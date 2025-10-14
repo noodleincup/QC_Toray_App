@@ -1,0 +1,707 @@
+﻿<UserControl x:Class="QC_Toray_App_v3.OperationUserControl"
+             PreviewKeyDown="Window_PreviewKeyDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QC_Toray_App_v3"
+             xmlns:uc="clr-namespace:QC_Toray_App_v3"
+             mc:Ignorable="d"
+             Width="1530" Height="835"
+             >
+    <UserControl.Resources>
+        <local:JudgementConverter x:Key="JudgementConverter"/>
+    </UserControl.Resources>
+    <Grid Background="#FFDEDEDE">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="75*"/>
+        </Grid.RowDefinitions>
+
+        <!--Grade Infomation-->
+        <Border BorderThickness="1" BorderBrush="#FF675656" Grid.ColumnSpan="2" Margin="350,20,280,20" CornerRadius="20" Background="#FAFAFA" Style="{DynamicResource MaterialDesignToolBarMainPanelBorderStyle}">
+            <Grid Grid.ColumnSpan="2" x:Name="GradeInfo" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!--Column 0-->
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" Height="16" Width="21" Foreground="#FF000000">No.:</TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" Grid.Row="1" Height="16" Width="34" Foreground="#FF000000">Grade:</TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" Grid.Row="2" Height="16" Width="25" Foreground="#FF000000">LOT.:</TextBlock>
+                <!--Column 1-->
+                <Border BorderThickness="0.5" BorderBrush="#FF675656" Margin="15,8" Grid.Column="1" Width="180" CornerRadius="5">
+                    <TextBlock x:Name="txblNo"/>
+                </Border>
+                <Border BorderThickness="0.5" BorderBrush="#FF675656" Margin="15,8" Grid.Column="1" Grid.Row="1" Width="180" CornerRadius="5">
+                    <TextBox x:Name="txbGrade" TextAlignment="Center" Foreground="Black" BorderThickness="0"/>
+                </Border>
+                
+                <Border BorderThickness="0.5" BorderBrush="#FF675656" Margin="15,8" Grid.Column="1" Grid.Row="2" Width="180" CornerRadius="5">
+                    <TextBox x:Name="txbLot" TextAlignment="Center" Foreground="Black" BorderThickness="0"/>
+                </Border>
+                <!--Column 2-->
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" Grid.Column="2" Height="16" Width="27" Foreground="#FF000000">Date:</TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" Grid.Column="2" Grid.Row="1" Height="16" Width="52" Foreground="#FF000000">Q'ty label:</TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,0" Grid.Column="2" Grid.Row="2" Height="16" Width="50" Foreground="#FF000000">M/C. No.:</TextBlock>
+                <!--Column 3-->
+                <Border BorderThickness="0.5" BorderBrush="#FF675656" Margin="15,8" Grid.Column="4" Width="180" CornerRadius="5">
+                    <TextBlock x:Name="txblDate" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </Border>
+                <Border BorderThickness="0.5" BorderBrush="#FF675656" Margin="15,8" Grid.Column="4" Grid.Row="1" Width="180" CornerRadius="5">
+                    <TextBlock x:Name="txblLabel" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </Border>
+                <Border BorderThickness="0.5" BorderBrush="#FF675656" Margin="15,8" Grid.Column="4" Grid.Row="2" Width="180" CornerRadius="5">
+                    <TextBlock x:Name="txblMcNo" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </Border>
+
+                <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!--Confirm Information-->
+                    <Button Width="280" Margin="10,0">Confirm</Button>
+                    <!--Rum Operation-->
+                    <Button Width="280" Margin="10,0">Run</Button>
+                </StackPanel>
+                
+            </Grid>
+        </Border>
+
+        <!--Batch History-->
+        <DataGrid x:Name="dgBatchHis" Grid.Row="1" Margin="20, 0, 20, 20" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource MaterialDesignRaisedButton}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Batch Number" Binding="{Binding Batch_Number}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Judgement" Binding="{Binding Judgement, Converter={StaticResource JudgementConverter}}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--Operation-->
+        <Border Grid.Column="1" Grid.Row="1" Margin="20, 0, 20, 20" BorderThickness="0.5" BorderBrush="Gray" Background="#FAFAFA" CornerRadius="20">
+            <Grid Grid.Column="1" Grid.Row="1" Margin="5">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Margin" Value="5,0"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    </Style>
+                    
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.2*"/>
+                </Grid.RowDefinitions>
+                 <!--Pallet Size--> 
+                <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold">Pallet Size</TextBlock>
+                 <!--Misscut of Pallet--> 
+                <TextBlock Grid.Row="2" Grid.Column="0" FontWeight="Bold">Misscut of Pallet</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1">Double</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="1">Triple</TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1">Fourfold</TextBlock>
+                 <!--Linkage--> 
+                <TextBlock Grid.Row="5" Grid.Column="0" FontWeight="Bold">Linkage</TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="1">Double</TextBlock>
+                <TextBlock Grid.Row="6" Grid.Column="1">Triple</TextBlock>
+                <TextBlock Grid.Row="7" Grid.Column="1">Fourfold</TextBlock>
+                <TextBlock Grid.Row="8" Grid.Column="1">Fivefold</TextBlock>
+                 <!--Defect Cutting--> 
+                <TextBlock Grid.Row="9" Grid.Column="0" FontWeight="Bold">Defect Cutting</TextBlock>
+                 <!--GF Not Distribution--> 
+                <TextBlock Grid.Row="10" Grid.Column="0" FontWeight="Bold">GF not Distribution</TextBlock>
+                <TextBlock Grid.Row="10" Grid.Column="1">Level 1</TextBlock>
+                <TextBlock Grid.Row="11" Grid.Column="1">Level 2</TextBlock>
+                <TextBlock Grid.Row="12" Grid.Column="1">Level 3</TextBlock>
+                 <!--Meyani--> 
+                <TextBlock Grid.Row="13" Grid.Column="0" FontWeight="Bold">Meyani</TextBlock>
+                <TextBlock Grid.Row="14" Grid.Column="1">Not Change color.</TextBlock>
+                 <!--Foreign Materials--> 
+                <TextBlock Grid.Row="15" Grid.Column="0" FontWeight="Bold">Foreign materials</TextBlock>
+                 <!--Black Spot--> 
+                <TextBlock Grid.Row="16" Grid.Column="0" FontWeight="Bold">Black Spot</TextBlock>
+                <TextBlock Grid.Row="16" Grid.Column="1">SS (0.08 mm² >)</TextBlock>
+                <TextBlock Grid.Row="17" Grid.Column="1">S (0.08 - 0.20 mm²)</TextBlock>
+                <TextBlock Grid.Row="18" Grid.Column="1">M (0.20 - 0.80 mm²)</TextBlock>
+                <TextBlock Grid.Row="19" Grid.Column="1">L or more</TextBlock>
+                 <!--Color Abnormal-->
+                <TextBlock Grid.Row="20" Grid.Column="0" FontWeight="Bold">Color abnormal</TextBlock>
+                 <!--Macaroni--> 
+                <TextBlock Grid.Row="21" Grid.Column="0" FontWeight="Bold">Macaroni</TextBlock>
+                <TextBlock Grid.Row="21" Grid.Column="1">SS (1.00 mm² >)</TextBlock>
+                <TextBlock Grid.Row="22" Grid.Column="1">S (1.00 - 1.50 mm²)</TextBlock>
+                <TextBlock Grid.Row="23" Grid.Column="1">M (1.50 - 2.00 mm²)</TextBlock>
+                <TextBlock Grid.Row="24" Grid.Column="1">L or more</TextBlock>
+
+                 <!--Remark--> 
+                <TextBlock Grid.Row="25" Grid.Column="0" FontWeight="Bold">Remark</TextBlock>
+                <TextBox x:Name="txbRemark" Grid.Row="25" Grid.Column="2" Grid.ColumnSpan="7" TextAlignment="Center" Margin="5,1" Foreground="Black"></TextBox>
+
+                 <!--Judgment--> 
+                <TextBlock Grid.Row="26" Grid.Column="0" FontWeight="Bold">Judgment (OK/NG)</TextBlock>
+                <UniformGrid Grid.Row="26" Grid.Column="2" Grid.ColumnSpan="7" Rows="1" Columns="2">
+                    <Button Margin="3" Height="20" >
+                        <TextBlock x:Name="btnOK" Foreground="White" FontSize="10" >OK</TextBlock>
+                    </Button>
+                    <Button x:Name="btnNG" Margin="3" Height="20" Background="#FFC864C8" BorderBrush="#FFC864C8">
+                        <TextBlock Foreground="White" FontSize="10" >NG</TextBlock>
+                    </Button>
+                </UniformGrid>
+                
+
+                <!--Sample1-->
+                <UniformGrid Grid.Column="2" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Sample 1</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize_S1" Background="LightGreen"></ToggleButton>
+                    <TextBox x:Name="txbMissDb_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_NoChg_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxForeignMat_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_SS_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_S_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_M_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_L_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxColorAbnormal_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_SS_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_S_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_M_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_L_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+
+                <!--Sample2-->
+                <UniformGrid Grid.Column="3" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Sample 2</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize_S2" Background="LightGreen"></ToggleButton>
+                    <TextBox x:Name="txbMissDb_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_NoChg_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxForeignMat_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_SS_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_S_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_M_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_L_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxColorAbnormal_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_SS_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_S_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_M_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_L_S2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+
+                <!--Sample3-->
+                <UniformGrid Grid.Column="4" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Sample 3</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize_S3" Background="LightGreen"></ToggleButton>
+                    <TextBox x:Name="txbMissDb_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_NoChg_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxForeignMat_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_SS_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_S_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_M_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_L_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxColorAbnormal_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_SS_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_S_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_M_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_L_S3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+
+                <!--Sample4-->
+                <UniformGrid Grid.Column="5" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Sample 4</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize_S4" Background="LightGreen"></ToggleButton>
+                    <TextBox x:Name="txbMissDb_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_NoChg_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxForeignMat_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_SS_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_S_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_M_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_L_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxColorAbnormal_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_SS_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_S_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_M_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_L_S4" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+
+                <!--Sample5-->
+                <UniformGrid Grid.Column="6" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Sample 5</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize_S6" Background="LightGreen"></ToggleButton>
+                    <TextBox x:Name="txbMissDb_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_NoChg_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxForeignMat_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_SS_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_S_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_M_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_L_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxColorAbnormal_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_SS_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_S_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_M_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_L_S5" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+
+                <!--Sample6-->
+                <UniformGrid Grid.Column="7" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Sample 6</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize_S5" Background="LightGreen"></ToggleButton>
+                    <TextBox x:Name="txbMissDb_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMeya_NoChg_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxForeignMat_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_SS_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_S_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_M_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxBlackSpot_L_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxColorAbnormal_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_SS_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_S_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_M_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="tbxMacaroni_L_S6" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+
+                <!--Summary-->
+                <UniformGrid Grid.Column="8" Grid.RowSpan="24" Columns="1" Rows="24">
+                    <TextBlock HorizontalAlignment="Center" >Summary</TextBlock>
+                    <ToggleButton x:Name="tgPalletSize" Background="LightGreen" IsChecked="False"></ToggleButton>
+                    <TextBox x:Name="txbMissDb" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissTp" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMissFf" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkDb" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkTp" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFf" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbLinkFF" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbDefect" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF2" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbGF3" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMeya" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMeya_NoChg" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbForeignMat" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbBlackSpot_SS" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbBlackSpot_S" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbBlackSpot_M" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbBlackSpot_L" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbColorAbnormal" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMacaroni_SS" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMacaroni_S" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMacaroni_M" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                    <TextBox x:Name="txbMacaroni_L" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
+                </UniformGrid>
+            </Grid>
+            
+            
+            <!--<UniformGrid Columns="8" Rows="26" Margin="5">
+                <UniformGrid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Margin" Value="5,0"/>
+                    </Style>
+                </UniformGrid.Resources>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock HorizontalAlignment="Center">Samaple 1</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Samaple 2</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Samaple 3</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Samaple 4</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Samaple 5</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Samaple 6</TextBlock>
+
+                --><!--Row0--><!--
+                <TextBlock FontWeight="Bold">Pallet Size</TextBlock>
+                <TextBlock></TextBlock>
+                <UniformGrid Columns="2">
+                    <uc:ToggleButton_Noodle x:Name="tgS1PalletSize" HorizontalAlignment="Center"></uc:ToggleButton_Noodle>
+                    <TextBlock></TextBlock>
+                </UniformGrid>
+                <UniformGrid Columns="2">
+                    <uc:ToggleButton_Noodle x:Name="tgS2PalletSize" HorizontalAlignment="Center"></uc:ToggleButton_Noodle>
+                    <TextBlock></TextBlock>
+                </UniformGrid>
+                <UniformGrid Columns="2">
+                    <uc:ToggleButton_Noodle x:Name="tgS3PalletSize" HorizontalAlignment="Center"></uc:ToggleButton_Noodle>
+                    <TextBlock></TextBlock>
+                </UniformGrid>
+                <UniformGrid Columns="2">
+                    <uc:ToggleButton_Noodle x:Name="tgS4PalletSize" HorizontalAlignment="Center"></uc:ToggleButton_Noodle>
+                    <TextBlock></TextBlock>
+                </UniformGrid>
+                <UniformGrid Columns="2">
+                    <uc:ToggleButton_Noodle x:Name="tgS5PalletSize" HorizontalAlignment="Center"></uc:ToggleButton_Noodle>
+                    <TextBlock></TextBlock>
+                </UniformGrid>
+                <UniformGrid Columns="2">
+                    <uc:ToggleButton_Noodle x:Name="tgS6PalletSize" HorizontalAlignment="Center"></uc:ToggleButton_Noodle>
+                    <TextBlock></TextBlock>
+                </UniformGrid>
+
+                --><!--Row1--><!--
+                <TextBlock FontWeight="Bold">Misscut of Pallet</TextBlock>
+                <TextBlock>Double</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row2--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Triple</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row3--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Fourfold</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row4--><!--
+                <TextBlock FontWeight="Bold">Linkage</TextBlock>
+                <TextBlock>Double</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row5--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Triple</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row6--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Fourfold</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row7--><!--
+                <TextBlock FontWeight="Bold">Defect Cutting</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row8--><!--
+                <TextBlock FontWeight="Bold">GF not Distribution</TextBlock>
+                <TextBlock>Level 1</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row9--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Level 2</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row10--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Level 3</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row11--><!--
+                <TextBlock FontWeight="Bold">Meyani</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row12--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>Not Change color.</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row13--><!--
+                <TextBlock FontWeight="Bold">Foreign materials</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row14--><!--
+                <TextBlock FontWeight="Bold">Black Spot</TextBlock>
+                <TextBlock>SS (0.08 mm² >)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row15--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>S (0.08 - 0.20 mm²)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row16--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>M (0.20 - 0.80 mm²)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row17--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>L or more</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row18--><!--
+                <TextBlock FontWeight="Bold">Color abnormal</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row19--><!--
+                <TextBlock FontWeight="Bold">Macaroni</TextBlock>
+                <TextBlock>SS (1.00 mm² >)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row20--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>S (1.00 - 1.50 mm²)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row21--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>M (1.50 - 2.00 mm²)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                
+                --><!--Row22--><!--
+                <TextBlock></TextBlock>
+                <TextBlock>L or more</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row23--><!--
+                <TextBlock FontWeight="Bold">Remark</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+                --><!--Row24--><!--
+                <TextBlock FontWeight="Bold">Judgment (OK/NG)</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock></TextBlock>
+
+            </UniformGrid>-->
+        </Border>
+
+
+    </Grid>
+</UserControl>
