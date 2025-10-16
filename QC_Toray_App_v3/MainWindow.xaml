@@ -102,6 +102,18 @@
                             <TextBlock Text="Login" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="MainTable" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Table" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Lot Table" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="LotOverview" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FormatListBulleted" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Lot Overview" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem x:Name="Operating" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="10"/>

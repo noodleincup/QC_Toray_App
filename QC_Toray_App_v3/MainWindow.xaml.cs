@@ -30,6 +30,7 @@ namespace QC_Toray_App_v3
             var loginControl = new LoginUserControl();
             loginControl.ChangePageRequested += OnChangePageRequested;
             GridMain.Children.Add(loginControl);
+
         }
         #region Menu Buttons functions
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -65,6 +66,16 @@ namespace QC_Toray_App_v3
                 case "Login":
                     usc = new LoginUserControl();
                     GridMain.Children.Add(usc);
+                    break;
+                case "MainTable":
+                    MainTable_UserControl mainTable = new MainTable_UserControl();
+                    mainTable.ChangePageRequested += OnChangePageRequested;
+                    GridMain.Children.Add(mainTable);
+                    break;
+                case "LotOverview":
+                    LotOverviewUserControl lotOverview = new LotOverviewUserControl();
+                    lotOverview.ChangePageRequested += OnChangePageRequested;
+                    GridMain.Children.Add(lotOverview);
                     break;
                 case "Operating":
                     usc = new OperationUserControl();

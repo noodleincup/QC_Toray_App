@@ -134,6 +134,7 @@ namespace QC_Toray_App_v3
         }
 
 
+        #region Export functions
         // Export to CSV
         private void ExportToCSV_Click(object sender, RoutedEventArgs e)
         {
@@ -325,6 +326,9 @@ namespace QC_Toray_App_v3
                 MessageBox.Show($"Error exporting to PDF: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        #endregion
+
 
         // Helper function to extract cell value
         private string GetCellValue(DataRowView rowView, DataGridColumn column)

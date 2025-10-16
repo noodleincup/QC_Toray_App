@@ -45,7 +45,7 @@ namespace QC_Toray_App_v3
                 {
                     GlobalState.Instance.IsFeatureEnabled = true;
                     // Raise the event and pass the desired ListViewItem name
-                    ChangePageRequested?.Invoke(this, "Operating"); // Example: Navigate to Operating page
+                    ChangePageRequested?.Invoke(this, "MainTable"); // Example: Navigate to Operating page
                 }
                 else { MessageBox.Show(display); }
                 //MessageBox.Show($"State: {GlobalState.Instance.IsFeatureEnabled}");
@@ -69,7 +69,7 @@ namespace QC_Toray_App_v3
                     {
                         GlobalState.Instance.IsFeatureEnabled = true;
                         // Raise the event and pass the desired ListViewItem name
-                        ChangePageRequested?.Invoke(this, "Operating"); // Example: Navigate to Operating page
+                        ChangePageRequested?.Invoke(this, "MainTable"); // Example: Navigate to Operating page
                     }
                     else { MessageBox.Show(display); }
                 }

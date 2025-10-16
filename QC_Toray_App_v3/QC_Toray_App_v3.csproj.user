@@ -9,6 +9,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="BatchDetailItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LotOverviewUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Master_UserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

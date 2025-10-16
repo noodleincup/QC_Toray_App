@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="QC_Toray_App_v3.LotOverviewUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QC_Toray_App_v3"
+             mc:Ignorable="d" 
+             d:DesignHeight="835" d:DesignWidth="1530" FontSize="16" Foreground="#FF3B3B3B">
+    <Grid Name="gridBackground" Background="#FFDEDEDE">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- #region Left Area -->
+        <Grid Name="gridLeft" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Background="#FFFAFAFA" Margin="30" CornerRadius="20">
+                <StackPanel Name="stackSample" Margin="20">
+                    <Label Content="Sample from :"/>
+                    <ComboBox Name="cbxFrom" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,10" HorizontalContentAlignment="Center">
+                        <ComboBoxItem Content="A" />
+                        <ComboBoxItem Content="B" />
+                        <ComboBoxItem Content="C" />
+                    </ComboBox>
+                    <Label Content="Sample Type :"/>
+                    <ComboBox Name="cbxType" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,10" HorizontalContentAlignment="Center">
+                        <ComboBoxItem Content="PBT"/>
+                        <ComboBoxItem Content="PCT"/>
+                        <ComboBoxItem Content="PAT"/>
+                    </ComboBox>
+                    <Label Content="Sample name :"/>
+                    <ComboBox Name="cbxName" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,10" HorizontalContentAlignment="Center">
+                        <ComboBoxItem Content="1101G-30"/>
+                        <ComboBoxItem Content="1101G-31"/>
+                        <ComboBoxItem Content="1101G-32"/>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
+                <StackPanel Name="stackSTD" Orientation="Horizontal" Height="50" Margin="5,0">
+                    <Label Content="Sample amount:" VerticalAlignment="Center" FontSize="16"/>
+                    <TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="200" Margin="20,0,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <!-- #end region Left Area -->
+
+        <!-- #region Center Area -->
+        <Grid Name="gridCenter" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Background="#FFFAFAFA" Margin="30" CornerRadius="5" Width="450">
+                <StackPanel Name="stackLotNo" Orientation="Horizontal" HorizontalAlignment="Center" Height="60" Margin="5,0">
+                    <Label Content="Sample No. :" VerticalAlignment="Center"/>
+                    <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="0.5" Height="42" Margin="30,0,0,0">
+                        <TextBox Name="txbLot" 
+                                 VerticalAlignment="Center" 
+                                 TextAlignment="Center" 
+                                 BorderThickness="0" 
+                                 Width="200"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="1" Background="#FFFAFAFA" Margin="0,0,0,50" Padding="0,20,0,0" BorderThickness="0.5,1,0.5,0.5" CornerRadius="20">
+                <Grid Name="gridBatchJudgement" Width="600">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0.5" BorderBrush="Gray" Padding="5,0,0,0">
+                        <DockPanel>
+                            <CheckBox Name="cbxSellectAll" DockPanel.Dock="Left" Content="All"/>
+                            <Label DockPanel.Dock="Right" HorizontalAlignment="Center" Content="Batch No."/>
+                        </DockPanel>
+                    </Border>
+                    <WrapPanel Name="wrpBatchDetail" Grid.Row="1" Orientation="Vertical">
+                    </WrapPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <!-- #end region Center Area -->
+
+        <!-- #region Right Area -->
+        <Grid Grid.Column="2" Name="gridRight">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Name="borderBatchDiameter" Background="#FFFAFAFA" BorderBrush="Gray" CornerRadius="20" Margin="19,120,18,108" Width="400"  Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="Gray" BorderThickness="0.5,1,0.5,0.5">
+                        <Label Content="Batch Number" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gray" BorderThickness="0.5,1,0.5,0.5">
+                        <TextBox Name="txbBatchNumber" 
+                                 Text="1" 
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 BorderThickness="0"
+                                 Width="100" TextAlignment="Center"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                        <Label  Content="Pellet Diamer" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                               Content="Pass/Not pass/-" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+
+                </Grid>
+            </Border>
+            <DockPanel Grid.Row="1">
+                <Button Name="btnRecord" Content="บันทึก"
+                        DockPanel.Dock="Top"
+                        FontSize="20" Width="200" Height="60" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Margin="0,50,0,0"
+                        Click="btnRecord_Clicked"/>
+                <Button Name="btnSendData" Content="ส่งข้อมูล" 
+                        DockPanel.Dock="Bottom"
+                        FontSize="20" Width="200" Height="60" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Margin="0,50,0,0"
+                        Click="btnSendData_Clicked"/>
+            </DockPanel>
+        </Grid>
+        <!-- #end region Right Area -->
+    </Grid>
+</UserControl>
