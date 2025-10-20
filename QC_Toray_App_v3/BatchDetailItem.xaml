@@ -11,7 +11,9 @@
         <Border DockPanel.Dock="Left" BorderThickness="0.5" BorderBrush="Gray" Width="150" Padding="5,0,5,0">
             <DockPanel>
                 <CheckBox x:Name="ItemCheckBox" DockPanel.Dock="Left"/>
-                <TextBox x:Name="ValueTextBox" DockPanel.Dock="Right" Text="1" BorderThickness="0" TextAlignment="Right"/>
+                <TextBox x:Name="ValueTextBox" DockPanel.Dock="Right" 
+                         Text="1" BorderThickness="0" TextAlignment="Right" 
+                         MouseDoubleClick="txbBatchDetail_DoubleClicked"/>
             </DockPanel>
         </Border>
         <Border DockPanel.Dock="Right" BorderThickness="0.5" BorderBrush="Gray" Width="150" Padding="5,0,0,0">

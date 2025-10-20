@@ -23,7 +23,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interação lógica para UserControlCreate.xam
     /// </summary>
-    public partial class OperationUserControl : UserControl
+    public partial class OperationUserControl : System.Windows.Controls.UserControl
     {
         private string PIC = "Mr. Donald";
         private int batch_no = 15;

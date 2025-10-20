@@ -18,7 +18,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interaction logic for Master_UseControl.xaml
     /// </summary>
-    public partial class Master_UserControl : UserControl
+    public partial class Master_UserControl : System.Windows.Controls.UserControl
     {
         public Master_UserControl()
         {

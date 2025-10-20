@@ -25,7 +25,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interaction logic for MainTable_UserControl.xaml
     /// </summary>
-    public partial class MainTable_UserControl : UserControl
+    public partial class MainTable_UserControl : System.Windows.Controls.UserControl
     {
         // Define an event for changing pages
         public event EventHandler<string> ChangePageRequested;

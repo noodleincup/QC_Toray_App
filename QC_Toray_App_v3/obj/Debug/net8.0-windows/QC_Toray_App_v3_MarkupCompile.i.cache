@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\App.xaml
-10-257052754
+12752380401
 
-19-1841715647
+21-251861028
 227-541163446
-BatchDetailItem.xaml;LoginUserControl.xaml;LotOverviewUserControl.xaml;MainTable_UserControl.xaml;MainWindow.xaml;Master_UserControl.xaml;OperationUserControl.xaml;Report1_UserControl.xaml;Report2_UserControl.xaml;UniformGrid_Master_UserControl.xaml;
+BatchDetailItem.xaml;BatchDiameterDatail_Window.xaml;LoginUserControl.xaml;LotOverviewUserControl.xaml;MainTable_UserControl.xaml;MainWindow.xaml;Master_UserControl.xaml;OperationUserControl.xaml;Report1_UserControl.xaml;Report2_UserControl.xaml;UniformGrid_Master_UserControl.xaml;UserControl\BatchCell_UserControl.xaml;
 
 False
 

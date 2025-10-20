@@ -58,7 +58,7 @@ namespace QC_Toray_App_v3
         #endregion
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserControl usc = null;
+            System.Windows.Controls.UserControl usc = null;
             GridMain.Children.Clear();
 
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)

@@ -18,7 +18,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interaction logic for LotOverviewUserControl.xaml
     /// </summary>
-    public partial class LotOverviewUserControl : UserControl
+    public partial class LotOverviewUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
         private const int defaultBatchNum = 20; // Default number of BatchDetailItem controls
@@ -119,6 +119,42 @@ namespace QC_Toray_App_v3
             wrpBatchDetail.Children.Add(_buttonPanel);
         }
 
+        private void btnBatchDiameter_Clicked(object sender, RoutedEventArgs e)
+        {
+            var batchDiameterWindow = new BatchDiameterDatail_Window(cbxName.SelectedValue?.ToString(), "Lot 123", "Batch 001")
+            {
+                Owner = Window.GetWindow(this)
+            };
+            bool? dialogResult = batchDiameterWindow.ShowDialog();
+
+            if (dialogResult == true)
+            {
+                MessageBox.Show($"dialogResult: {dialogResult}");
+            }
+            else
+            {
+                MessageBox.Show("Batch Diameter window was closed without confirmation.");
+            }
+        }
+
+        private void txbBatchNumber_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var batchDiameterWindow = new BatchDiameterDatail_Window(cbxName.Text, txbLot.Text, txbBatchNumber.Text)
+            {
+                Owner = Window.GetWindow(this)
+            };
+            bool? dialogResult = batchDiameterWindow.ShowDialog();
+
+            if (dialogResult == true)
+            {
+                MessageBox.Show($"dialogResult: {dialogResult}");
+            }
+            else
+            {
+                MessageBox.Show("Batch Diameter window was closed without confirmation.");
+            }
+        }
+
         private void btnRecord_Clicked(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Record button clicked!");
@@ -127,6 +163,29 @@ namespace QC_Toray_App_v3
         {
             MessageBox.Show("Send Data button clicked!");
         }
+        
+        private void cbxSelectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var child in wrpBatchDetail.Children)
+            {
+                if (child is BatchDetailItem item)
+                {
+                    item.IsItemSelected = true;
+                }
+            }
+        }
+
+        private void cbxSelectAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (var child in wrpBatchDetail.Children)
+            {
+                if (child is BatchDetailItem item)
+                {
+                    item.IsItemSelected = false;
+                }
+            }
+        }
+       
         #endregion
     }
 }

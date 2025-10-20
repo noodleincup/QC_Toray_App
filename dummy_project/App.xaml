@@ -1,0 +1,118 @@
+﻿<Application x:Class="dummy_project.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:dummy_project"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- MahApps first -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+
+                <!-- MaterialDesign after MahApps (so it can apply its styles) -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Explicit overrides of MaterialDesign color/brush keys (ensures blue theme) -->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FF15A9F3" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush"   Color="#FF2196F3" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush"  Color="#FF1565C0" />
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#FF3F51B5" />
+
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="Black" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush"   Color="White" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush"  Color="White" />
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="White" />
+
+            <Color x:Key="PrimaryHueLight">#FF15A9F3</Color>
+            <Color x:Key="PrimaryHueMid">#FF2196F3</Color>
+            <Color x:Key="PrimaryHueDark">#FF1565C0</Color>
+            <Color x:Key="SecondaryAccent">#FF3F51B5</Color>
+            
+            <!-- App-level default Button style that keeps existing MahApps template but changes colors -->
+            <!--<Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                 use MaterialDesign/MahApps brushes if present, fallback to hard-coded color 
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            </Style>-->
+            <Style TargetType="Button">
+                <!-- default values (used by TemplateBinding) -->
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <!--<Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />-->
+                <Setter Property="BorderBrush" Value="#00000000" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="MinWidth" Value="60" />
+                <Setter Property="MinHeight" Value="26" />
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <!-- outer ring: semi-transparent fill used to cast the blur/glow -->
+                                <Border x:Name="Glow"
+                                        CornerRadius="8"
+                                        Padding="4"
+                                        SnapsToDevicePixels="True"
+                                        Background="{DynamicResource PrimaryHueMidBrush}"
+                                        Opacity="1"
+                                        IsHitTestVisible="False">           
+                                    <!-- Use DropShadowEffect with ShadowDepth=0 so it becomes a soft glow -->
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="{DynamicResource PrimaryHueMid}" BlurRadius="12" ShadowDepth="0.2" Opacity="0.5"/>
+                                    </Border.Effect>
+                                </Border>
+
+                                <!-- inner face: actual button content sits on top -->
+                                <Border x:Name="Face"
+                                        CornerRadius="8"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        SnapsToDevicePixels="True">
+                                    <ContentPresenter   Content="{TemplateBinding Content}"
+                                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                        Margin="{TemplateBinding Padding}"
+                                                        RecognizesAccessKey="True"/>
+                                </Border>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <!-- Hover: increase glow intensity and slightly expand -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Glow" Property="Opacity" Value="0.36"/>
+                                    <Setter TargetName="Glow" Property="CornerRadius" Value="14"/>
+                                    <!--<Setter TargetName="Glow" Property="Effect">
+                                        <DropShadowEffect Color="{DynamicResource PrimaryHueMid}" BlurRadius="26" ShadowDepth="0" Opacity="0.9"/>
+                                    </Setter>-->
+                                    <Setter TargetName="Face" Property="CornerRadius" Value="10"/>
+                                </Trigger>
+
+                                <!-- Pressed: darker face, subtle shrink of glow -->
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Face" Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                                    <Setter TargetName="Glow" Property="Opacity" Value="0.20"/>
+                                    <Setter TargetName="Face" Property="CornerRadius" Value="8"/>
+                                </Trigger>
+
+                                <!-- Disabled -->
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Glow" Property="Opacity" Value="0.0"/>
+                                    <Setter TargetName="Face" Property="Background" Value="#FFF3F3F3"/>
+                                    <Setter Property="Foreground" Value="#FF9E9E9E"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

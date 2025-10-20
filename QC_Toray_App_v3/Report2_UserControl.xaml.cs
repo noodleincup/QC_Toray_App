@@ -25,7 +25,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interaction logic for Report2_UserControl.xaml
     /// </summary>
-    public partial class Report2_UserControl : UserControl
+    public partial class Report2_UserControl : System.Windows.Controls.UserControl
     {
         // Create DataTable
         DataTable dt = new DataTable();

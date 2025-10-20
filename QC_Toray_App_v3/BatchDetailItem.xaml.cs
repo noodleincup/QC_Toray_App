@@ -18,8 +18,9 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interaction logic for BatchDetailItem.xaml
     /// </summary>
-    public partial class BatchDetailItem : UserControl
+    public partial class BatchDetailItem : System.Windows.Controls.UserControl
     {
+        //public event EventHandler<MouseButtonEventArgs> DoubleClicked;
         public BatchDetailItem()
         {
             InitializeComponent();
@@ -43,6 +44,11 @@ namespace QC_Toray_App_v3
         {
             get { return ItemCheckBox.IsChecked; }
             set { ItemCheckBox.IsChecked = value; }
+        }
+
+        private void txbBatchDetail_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show($"Batch Detail {ItemValue}");
         }
     }
 }

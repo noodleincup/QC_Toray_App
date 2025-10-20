@@ -23,7 +23,7 @@ namespace QC_Toray_App_v3
 {
     // Define an event
     //public event EventHandler<string> DataSent;
-    public partial class LoginUserControl : UserControl
+    public partial class LoginUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
         public LoginUserControl()

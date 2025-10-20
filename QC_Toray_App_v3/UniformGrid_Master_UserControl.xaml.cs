@@ -18,7 +18,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interaction logic for UniformGrid_Master_UserControl.xaml
     /// </summary>
-    public partial class UniformGrid_Master_UserControl : UserControl
+    public partial class UniformGrid_Master_UserControl : System.Windows.Controls.UserControl
     {
         public UniformGrid_Master_UserControl()
         {
