@@ -15,13 +15,14 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" mah:TextBoxHelper.Watermark="Search" 
-         Width="200" 
-         Height="30" 
-         Background="White" 
-         BorderBrush="Black" 
-         BorderThickness="0.5" Style="{DynamicResource MahApps.Styles.TextBox}" 
-         Margin="20,10" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="0" Name="txbSearch"
+                 mah:TextBoxHelper.Watermark="Search" 
+                 Width="200" 
+                 Height="30" 
+                 Background="White" 
+                 BorderBrush="Black" 
+                 BorderThickness="0.5" Style="{DynamicResource MahApps.Styles.TextBox}" 
+                 Margin="20,10" HorizontalAlignment="Left"/>
         <!--Batch History-->
         <DataGrid Grid.Row="1" Margin ="20,0,20,0" 
                   x:Name="tableGrid" 
