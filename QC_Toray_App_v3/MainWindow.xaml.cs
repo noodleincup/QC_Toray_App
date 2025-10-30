@@ -21,6 +21,9 @@ namespace QC_Toray_App_v3
         private Point _startPoint;
         private bool loginStatus = false;
 
+        private string lotData = "";
+        private string gradeData = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -70,10 +73,11 @@ namespace QC_Toray_App_v3
                 case "MainTable":
                     MainTable_UserControl mainTable = new MainTable_UserControl();
                     mainTable.ChangePageRequested += OnChangePageRequested;
+                    mainTable.UpdateLotAndGradeData += OnUpdateLotAndGradeData; // OnUpdateLotAndGradeData
                     GridMain.Children.Add(mainTable);
                     break;
                 case "LotOverview":
-                    LotOverviewUserControl lotOverview = new LotOverviewUserControl();
+                    LotOverviewUserControl lotOverview = new LotOverviewUserControl(lotData, gradeData);
                     lotOverview.ChangePageRequested += OnChangePageRequested;
                     GridMain.Children.Add(lotOverview);
                     break;
@@ -109,8 +113,18 @@ namespace QC_Toray_App_v3
             }
         }
 
-        
+        private void OnUpdateLotAndGradeData(object sender, string lot_grade)
+        {
+            string[] parts = lot_grade.Split(',');
+            lotData = parts[0];
+            gradeData = parts[1];
 
+            //MessageBox.Show($"Lot Data: {lotData}\nGrade Data: {gradeData}", "Lot and Grade Data Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+
+
+        #region Drag Window Functions
         // Handle Draggable Header Mouse Events
         private void DraggableHeader_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -136,6 +150,6 @@ namespace QC_Toray_App_v3
             _isDragging = false;
             DraggableHeader.ReleaseMouseCapture();
         }
-
+        #endregion
     }
 }

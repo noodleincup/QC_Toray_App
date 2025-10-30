@@ -30,6 +30,35 @@ namespace QC_Toray_App_v3
         }
         public bool NegativeIsFeatureEnabled { get { return !_isFeatureEnabled; } }
 
+
+        private string _serverIP = "192.168.0.123";
+        public string ServerIP
+        {
+            get { return _serverIP; }
+            set
+            {
+                if (_serverIP != value)
+                {
+                    _serverIP = value;
+                    OnPropertyChanged(nameof(ServerIP));
+                }
+            }
+        }
+
+        private int _serverPort = 7930;
+        public int ServerPort
+        {
+            get { return _serverPort; }
+            set
+            {
+                if (_serverPort != value)
+                {
+                    _serverPort = value;
+                    OnPropertyChanged(nameof(ServerPort));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {

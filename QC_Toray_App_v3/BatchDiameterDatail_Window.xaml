@@ -67,8 +67,8 @@
 
         <!--Grid bottom-->
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,5">
-            <Button Content="Save" Click="btnSaveDiameterData_Clicked" Width="75" Height="25" Margin="20,0" FontSize="12"/>
-            <Button Content="Cancel" Click="btnCancelDiameterData_Clicked" Width="75" Height="25" Margin="20,0" FontSize="12" 
+            <Button Content="Save" Click="btnSaveDiameterData_Clicked" Width="90" Height="25" Margin="20,0" FontSize="12"/>
+            <Button Content="Measure" Click="btnCancelDiameterData_Clicked" Width="90" Height="25" Margin="20,0" FontSize="12" 
                     Background="#FFC864C8" BorderBrush="#FFC864C8"/>
         </StackPanel>
         <!--End Grid bottom-->

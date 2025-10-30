@@ -17,6 +17,7 @@
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Name="txbSearch"
                  mah:TextBoxHelper.Watermark="Search" 
+                 TextChanged="txbSearch_TextChanged"
                  Width="200" 
                  Height="30" 
                  Background="White" 
@@ -26,11 +27,13 @@
         <!--Batch History-->
         <DataGrid Grid.Row="1" Margin ="20,0,20,0" 
                   x:Name="tableGrid" 
-                  AutoGenerateColumns="True" 
-                  HeadersVisibility="Column" 
+                  AutoGenerateColumns="True"
+                  HeadersVisibility="Column"
                   CanUserSortColumns="True"
-                  IsReadOnly="True" 
-                  CellStyle="{DynamicResource MaterialDesignDataGridCell}">
+                  IsReadOnly="True"
+                  CellStyle="{DynamicResource MaterialDesignDataGridCell}"
+                  SelectedCellsChanged="tableGrid_SelectionCellChanged">
+            
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Width="Auto"/>
                 <DataGridTextColumn Header="Grade" Width="*"/>

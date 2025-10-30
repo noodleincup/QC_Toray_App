@@ -24,10 +24,14 @@ namespace QC_Toray_App_v3
         private const int defaultBatchNum = 20; // Default number of BatchDetailItem controls
 
         StackPanel _buttonPanel;
-        public LotOverviewUserControl()
+        public LotOverviewUserControl(string lotData, string gradeData)
         {
             InitializeComponent();
             initializeBatchDetail();
+
+            // Set initial values for Lot and Grade
+            txbLot.Text = lotData;
+            cbxName.Text = gradeData;
         }
 
         public void initializeBatchDetail()

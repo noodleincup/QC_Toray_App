@@ -29,9 +29,11 @@ namespace QC_Toray_App_v3
     {
         // Define an event for changing pages
         public event EventHandler<string> ChangePageRequested;
+        public event EventHandler<string> UpdateLotAndGradeData;
 
         // Create DataTable
         DataTable dt = new DataTable();
+
         public MainTable_UserControl()
         {
             InitializeComponent();
@@ -39,10 +41,45 @@ namespace QC_Toray_App_v3
             LoadData();
         }
 
+        // Test Selected event
+        private void tableGrid_MouseDoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (tableGrid.SelectedItem is DataRowView rowView)
+            {
+                string lotValue = rowView["lot"].ToString();
+                MessageBox.Show($"Selected Lot: {lotValue}");
+            }
+        }
+        private void tableGrid_SelectionCellChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            try
+            {
+                
+                // Update Lot and Grade Data
+                if (tableGrid.SelectedItem is DataRowView rowView)
+                {
+                    string formatLotGradeData = rowView["lot"].ToString() + "," + rowView["Grade"].ToString();
+                    UpdateLotAndGradeData?.Invoke(this, formatLotGradeData);
+                }
+
+                GlobalState.Instance.IsFeatureEnabled = true;
+                // Raise the event and pass the desired ListViewItem name
+                ChangePageRequested?.Invoke(this, "LotOverview");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void LoadData()
         {
+            // Make RowFilter matching case-insensitive
+            dt.CaseSensitive = false;
+
             // Sample Batch Numbers (These will be the headers)
-            string[] Headers = { "Date", "Grade", "lot", "Order card no", "Sample from", "Pellet diameter", "Target sample", "Received sample", "Waiting sample", "Result of Current bt no", "Result of total quatity bt no", "Result Ng bt"};
+            string[] Headers = { "Date", "Grade", "lot", "Order card no", "Sample from", "Pellet diameter", "Target sample", "Received sample", "Waiting sample", "Result of Current bt no", "Result of total quatity bt no", "Result Ng bt no"};
 
             //// Add batch columns as headers
             foreach (string header in Headers)
@@ -76,6 +113,8 @@ namespace QC_Toray_App_v3
             };
             return rows;
         }
+
+
 
         private void ConfigureDataGrid()
         {
@@ -336,9 +375,6 @@ namespace QC_Toray_App_v3
             }
         }
 
-        
-
-
         // Helper function to extract cell value
         private string GetCellValue(DataRowView rowView, DataGridColumn column)
         {
@@ -350,5 +386,61 @@ namespace QC_Toray_App_v3
             return string.Empty;
         }
 
+
+
+        #region Filter Feature Area Function
+        /// <summary>
+        /// Filters the DataTable bound to tableGrid by the provided query string.
+        /// Matches rows where 'lot' OR 'Grade' contains the query (case-insensitive).
+        /// Call with empty or null to clear the filter.
+        /// </summary>
+        public void FilterTableBySearch(string query)
+        {
+            if (dt == null) return;
+
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                // Clear filter
+                dt.DefaultView.RowFilter = string.Empty;
+                return;
+            }
+
+            // Trim and escape single quotes for DataView RowFilter expression
+            string q = query.Trim().Replace("'", "''");
+
+            // Ensure case-insensitive matching (LoadData already sets CaseSensitive = false, but enforce here)
+            dt.CaseSensitive = false;
+
+            // Build row filter: use Convert(...) to ensure non-string columns are treated as strings
+            // Search both 'lot' and 'Grade' columns for the query substring
+            string filter = $"Convert([lot], 'System.String') LIKE '%{q}%' OR Convert([Grade], 'System.String') LIKE '%{q}%'";
+            try
+            {
+                dt.DefaultView.RowFilter = filter;
+            }
+            catch (Exception ex)
+            {
+                // Fallback: clear filter on error
+                dt.DefaultView.RowFilter = string.Empty;
+                MessageBox.Show($"Filter error: {ex.Message}", "Filter Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        // TextChanged handler for a TextBox named 'txbSearch'.
+        // If txbSearch exists in XAML and is hooked, this will automatically filter as text changes.
+        private void txbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            FilterTableBySearch(tb?.Text ?? string.Empty);
+
+            // Bind to DataGrid
+            tableGrid.ItemsSource = dt.DefaultView;
+            ConfigureDataGrid();
+        }
+
+
+        #endregion
+
+      
     }
 }

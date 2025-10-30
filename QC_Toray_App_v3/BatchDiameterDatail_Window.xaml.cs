@@ -163,8 +163,10 @@ namespace QC_Toray_App_v3
 
         private void btnCancelDiameterData_Clicked(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false; // Indicate cancellation
-            this.Close();
+            //this.DialogResult = false; // Indicate cancellation
+            //this.Close();
+
+
         }
     }
 }
