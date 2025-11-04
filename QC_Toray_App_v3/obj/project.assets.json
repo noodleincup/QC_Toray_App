@@ -1807,23 +1807,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\NoodleInCup\\.nuget\\packages\\": {},
+    "C:\\Users\\autoy\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\Toray\\QC_Toray_App\\QC_Toray_App_v3\\QC_Toray_App_v3.csproj",
+      "projectUniqueName": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\QC_Toray_App_v3.csproj",
       "projectName": "QC_Toray_App_v3",
-      "projectPath": "D:\\Project\\Toray\\QC_Toray_App\\QC_Toray_App_v3\\QC_Toray_App_v3.csproj",
-      "packagesPath": "C:\\Users\\NoodleInCup\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\Toray\\QC_Toray_App\\QC_Toray_App_v3\\obj\\",
+      "projectPath": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\QC_Toray_App_v3.csproj",
+      "packagesPath": "C:\\Users\\autoy\\.nuget\\packages\\",
+      "outputPath": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\NoodleInCup\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\autoy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

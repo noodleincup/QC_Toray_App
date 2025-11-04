@@ -36,6 +36,9 @@ namespace QC_Toray_App_v3
             txbLot.Text = lotData;
             txbNo.Text = batchNum;
 
+            DateTime dateTime = DateTime.Now;
+            txblDate.Text = dateTime.ToString("yyyy-MM-dd");
+
             List<Batch> batchs = new List<Batch>();
             batchs.Add(new Batch() { Batch_Number = 1, Judgement = 1 });
             batchs.Add(new Batch() { Batch_Number = 2, Judgement = 1 });
@@ -53,10 +56,6 @@ namespace QC_Toray_App_v3
             {
                 MessageBox.Show("Spacebar Pressed!");
                 e.Handled = true; // Prevents further propagation of the event
-
-                
-
-
             }
         }
 
@@ -73,7 +72,7 @@ namespace QC_Toray_App_v3
                 MessageBox.Show("Enter Pressed in PreviewKeyDown!");
 
                 // Get data and OK Trick
-                Batch batch = PrepareData(true);
+                //Batch batch = PrepareData(true);
 
                 // Insert data
                 bool success = true; // Insert_Data(batch);
