@@ -29,7 +29,6 @@ namespace dummy_project
             // Set DataContext for data binding
             this.DataContext = this;
 
-
             // Initialize ViewModel and pass in the UI update action
             viewModel = new ClientViewModel(UpdateConnectionStatusSafely);
             

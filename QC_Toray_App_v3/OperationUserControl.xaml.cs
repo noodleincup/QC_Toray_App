@@ -1,10 +1,16 @@
-﻿using System;
+﻿using HandleDatabase;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -12,25 +18,53 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HandleDatabase;
-using System.Globalization;
-using System.Windows.Data;
-using System.Data;
-using System.Text.RegularExpressions;
+
 
 namespace QC_Toray_App_v3
 {
     /// <summary>
     /// Interação lógica para UserControlCreate.xam
     /// </summary>
-    public partial class OperationUserControl : System.Windows.Controls.UserControl
+    public partial class OperationUserControl : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
         private string PIC = "Mr. Donald";
         private int batch_no = 15;
+        private TCPClientViewModel viewModel;
+
+
+        private string _connectionStaus = "Disconnected";
+
+        public string ConnectionStatus
+        {
+            get { return _connectionStaus; }
+            set
+            {
+                if (_connectionStaus != value)
+                {
+                    _connectionStaus = value;
+                    OnPropertyChanged(nameof(ConnectionStatus));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public OperationUserControl(string lotData="111111", string batchNum="1")
         {
             InitializeComponent();
+
+            // Initialize ViewModel and pass in the UI update action
+            viewModel = new TCPClientViewModel(UpdateConnectionStatusSafely);
+
+            // Bind DataContext
+            this.DataContext = this;
+
+            ConnectTcpServer();
 
             // Set initial values for Lot and Batch Number
             txbLot.Text = lotData;
@@ -82,6 +116,34 @@ namespace QC_Toray_App_v3
             }
         }
 
+        private async void ConnectTcpServer()
+        {
+            if (!viewModel.IsConnected)
+            {
+                //viewModel.ServerHost = (txbIp.Text != "") ? txbIp.Text : viewModel.ServerHost; // Assuming txbPort is a TextBox for host
+                //viewModel.ServerPort = (txbIp.Text != "") ? int.Parse(txbPort.Text) : viewModel.ServerPort; // Assuming txbHost is a TextBox for port
+
+                // 1. Connect
+                await viewModel.ConnectToServerAsync();
+            }
+            else
+            {
+                // If connected, this button can act as a Disconnect button
+                await viewModel.DisconnectFromServerAsync();
+            }
+        }
+
+        private void UpdateConnectionStatusSafely(bool isConnected)
+        {
+            // Use the Dispatcher to ensure the UI update runs on the main thread
+            Dispatcher.Invoke(() =>
+            {
+                ConnectionStatus = isConnected ?
+                    "Connected" ://$"Connected to {ClientViewModel.ServerHost}:{ClientViewModel.ServerPort}" : 
+                    "Disconnected";
+            });
+        }
+
         // Get the data from SQL to datagrid on interface
         private void Display_Data()
         {
@@ -109,7 +171,6 @@ namespace QC_Toray_App_v3
             dgBatchHis.ItemsSource = lists;
 
         }
-
 
         // Insert from data table to sql server 
         private bool Insert_Data(Batch batch)
