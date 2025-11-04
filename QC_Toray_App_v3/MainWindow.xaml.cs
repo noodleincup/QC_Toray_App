@@ -17,16 +17,48 @@ namespace QC_Toray_App_v3
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static MainWindow _instance;
+        public static MainWindow Instance => _instance ??= new MainWindow();
+
+
+
         private bool _isDragging = false;
         private Point _startPoint;
         private bool loginStatus = false;
 
         private string lotData = "";
+        public string LotData
+        {
+            get { return lotData; }
+        }
+
         private string gradeData = "";
+        public string GradeData
+        {
+            get { return gradeData; }
+        }
+
+        private string batchNum = "";
+        public string BatchNum
+        {
+            get { return batchNum; }
+            set { 
+                batchNum = value; 
+                //MessageBox.Show($"Batch Number set to: {batchNum}", "Batch Number Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Singleton Pattern Implementation
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+
+
             this.DataContext = this;
 
             // Attach event listener when LoginUserControl is added
@@ -78,12 +110,15 @@ namespace QC_Toray_App_v3
                     break;
                 case "LotOverview":
                     LotOverviewUserControl lotOverview = new LotOverviewUserControl(lotData, gradeData);
-                    lotOverview.ChangePageRequested += OnChangePageRequested;
+                    lotOverview.ChangePageRequested += (s, e) => OnChangePageRequested(s, e);
                     GridMain.Children.Add(lotOverview);
                     break;
                 case "Operating":
-                    usc = new OperationUserControl();
-                    GridMain.Children.Add(usc);
+                    OperationUserControl operationUser = new OperationUserControl(
+                        lotData: LotData,
+                        batchNum: BatchNum);
+                    //MessageBox.Show($"Lot Data: {LotData}\nBatch Number: {BatchNum}", "Operating Page Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                    GridMain.Children.Add(operationUser);
                     break;
                 case "Report1":
                     usc = new Report1_UserControl();
@@ -112,6 +147,32 @@ namespace QC_Toray_App_v3
                 ListViewMenu_SelectionChanged(ListViewMenu, null); // Call the existing function
             }
         }
+
+
+        // Overloaded function to change page with lot and grade data to operation user control
+        private void OnChangePageRequested(object sender, (string pageName, string lotData, string batchNum) args)
+        {
+            string pageName = args.pageName;
+            string lotData = args.lotData;
+            string batchNum = args.batchNum;
+            // Simulate selecting a ListViewItem to trigger the switch
+            var listViewItem = ListViewMenu.Items.Cast<ListViewItem>().FirstOrDefault(i => i.Name == pageName);
+            if (listViewItem != null)
+            {
+                ListViewMenu.SelectedItem = listViewItem;
+                if (pageName == "Operating")
+                {
+                    OperationUserControl operationControl = new OperationUserControl(lotData, batchNum);
+                    GridMain.Children.Clear();
+                    GridMain.Children.Add(operationControl);
+                }
+                else
+                {
+                    ListViewMenu_SelectionChanged(ListViewMenu, null); // Call the existing function
+                }
+            }
+        }
+
 
         private void OnUpdateLotAndGradeData(object sender, string lot_grade)
         {

@@ -21,7 +21,9 @@ namespace QC_Toray_App_v3
     public partial class LotOverviewUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
-        private const int defaultBatchNum = 20; // Default number of BatchDetailItem controls
+        private const int DEFAULT_BATCH_NUM= 20; // Default number of BatchDetailItem controls
+        private string userLotData;
+        private string userGradeData;
 
         StackPanel _buttonPanel;
         public LotOverviewUserControl(string lotData, string gradeData)
@@ -30,17 +32,21 @@ namespace QC_Toray_App_v3
             initializeBatchDetail();
 
             // Set initial values for Lot and Grade
-            txbLot.Text = lotData;
-            cbxName.Text = gradeData;
+            userLotData = lotData;
+            userGradeData = gradeData;
+
+            txbLot.Text = userLotData;
+            cbxName.Text = userGradeData;
         }
 
         public void initializeBatchDetail()
         {
 
             // 0. Create default BatchDetailItem controls
-            for (int i = 0; i < defaultBatchNum; i++)
+            for (int i = 0; i < DEFAULT_BATCH_NUM; i++)
             {
                 BatchDetailItem item = new BatchDetailItem();
+                item.ChangePageRequested += OnChangePageRequested;
                 item.ItemValue = (i + 1).ToString();
                 wrpBatchDetail.Children.Add(item);
             }
@@ -87,6 +93,11 @@ namespace QC_Toray_App_v3
             wrpBatchDetail.Children.Add(_buttonPanel);
         }
 
+        private void Item_ChangePageRequested(object? sender, string e)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Button Click Handlers
         private void AddDetail_Click(object sender, RoutedEventArgs e)
         {
@@ -125,7 +136,7 @@ namespace QC_Toray_App_v3
 
         private void btnBatchDiameter_Clicked(object sender, RoutedEventArgs e)
         {
-            var batchDiameterWindow = new BatchDiameterDatail_Window(cbxName.SelectedValue?.ToString(), "Lot 123", "Batch 001")
+            var batchDiameterWindow = new BatchDiameterDatail_Window(cbxName.SelectedValue?.ToString(), userLotData, txbBatchNumber.Text)
             {
                 Owner = Window.GetWindow(this)
             };
@@ -191,5 +202,11 @@ namespace QC_Toray_App_v3
         }
        
         #endregion
+
+        private void OnChangePageRequested(object sender, string pageName)
+        {
+            ChangePageRequested?.Invoke(this, pageName);
+
+        }
     }
 }

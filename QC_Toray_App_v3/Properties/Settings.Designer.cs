@@ -12,7 +12,7 @@ namespace QC_Toray_App_v3.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,14 +25,26 @@ namespace QC_Toray_App_v3.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.206,8392; Database=Test_WPF_App; User Id=admin; Password=123;Tru" +
-            "stServerCertificate=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123,1433; Database=test_app_db; User Id=admin; Password=123;Trus" +
+            "tServerCertificate=True;")]
         public string DatabaseConnectionString {
             get {
                 return ((string)(this["DatabaseConnectionString"]));
             }
             set {
                 this["DatabaseConnectionString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Lot_Overview_Table")]
+        public string LotOverviewTableName {
+            get {
+                return ((string)(this["LotOverviewTableName"]));
+            }
+            set {
+                this["LotOverviewTableName"] = value;
             }
         }
     }

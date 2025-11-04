@@ -27,9 +27,14 @@ namespace QC_Toray_App_v3
     {
         private string PIC = "Mr. Donald";
         private int batch_no = 15;
-        public OperationUserControl()
+
+        public OperationUserControl(string lotData="111111", string batchNum="1")
         {
             InitializeComponent();
+
+            // Set initial values for Lot and Batch Number
+            txbLot.Text = lotData;
+            txbNo.Text = batchNum;
 
             List<Batch> batchs = new List<Batch>();
             batchs.Add(new Batch() { Batch_Number = 1, Judgement = 1 });

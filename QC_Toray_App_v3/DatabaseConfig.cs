@@ -18,5 +18,15 @@ namespace QC_Toray_App_v3
                 Properties.Settings.Default.Save();
             }
         }
+
+        public static string LotOverviewTableName
+        {
+            get => Properties.Settings.Default.LotOverviewTableName;
+            set
+            {
+                Properties.Settings.Default.LotOverviewTableName = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }

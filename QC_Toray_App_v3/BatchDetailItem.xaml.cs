@@ -20,7 +20,8 @@ namespace QC_Toray_App_v3
     /// </summary>
     public partial class BatchDetailItem : System.Windows.Controls.UserControl
     {
-        //public event EventHandler<MouseButtonEventArgs> DoubleClicked;
+        public event EventHandler<string> ChangePageRequested;
+
         public BatchDetailItem()
         {
             InitializeComponent();
@@ -48,7 +49,10 @@ namespace QC_Toray_App_v3
 
         private void txbBatchDetail_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show($"Batch Detail {ItemValue}");
+            //MessageBox.Show($"Batch Detail {ItemValue}");
+            MainWindow.Instance.BatchNum = ItemValue;
+            //MessageBox.Show($"From the second");
+            ChangePageRequested?.Invoke(this, "Operating");
         }
     }
 }

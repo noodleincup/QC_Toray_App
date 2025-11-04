@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="DatabaseConnectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Server=192.168.0.206,8392; Database=Test_WPF_App; User Id=admin; Password=123;TrustServerCertificate=True;</Value>
+      <Value Profile="(Default)">Server=192.168.0.123,1433; Database=test_app_db; User Id=admin; Password=123;TrustServerCertificate=True;</Value>
+    </Setting>
+    <Setting Name="LotOverviewTableName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Lot_Overview_Table</Value>
     </Setting>
   </Settings>
 </SettingsFile>
