@@ -14,6 +14,11 @@ namespace QC_Toray_App_v3
         private int _serverPort = 7930;
         private CancellationTokenSource _connectCts = new CancellationTokenSource();
 
+        // Callback to update UI after receiving message
+        public event Action<string>? UpdateDefectAferReceiveMessage;
+
+
+
         public string ServerHost { get => _serverHost; set => _serverHost = value; }
         public int ServerPort { get => _serverPort; set => _serverPort = value; }
 
@@ -86,6 +91,9 @@ namespace QC_Toray_App_v3
             Console.WriteLine($"**RECEIVED**: \"{message.Replace("\n", "\\n")}\"");
             // NOTE: If you need to update a collection in the UI, do so here, 
             // using the Dispatcher via another passed-in Action if necessary.
+            UpdateDefectAferReceiveMessage?.Invoke(message);
+
+
         }
         private void HandleConnectionChanged(bool isNowConnected)
         {

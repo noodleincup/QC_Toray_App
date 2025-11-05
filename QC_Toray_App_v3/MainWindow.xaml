@@ -31,6 +31,10 @@
     <Grid Background="#FFDEDEDE">
         <!--Content-->
         <Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="835" Width="1530" Margin="0,0,0,2">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="197*"/>
+            </Grid.RowDefinitions>-->
             <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="89*"/>

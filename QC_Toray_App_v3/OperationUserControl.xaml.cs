@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -30,9 +31,15 @@ namespace QC_Toray_App_v3
         private string PIC = "Mr. Donald";
         private int batch_no = 15;
         private TCPClientViewModel viewModel;
+        
+        private const string CONNECT = "Connected";
+        private const string DISCONNECT = "Disconnected";
+        private const int DEFECT_DATA_LENGTH = 23;
 
+        private string grabImageMessage = "grabImage123456789";
+        private string resetDefectsMessage = "resetDefects987654321";
 
-        private string _connectionStaus = "Disconnected";
+        private string _connectionStaus = DISCONNECT;
 
         public string ConnectionStatus
         {
@@ -60,11 +67,13 @@ namespace QC_Toray_App_v3
 
             // Initialize ViewModel and pass in the UI update action
             viewModel = new TCPClientViewModel(UpdateConnectionStatusSafely);
+            //viewModel.UpdateDefectAferReceiveMessage += GetDefectDataAndUpdateUI;
+
+            // Initialize TCP Client Connection
+            InitializeTcpClient();
 
             // Bind DataContext
             this.DataContext = this;
-
-            ConnectTcpServer();
 
             // Set initial values for Lot and Batch Number
             txbLot.Text = lotData;
@@ -84,6 +93,8 @@ namespace QC_Toray_App_v3
             //Display_Data();
         }
 
+
+        #region Keyboard Events
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
@@ -98,7 +109,8 @@ namespace QC_Toray_App_v3
         {
             if (e.Key == Key.Space)
             {
-                MessageBox.Show("Spacebar Pressed in PreviewKeyDown!");
+                //MessageBox.Show("Spacebar Pressed in PreviewKeyDown!");
+                SendMessageToServer(grabImageMessage);
 
                 e.Handled = true; // Stops further event bubbling
             }
@@ -116,7 +128,19 @@ namespace QC_Toray_App_v3
             }
         }
 
-        private async void ConnectTcpServer()
+        #endregion
+
+
+
+        #region TCP Methods
+
+        private async Task InitializeTcpClient()
+        {
+            await ConnectTcpServer();
+            await SendMessageToServer(resetDefectsMessage);
+        }
+
+        private async Task ConnectTcpServer()
         {
             if (!viewModel.IsConnected)
             {
@@ -133,17 +157,71 @@ namespace QC_Toray_App_v3
             }
         }
 
+        // set as private for event from MainWindow
+        public async Task DisconnectTcpServer()
+        {
+            await viewModel.DisconnectFromServerAsync();
+        }
+
         private void UpdateConnectionStatusSafely(bool isConnected)
         {
             // Use the Dispatcher to ensure the UI update runs on the main thread
             Dispatcher.Invoke(() =>
             {
                 ConnectionStatus = isConnected ?
-                    "Connected" ://$"Connected to {ClientViewModel.ServerHost}:{ClientViewModel.ServerPort}" : 
-                    "Disconnected";
+                    CONNECT ://$"Connected to {ClientViewModel.ServerHost}:{ClientViewModel.ServerPort}" : 
+                    DISCONNECT;
             });
         }
 
+        private async Task SendMessageToServer(string mmessage)
+        {
+            // Send data to server via ViewModel
+            _ = viewModel.SendDataAsync(mmessage);
+        }
+
+        #endregion
+
+        #region Button Click Handlers
+
+        private void btnReconnect_Click(object sender, RoutedEventArgs e)
+        {
+            ConnectTcpServer();
+        }
+
+        private void btnRun_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("Run Clicked");
+            SendMessageToServer(grabImageMessage);
+        }
+
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Confirm Clicked");
+        }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            // Get data and OK Trick
+            Batch batch = PrepareData(true);
+            // Insert data
+            bool success = Insert_Data(batch);
+            if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Failed"); }
+        }
+
+        private void btnNG_Click(object sender, RoutedEventArgs e)
+        {
+            // Get data and NG Trick
+            Batch batch = PrepareData(false);
+            // Insert data
+            bool success = Insert_Data(batch);
+            if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Failed"); }
+        }
+
+        #endregion
+
+
+        #region Data Handling Methods
         // Get the data from SQL to datagrid on interface
         private void Display_Data()
         {
@@ -232,7 +310,42 @@ namespace QC_Toray_App_v3
             insertBatch.PIC = PIC;
             
             return insertBatch;
-        } 
+        }
+        #endregion
+
+        #region Defect Input Handlers
+
+        private void GetDefectDataAndUpdateUI(string message)
+        {
+            string[] defectData = message.Split(',');
+
+            if(defectData.Length == DEFECT_DATA_LENGTH) 
+            {
+
+                var allTextBoxes = uniSample1.Children.OfType<TextBox>().ToList();
+                UIElement txbElement;
+
+                for (int i = 0; i < DEFECT_DATA_LENGTH; i++)
+                {
+                    //txbElement = allTextBoxes.Find(tb => tb.Name == $"txb{defectData[i].Split(':')[0]}");
+                    txbElement = allTextBoxes[i];
+                    ((TextBox)txbElement).Text = defectData[i].Split(':')[1];
+                    //txbElement.Dispatcher.Invoke(() =>
+                    //{
+                    //    if (txbElement is TextBox)
+                    //    {
+                    //        ((TextBox)txbElement).Text = defectData[i].Split(':')[1];
+                    //    }
+                    //});
+                }
+                    
+            }
+
+            Console.WriteLine("Defect Data Updated from Server.");
+
+        }
+
+        #endregion
     }
 
     // Bliding Data to Interface

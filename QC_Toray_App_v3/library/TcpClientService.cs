@@ -158,7 +158,14 @@ namespace QC_Toray_App_v3.Network
             {
                 while (!token.IsCancellationRequested)
                 {
-                    string? line = await reader.ReadLineAsync().ConfigureAwait(false);
+                    byte[] buffer = new byte[1024];
+
+                    int bytesRead = await _networkStream!.ReadAsync(buffer, 0, buffer.Length, token).ConfigureAwait(false);
+
+                    string byteAsString = BitConverter.ToString(buffer, 0, bytesRead).Replace("-", " ");
+
+                    string line = System.Text.Encoding.UTF8.GetString(getCleanDataBytes(buffer, bytesRead));
+
                     if (line is null)
                     {
                         // Stream closed by remote
@@ -182,6 +189,26 @@ namespace QC_Toray_App_v3.Network
                 // Ensure state is updated and connection closed
                 await DisconnectInternalAsync().ConfigureAwait(false);
             }
+        }
+
+        private byte[] getCleanDataBytes(byte[] data, int bytesRead)
+        {
+            // Trim STX (0x02) and ETX (0x03)
+            int startIndex = 0;
+            int endIndex = bytesRead;
+
+            // Check first byte
+            if (bytesRead > 0 && data[0] == 0x02)
+                startIndex++;
+
+            // Check last byte
+            if (bytesRead > 1 && data[bytesRead - 1] == 0x03)
+                endIndex--;
+
+            // Create clean data array
+            byte[] cleanData = new byte[endIndex - startIndex];
+            Array.Copy(data, startIndex, cleanData, 0, cleanData.Length);
+            return cleanData;
         }
 
         private void ThrowIfDisposed()

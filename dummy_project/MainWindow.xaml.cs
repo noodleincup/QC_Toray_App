@@ -31,18 +31,10 @@ namespace dummy_project
 
             // Initialize ViewModel and pass in the UI update action
             viewModel = new ClientViewModel(UpdateConnectionStatusSafely);
-            
 
-            // **Call AllocConsole to create the console window**
-            if (ConsoleHelper.AllocConsole())
-            {
-                Console.Title = "Application Debug Log";
-                Console.WriteLine("Console window successfully attached.");
-            }
-            else
-            {
-                // The console might already exist or a failure occurred
-            }
+            OpenConsoleWindows();
+
+
         }
 
         private string _connectionStaus = "Disconnected";
@@ -115,6 +107,21 @@ namespace dummy_project
             }
         }
         #endregion
+
+        // Open Console Window
+        private void OpenConsoleWindows() 
+        {
+            // **Call AllocConsole to create the console window**
+            if (ConsoleHelper.AllocConsole())
+            {
+                Console.Title = "Application Debug Log";
+                Console.WriteLine("Console window successfully attached.");
+            }
+            else
+            {
+                // The console might already exist or a failure occurred
+            }
+        }
 
     }
 

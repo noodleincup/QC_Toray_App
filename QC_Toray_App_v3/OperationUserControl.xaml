@@ -73,10 +73,12 @@
                 </Border>
 
                 <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!--Reconnect to TCP Server:-->
+                    <Button Name="btnReconnect" Width="200" Margin="10,0" Click="btnReconnect_Click">Reconnect</Button>
                     <!--Confirm Information-->
-                    <Button Width="280" Margin="10,0">Confirm</Button>
-                    <!--Rum Operation-->
-                    <Button Width="280" Margin="10,0">Run</Button>
+                    <Button Name="btnRun" Width="200" Margin="10,0" Click="btnRun_Click">Run</Button>
+                    <!--Run Operation-->
+                    <Button Name="btnConfirm" Width="200" Margin="10,0">Confirm</Button>
                 </StackPanel>
                 
             </Grid>
@@ -215,7 +217,7 @@
                 
 
                 <!--Sample1-->
-                <UniformGrid Grid.Column="2" Grid.RowSpan="24" Columns="1" Rows="24">
+                <UniformGrid Name="uniSample1" Grid.Column="2" Grid.RowSpan="24" Columns="1" Rows="24">
                     <TextBlock HorizontalAlignment="Center" >Sample 1</TextBlock>
                     <ToggleButton x:Name="tgPalletSize_S1" Background="LightGreen"></ToggleButton>
                     <TextBox x:Name="txbMissDb_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>

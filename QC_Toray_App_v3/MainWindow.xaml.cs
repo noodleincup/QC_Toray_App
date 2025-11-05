@@ -21,11 +21,13 @@ namespace QC_Toray_App_v3
         public static MainWindow Instance => _instance ??= new MainWindow();
 
 
-
+        // For app window dragging
         private bool _isDragging = false;
         private Point _startPoint;
         private bool loginStatus = false;
 
+
+        // Properties to hold Lot, Grade and Batch data
         private string lotData = "";
         public string LotData
         {
@@ -48,9 +50,12 @@ namespace QC_Toray_App_v3
             }
         }
 
+
         public MainWindow()
         {
             InitializeComponent();
+
+            OpenConsoleWindows();
 
             // Singleton Pattern Implementation
             if (_instance == null)
@@ -65,7 +70,6 @@ namespace QC_Toray_App_v3
             var loginControl = new LoginUserControl();
             loginControl.ChangePageRequested += OnChangePageRequested;
             GridMain.Children.Add(loginControl);
-
         }
         #region Menu Buttons functions
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -94,6 +98,13 @@ namespace QC_Toray_App_v3
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             System.Windows.Controls.UserControl usc = null;
+
+            // Close TCP connection if Operating page is open
+            if (IsOperatingPageOpen())
+            {
+                ClosedTcpConnectionIfOperatingPage();
+            }
+
             GridMain.Children.Clear();
 
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -148,6 +159,35 @@ namespace QC_Toray_App_v3
             }
         }
 
+        private void ClosedTcpConnectionIfOperatingPage()
+        {
+            // Close TCP connection here
+            var operatingControl = GridMain.Children.OfType<OperationUserControl>().FirstOrDefault();
+
+            if (operatingControl.ConnectionStatus == "Connected")
+            {
+                operatingControl.DisconnectTcpServer();
+            }
+
+        }
+
+        private bool IsOperatingPageOpen()
+        {
+            UIElementCollection children = GridMain.Children.Count > 0 ? GridMain.Children : null;
+
+            if (children != null)
+            {
+                foreach (var child in children)
+                {
+                    if (child is OperationUserControl)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
 
         // Overloaded function to change page with lot and grade data to operation user control
         private void OnChangePageRequested(object sender, (string pageName, string lotData, string batchNum) args)
@@ -170,6 +210,20 @@ namespace QC_Toray_App_v3
                 {
                     ListViewMenu_SelectionChanged(ListViewMenu, null); // Call the existing function
                 }
+            }
+        }
+
+        private void OpenConsoleWindows()
+        {
+            // **Call AllocConsole to create the console window**
+            if (ConsoleHelper.AllocConsole())
+            {
+                Console.Title = "Application Debug Log";
+                Console.WriteLine("Console window successfully attached.");
+            }
+            else
+            {
+                // The console might already exist or a failure occurred
             }
         }
 

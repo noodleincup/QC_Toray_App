@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\App.xaml
 12752380401
 
-23-1589913554
+24228479321
 227-1970630991
 BatchDetailItem.xaml;BatchDiameterDatail_Window.xaml;LoginUserControl.xaml;LotOverviewUserControl.xaml;MainTable_UserControl.xaml;MainWindow.xaml;Master_UserControl.xaml;OperationUserControl.xaml;Report1_UserControl.xaml;Report2_UserControl.xaml;UniformGrid_Master_UserControl.xaml;UserControl\BatchCell_UserControl.xaml;
 
-False
+True
 
