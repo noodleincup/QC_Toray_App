@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -28,10 +29,13 @@ namespace QC_Toray_App_v3
     /// </summary>
     public partial class OperationUserControl : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
+
+        #region Declare Constants and Variables
+
         private string PIC = "Mr. Donald";
         private int batch_no = 15;
-        private TCPClientViewModel viewModel;
-        
+        private TCPClientViewModel viewModel = TCPClientViewModel.Instance;
+
         private const string CONNECT = "Connected";
         private const string DISCONNECT = "Disconnected";
         private const int DEFECT_DATA_LENGTH = 23;
@@ -40,6 +44,11 @@ namespace QC_Toray_App_v3
         private string resetDefectsMessage = "resetDefects987654321";
 
         private string _connectionStaus = DISCONNECT;
+        private bool _tcpInitialized = false;
+        private bool _eventsSubscribed = false;
+
+        private UniformGrid[] UniformSample;
+        private int sampleIndex = 0;
 
         public string ConnectionStatus
         {
@@ -61,16 +70,22 @@ namespace QC_Toray_App_v3
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #endregion
+
         public OperationUserControl(string lotData="111111", string batchNum="1")
         {
             InitializeComponent();
 
-            // Initialize ViewModel and pass in the UI update action
-            viewModel = new TCPClientViewModel(UpdateConnectionStatusSafely);
-            //viewModel.UpdateDefectAferReceiveMessage += GetDefectDataAndUpdateUI;
+            // Initialize UniformSample array
+            UniformSample = new UniformGrid[] { uniSample1, uniSample2, uniSample3, uniSample4, uniSample5, uniSummary};
+            UniformSample[sampleIndex].Children.OfType<TextBlock>().ToList()[0].FontWeight = FontWeights.Bold;
 
-            // Initialize TCP Client Connection
-            InitializeTcpClient();
+            // Use the app-wide singleton
+            viewModel = TCPClientViewModel.Instance;
+
+            // Defer TCP initialization to Loaded to avoid duplicate/early initialization
+            this.Loaded += OperationUserControl_Loaded;
+            this.Unloaded += OperationUserControl_Unloaded;
 
             // Bind DataContext
             this.DataContext = this;
@@ -94,6 +109,60 @@ namespace QC_Toray_App_v3
         }
 
 
+        #region Loading and Unloading UserControl
+        private async void OperationUserControl_Loaded(object? sender, RoutedEventArgs e)
+        {
+            if (_tcpInitialized) return;
+            _tcpInitialized = true;
+
+            // Subscribe to singleton events (safe to unsubscribe first to avoid duplicate handlers)
+            if (!_eventsSubscribed)
+            {
+                viewModel.ConnectionStatusChanged -= UpdateConnectionStatusSafely;
+                viewModel.ConnectionStatusChanged += UpdateConnectionStatusSafely;
+
+                viewModel.MessageReceived -= OnMessageReceivedFromServer;
+                viewModel.MessageReceived += OnMessageReceivedFromServer;
+
+                _eventsSubscribed = true;
+            }
+
+            try
+            {
+                // Request connect — viewModel logs the caller and stack trace if duplicate connects occur
+                await viewModel.ConnectToServerAsync().ConfigureAwait(false);
+
+                // send initial reset only if connected
+                if (viewModel.IsConnected)
+                {
+                    await SendMessageToServer(resetDefectsMessage).ConfigureAwait(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Console.WriteLine($"TCP init failed: {ex.Message}"));
+            }
+        }
+
+        private void OperationUserControl_Unloaded(object? sender, RoutedEventArgs e)
+        {
+            // Unsubscribe to avoid retaining UI references
+            if (_eventsSubscribed)
+            {
+                viewModel.ConnectionStatusChanged -= UpdateConnectionStatusSafely;
+                viewModel.MessageReceived -= OnMessageReceivedFromServer;
+                _eventsSubscribed = false;
+            }
+        }
+
+        private void OnMessageReceivedFromServer(string message)
+        {
+            // This callback comes from background thread -> marshal to UI thread
+            Dispatcher.Invoke(() => GetDefectDataAndUpdateUI(message));
+        }
+
+        #endregion
+
         #region Keyboard Events
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -109,22 +178,79 @@ namespace QC_Toray_App_v3
         {
             if (e.Key == Key.Space)
             {
-                //MessageBox.Show("Spacebar Pressed in PreviewKeyDown!");
-                SendMessageToServer(grabImageMessage);
+                // Ensure sending uses awaited path and single-connection behavior
+                _ = Dispatcher.InvokeAsync(async () => await SendMessageToServer(grabImageMessage).ConfigureAwait(false));
 
                 e.Handled = true; // Stops further event bubbling
             }
             else if (e.Key == Key.Enter) {
-                MessageBox.Show("Enter Pressed in PreviewKeyDown!");
+                //MessageBox.Show("Enter Pressed in PreviewKeyDown!");
 
                 // Get data and OK Trick
                 //Batch batch = PrepareData(true);
 
                 // Insert data
                 bool success = true; // Insert_Data(batch);
-                if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Success"); }
+                                     //if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Success"); }
+
+                UpdateSelectUI(sampleIndex);
+                UpdateSampleIndex();
+
+                if (sampleIndex == 5)
+                {
+                    SummaryDefecAllType();
+                }
+
 
                 e.Handled = true; // Stops further event bubbling
+
+                
+            }
+        }
+
+        private void UpdateSelectUI(int index)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                int nextIndex = (index + 1) % UniformSample.Length;
+                //Brush defaultColor = UniformSample[nextIndex].Background;
+
+                //UniformSample[index].Background = defaultColor;
+                //UniformSample[nextIndex].Background = Brushes.LightBlue;
+
+                FontWeight fontWeight = UniformSample[nextIndex].Children.OfType<TextBlock>().ToList()[0].FontWeight;
+                UniformSample[index].Children.OfType<TextBlock>().ToList()[0].FontWeight = fontWeight;
+                UniformSample[nextIndex].Children.OfType<TextBlock>().ToList()[0].FontWeight = FontWeights.Bold;
+
+            });
+        }
+        private void UpdateSampleIndex()
+        {
+            sampleIndex = (sampleIndex + 1) % UniformSample.Length;
+        }
+
+        private void SummaryDefecAllType()
+        {
+            var allTxbSummary = UniformSample[UniformSample.Length-1].Children.OfType<TextBox>().ToList();
+            UIElement eachTxbSummary;
+
+            for (int i = 0; i < DEFECT_DATA_LENGTH; i++)
+            {
+                eachTxbSummary = allTxbSummary[i];
+                int sumValue = 0;
+                for (int j = 0; j < UniformSample.Length -1; j++)
+                {
+                    var sampleAllTextBoxes = UniformSample[j].Children.OfType<TextBox>().ToList();
+                    UIElement sampleTxbElement = sampleAllTextBoxes[i];
+                    int currentValue = 0;
+                    if (!int.TryParse(((TextBox)sampleTxbElement).Text, out currentValue))
+                    {
+                        continue;
+                    }
+                     sumValue += currentValue;
+                }
+
+                ((TextBox)eachTxbSummary).Text = sumValue.ToString();
             }
         }
 
@@ -134,33 +260,19 @@ namespace QC_Toray_App_v3
 
         #region TCP Methods
 
-        private async Task InitializeTcpClient()
-        {
-            await ConnectTcpServer();
-            await SendMessageToServer(resetDefectsMessage);
-        }
-
         private async Task ConnectTcpServer()
         {
-            if (!viewModel.IsConnected)
-            {
-                //viewModel.ServerHost = (txbIp.Text != "") ? txbIp.Text : viewModel.ServerHost; // Assuming txbPort is a TextBox for host
-                //viewModel.ServerPort = (txbIp.Text != "") ? int.Parse(txbPort.Text) : viewModel.ServerPort; // Assuming txbHost is a TextBox for port
-
-                // 1. Connect
-                await viewModel.ConnectToServerAsync();
-            }
-            else
-            {
-                // If connected, this button can act as a Disconnect button
-                await viewModel.DisconnectFromServerAsync();
-            }
+            await viewModel.ConnectToServerAsync().ConfigureAwait(false);
         }
 
         // set as private for event from MainWindow
         public async Task DisconnectTcpServer()
         {
-            await viewModel.DisconnectFromServerAsync();
+            if (viewModel != null && viewModel.IsConnected == true)
+            {
+                await viewModel.DisconnectFromServerAsync().ConfigureAwait(false);
+                UpdateConnectionStatusSafely(false);
+            }
         }
 
         private void UpdateConnectionStatusSafely(bool isConnected)
@@ -168,36 +280,49 @@ namespace QC_Toray_App_v3
             // Use the Dispatcher to ensure the UI update runs on the main thread
             Dispatcher.Invoke(() =>
             {
-                ConnectionStatus = isConnected ?
-                    CONNECT ://$"Connected to {ClientViewModel.ServerHost}:{ClientViewModel.ServerPort}" : 
-                    DISCONNECT;
+                ConnectionStatus = isConnected ? CONNECT : DISCONNECT;
             });
         }
 
-        private async Task SendMessageToServer(string mmessage)
+        private async Task SendMessageToServer(string message)
         {
-            // Send data to server via ViewModel
-            _ = viewModel.SendDataAsync(mmessage);
+            if (viewModel == null) return;
+
+            // Ensure connected before sending. If not connected, try to connect once.
+            if (!viewModel.IsConnected)
+            {
+                await ConnectTcpServer().ConfigureAwait(false);
+            }
+
+            if (viewModel.IsConnected)
+            {
+                await viewModel.SendDataAsync(message).ConfigureAwait(false);
+            }
+            else
+            {
+                // optional: log or notify that send failed due to no connection
+                Dispatcher.Invoke(() => Console.WriteLine($"Send skipped, not connected: \"{message}\""));
+            }
         }
 
         #endregion
 
         #region Button Click Handlers
 
-        private void btnReconnect_Click(object sender, RoutedEventArgs e)
+        private async void btnReconnect_Click(object sender, RoutedEventArgs e)
         {
-            ConnectTcpServer();
+            await ConnectTcpServer().ConfigureAwait(false);
         }
 
-        private void btnRun_Click(object sender, RoutedEventArgs e)
+        private async void btnRun_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("Run Clicked");
-            SendMessageToServer(grabImageMessage);
+            await SendMessageToServer(grabImageMessage).ConfigureAwait(false);
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Confirm Clicked");
+            SummaryDefecAllType();
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
@@ -322,7 +447,7 @@ namespace QC_Toray_App_v3
             if(defectData.Length == DEFECT_DATA_LENGTH) 
             {
 
-                var allTextBoxes = uniSample1.Children.OfType<TextBox>().ToList();
+                var allTextBoxes = UniformSample[sampleIndex].Children.OfType<TextBox>().ToList();
                 UIElement txbElement;
 
                 for (int i = 0; i < DEFECT_DATA_LENGTH; i++)
@@ -338,7 +463,6 @@ namespace QC_Toray_App_v3
                     //    }
                     //});
                 }
-                    
             }
 
             Console.WriteLine("Defect Data Updated from Server.");

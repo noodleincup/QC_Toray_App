@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QC_Toray_App_v3"
         mc:Ignorable="d"
-        Title="Batch diameter" Height="900" Width="400" ResizeMode="NoResize" FontSize="10">
+        Title="Batch diameter" Height="900" Width="500" ResizeMode="NoResize" FontSize="10">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -67,8 +67,11 @@
 
         <!--Grid bottom-->
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,5">
-            <Button Content="Save" Click="btnSaveDiameterData_Clicked" Width="90" Height="25" Margin="20,0" FontSize="12"/>
-            <Button Content="Measure" Click="btnCancelDiameterData_Clicked" Width="90" Height="25" Margin="20,0" FontSize="12" 
+            <Button Name="btnSave" Content="Save" Click="btnSaveDiameterData_Clicked" Width="100" Height="25" Margin="5,0" FontSize="12"/>
+            <Button Name="btnTcpStatus" Content="Connect" Click="btnTcpStatus_Clicked" Width="100" Height="25" Margin="5,0" FontSize="12"/>
+            <Button Name="btnMeasureL" Content="Measure L" Click="btnMeasureL_Clicked" Width="100" Height="25" Margin="5,0" FontSize="12" 
+                    Background="#FFC864C8" BorderBrush="#FFC864C8"/>
+            <Button Content="Measure AB" Click="btnMeasureAB_Clicked" Width="100" Height="25" Margin="5,0" FontSize="12" 
                     Background="#FFC864C8" BorderBrush="#FFC864C8"/>
         </StackPanel>
         <!--End Grid bottom-->

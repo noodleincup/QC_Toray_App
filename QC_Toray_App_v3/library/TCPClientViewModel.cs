@@ -1,114 +1,169 @@
 ﻿using QC_Toray_App_v3.Network;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace QC_Toray_App_v3
 {
-    class TCPClientViewModel
+    /// <summary>
+    /// App-wide single TCP client view-model/service.
+    /// Exposes events for UI to subscribe and logs caller/stack when Connect/Send are invoked.
+    /// </summary>
+    public sealed class TCPClientViewModel : IDisposable, IAsyncDisposable
     {
+        private static readonly Lazy<TCPClientViewModel> _instance = new(() => new TCPClientViewModel());
+        public static TCPClientViewModel Instance => _instance.Value;
+
         private readonly TcpClientService _clientService;
         private string _serverHost = "192.168.0.123";
         private int _serverPort = 7930;
         private CancellationTokenSource _connectCts = new CancellationTokenSource();
+        private readonly SemaphoreSlim _connectLock = new(1, 1);
+        private bool _disposed;
 
-        // Callback to update UI after receiving message
-        public event Action<string>? UpdateDefectAferReceiveMessage;
-
-
+        // Events for UI / consumers
+        public event Action<string>? MessageReceived;
+        public event Action<bool>? ConnectionStatusChanged;
 
         public string ServerHost { get => _serverHost; set => _serverHost = value; }
         public int ServerPort { get => _serverPort; set => _serverPort = value; }
+        public bool IsConnected => _clientService?.IsConnected ?? false;
 
-        // Action passed from MainWindow to safely update UI from background thread
-        private readonly Action<bool> _safeConnectionUpdate;
-
-        public bool IsConnected => _clientService.IsConnected;
-
-        // Modified Constructor to accept the safe UI update method
-        public TCPClientViewModel(Action<bool> safeConnectionUpdate)
+        private TCPClientViewModel()
         {
             _clientService = new TcpClientService();
-            _safeConnectionUpdate = safeConnectionUpdate;
-
-            // 1. Subscribe to events for receiving data and connection status
-            _clientService.OnMessageReceived += HandleMessageReceived;
-            _clientService.OnConnectionChanged += HandleConnectionChanged;
+            _clientService.OnMessageReceived += Internal_OnMessageReceived;
+            _clientService.OnConnectionChanged += Internal_OnConnectionChanged;
         }
 
-        // --- Connection Handling ---
-        public async Task ConnectToServerAsync()
+        private void Internal_OnMessageReceived(string msg)
         {
-            Console.WriteLine($"Attempting to connect to {_serverHost}:{_serverPort}...");
-            _connectCts = new CancellationTokenSource();
+            Log($"OnMessageReceived -> \"{msg.Replace("\n", "\\n")}\"");
+            MessageReceived?.Invoke(msg);
+        }
 
+        private void Internal_OnConnectionChanged(bool connected)
+        {
+            Log($"OnConnectionChanged -> {connected}");
+            ConnectionStatusChanged?.Invoke(connected);
+        }
+
+        private void Log(string msg)
+        {
+            Console.WriteLine($"[TCPVM {DateTime.Now:HH:mm:ss.fff}] {msg}");
+        }
+
+        private void LogWithStack(string msg, [CallerMemberName] string caller = "", [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
+        {
+            var shortFile = Path.GetFileName(file);
+            var st = new StackTrace(skipFrames: 1, fNeedFileInfo: true).ToString();
+            Console.WriteLine($"[TCPVM {DateTime.Now:HH:mm:ss.fff}] {msg} (called from {caller} in {shortFile}:{line})\nStack:\n{st}");
+        }
+
+        public async Task ConnectToServerAsync([CallerMemberName] string caller = "", [CallerFilePath] string callerFile = "", [CallerLineNumber] int callerLine = 0)
+        {
+            //LogWithStack("ConnectToServerAsync requested", caller, callerFile, callerLine);
+
+            await _connectLock.WaitAsync().ConfigureAwait(false);
             try
             {
-                await _clientService.ConnectAsync(_serverHost, _serverPort, _connectCts.Token);
+                if (_clientService.IsConnected)
+                {
+                    Log("Connect skipped — already connected.");
+                    return;
+                }
+
+                _connectCts?.Cancel();
+                _connectCts = new CancellationTokenSource();
+
+                Log($"Attempting to connect to {_serverHost}:{_serverPort}...");
+                await _clientService.ConnectAsync(_serverHost, _serverPort, _connectCts.Token).ConfigureAwait(false);
+                Log("ConnectAsync completed.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Connection failed: {ex.Message}");
-                // Handle connection failure
+                Log($"Connect failed: {ex.GetType().Name}: {ex.Message}");
+                throw;
             }
-        }
-
-        public async Task DisconnectFromServerAsync()
-        {
-            if (IsConnected)
+            finally
             {
-                Console.WriteLine("Disconnecting...");
-                _connectCts.Cancel();
-                await _clientService.DisconnectAsync();
+                _connectLock.Release();
             }
         }
 
-        // --- Sending Data ---
-        public async Task SendDataAsync(string data)
+        public async Task DisconnectFromServerAsync([CallerMemberName] string caller = "", [CallerFilePath] string callerFile = "", [CallerLineNumber] int callerLine = 0)
         {
+            //LogWithStack("DisconnectFromServerAsync requested", caller, callerFile, callerLine);
+
             try
             {
-                Console.WriteLine($"Sending: \"{data.Replace("\n", "\\n")}\"");
-                await _clientService.SendAsync(data);
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine($"Send failed (Not connected): {ex.Message}");
+                _connectCts?.Cancel();
+                await _clientService.DisconnectAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Send failed: {ex.Message}");
+                Log($"Disconnect failed: {ex.Message}");
             }
         }
 
-        // --- Event Handlers (Receiving Data & Connection Status) ---
-
-        private void HandleMessageReceived(string message)
+        public async Task SendDataAsync(string data, [CallerMemberName] string caller = "", [CallerFilePath] string callerFile = "", [CallerLineNumber] int callerLine = 0)
         {
-            // Data received successfully from the server
-            Console.WriteLine($"**RECEIVED**: \"{message.Replace("\n", "\\n")}\"");
-            // NOTE: If you need to update a collection in the UI, do so here, 
-            // using the Dispatcher via another passed-in Action if necessary.
-            UpdateDefectAferReceiveMessage?.Invoke(message);
+            //LogWithStack($"SendDataAsync called -> \"{data.Replace("\n", "\\n")}\"", caller, callerFile, callerLine);
 
+            if (!_clientService.IsConnected)
+            {
+                Log("Not connected before send — will attempt to connect first.");
+                try
+                {
+                    await ConnectToServerAsync(caller, callerFile, callerLine).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    Log($"Connect-before-send failed: {ex.Message}");
+                }
+            }
 
+            if (_clientService.IsConnected)
+            {
+                try
+                {
+                    await _clientService.SendAsync(data).ConfigureAwait(false);
+                    Log($"SendAsync completed -> \"{data.Replace("\n", "\\n")}\"");
+                }
+                catch (Exception ex)
+                {
+                    Log($"Send failed: {ex.Message}");
+                    throw;
+                }
+            }
+            else
+            {
+                Log($"Send skipped (still not connected): \"{data.Replace("\n", "\\n")}\"");
+                throw new InvalidOperationException("Not connected");
+            }
         }
-        private void HandleConnectionChanged(bool isNowConnected)
-        {
-            // Connection status changed notification (called from the background thread)
-            Console.WriteLine($"***CONNECTION STATUS CHANGED***: IsConnected = {isNowConnected}");
-            // CRITICAL FIX: Use the injected Action to marshal the call back to the UI thread
-            _safeConnectionUpdate?.Invoke(isNowConnected);
-        }
-        // --- Cleanup ---
+
         public void Dispose()
         {
-            _connectCts.Dispose();
-            _clientService.Dispose();
-            _clientService.OnMessageReceived -= HandleMessageReceived;
-            _clientService.OnConnectionChanged -= HandleConnectionChanged;
+            if (_disposed) return;
+            _disposed = true;
+
+            try
+            {
+                _clientService.OnMessageReceived -= Internal_OnMessageReceived;
+                _clientService.OnConnectionChanged -= Internal_OnConnectionChanged;
+                _clientService.Dispose();
+            }
+            catch { /* swallow */ }
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            Dispose();
+            await Task.CompletedTask;
         }
     }
 }
