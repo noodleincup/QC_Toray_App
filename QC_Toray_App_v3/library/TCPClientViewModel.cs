@@ -1,4 +1,5 @@
-﻿using QC_Toray_App_v3.Network;
+﻿using QC_Toray_App_v3.library;
+using QC_Toray_App_v3.Network;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -18,8 +19,8 @@ namespace QC_Toray_App_v3
         public static TCPClientViewModel Instance => _instance.Value;
 
         private readonly TcpClientService _clientService;
-        private string _serverHost = "192.168.0.123";
-        private int _serverPort = 7930;
+        private string _serverHost = TcpConfig.TcpServerIp;
+        private int _serverPort = TcpConfig.TcpServerPort;
         private CancellationTokenSource _connectCts = new CancellationTokenSource();
         private readonly SemaphoreSlim _connectLock = new(1, 1);
         private bool _disposed;

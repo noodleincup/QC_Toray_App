@@ -39,13 +39,15 @@ namespace QC_Toray_App_v3
         private const string CONNECT = "Connect";
         private const string DISCONNECT = "Disconnect";
 
-        private string measureDiameterLMessage = "grabImage123456789";
-        private string measureDiameterABMessage = "grabDiameter123456";
+        private string measureDiameterLMessage = "measureL";
+        private string measureDiameterABMessage = "measureAB";
         private string resetDefectsMessage = "resetDefects987654321";
 
         private string _connectionStaus = DISCONNECT;
         private bool _tcpInitialized = false;
         private bool _eventsSubscribed = false;
+
+        private int ELEMENT_NUM = 30;
 
         public string ConnectionStatus
         {
@@ -140,11 +142,7 @@ namespace QC_Toray_App_v3
             }
         }
 
-        private void OnMessageReceivedFromServer(string message)
-        {
-            // This callback comes from background thread -> marshal to UI thread
-            //Dispatcher.Invoke(() => GetDefectDataAndUpdateUI(message));
-        }
+        
 
         #endregion
 
@@ -239,9 +237,180 @@ namespace QC_Toray_App_v3
             //grdDiameterTable.Children.Add(buttonPanel);
         }
 
-        private void UpdateBatchDiameterTable(string data)
+        private void ChangeBtnTcpStatusUI(bool isConnected)
         {
+            Brush blueColor = btnSave.Background;
+            Brush redColor = (Brush)new BrushConverter().ConvertFromString("#FFC864C8");
 
+            if (isConnected)
+            {
+                btnTcpStatus.Content = DISCONNECT;
+                btnTcpStatus.Background = redColor;
+                btnTcpStatus.BorderBrush = redColor;
+            }
+            else
+            {
+                btnTcpStatus.Content = CONNECT;
+                btnTcpStatus.Background = blueColor;
+                btnTcpStatus.BorderBrush = blueColor;
+            }
+        }
+
+        private void UpdateBatchDiameterTable(string message)
+        {
+            UIElement[] elements = grdDiameterTable.Children.Cast<BatchCell_UserControl>().ToArray();
+
+            string[] rawData = GetRawData(message);
+
+            string typeData = GetTypeData(message);
+
+            if (!IsTypeValid(typeData))
+            {
+                throw new Exception($"Invalid type data received: {typeData}");
+            }
+
+            if (typeData == "L") { LoadDataLToTable(rawData, elements); }
+            else { LoadDataABToTable(rawData, elements); }
+
+            UpdateAverageUI(elements);
+        }
+
+        private string[] GetRawData(string message) 
+        { 
+            return message.Split(',');
+        }
+
+        private string GetTypeData(string message)
+        {
+            string[] rawData = GetRawData(message);
+            char[] charToTrim = { ' ', '"'};
+
+            // type:AB or type:L from "0:AB" , "0:L" 
+            return rawData[0].Split(":")[1].Trim(charToTrim);
+        }
+
+        private bool IsTypeValid(string typeData)
+        {
+            return Array.Exists(new string[] { "L", "AB" }, data => data == typeData);
+        }
+
+        private string ModifyDigitPoint(string value, int digit)
+        {
+            int digitIndex = value.IndexOf('.');
+            int desiredLength = digitIndex + digit + 1;
+
+            if (digitIndex != -1) 
+            {
+                return value.Substring(0, desiredLength);
+            }
+
+            return value;
+        }
+
+        private void LoadDataLToTable(string[] rawData, UIElement[] elements)
+        {
+            // - 3 refer from header, average and judgement , -1 refer for type data as index 0
+            int elementNum = ELEMENT_NUM;
+            int inputNum = rawData.Length - 1;
+
+            if (elementNum != inputNum)
+            {
+                throw new Exception($"Amount L data {elementNum} not equal to number of input {inputNum}");
+            }
+
+            for (int i = 1; i < ELEMENT_NUM + 1; i++)
+            {
+                if (elements[i] is BatchCell_UserControl batchCell)
+                {
+                    //string id = batchCell.cols0.Text;
+
+                    string[] elementData = rawData[i].Split(":");
+
+                    int id = int.Parse(elementData[0]);
+                    string dataL = elementData[1].Trim();
+
+                    if (dataL != null && id == i) 
+                    { 
+                        batchCell.cols3.Text = ModifyDigitPoint(dataL, 2);
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid Index or L Data");
+                    }
+                }
+            }
+        }
+
+        private void LoadDataABToTable(string[] rawData, UIElement[] elements)
+        {
+            // - 3 refer from header, average and judgement , -1 refer for type data as index 0
+            int elementNum = ELEMENT_NUM;
+            int inputNum = rawData.Length - 1;
+
+            if (elementNum != inputNum)
+            {
+                throw new Exception($"Amount AB data {elementNum} not equal to number of input {inputNum}");
+            }
+
+            for (int i = 1; i < ELEMENT_NUM + 1; i++)
+            {
+                if (elements[i] is BatchCell_UserControl batchCell)
+                {
+                    //string id = batchCell.cols0.Text;
+
+                    string[] elementData = rawData[i].Split(":");
+
+                    int id = int.Parse(elementData[0]);
+                    string dataA = elementData[1].Trim();
+                    string dataB = elementData[2].Trim();
+
+                    if (dataA != null && dataB != null && id == i)
+                    {
+                        batchCell.cols1.Text = ModifyDigitPoint(dataA, 2);
+                        batchCell.cols2.Text = ModifyDigitPoint(dataB, 2);
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid Index or AB Data");
+                    }
+                }
+            }
+        }
+
+        private void UpdateAverageUI(UIElement[] elements)
+        {
+            UIElement avgUI = elements[elements.Length-2];
+            int eleNum = elements.Length - 3;
+
+            
+
+            float[] avgAll = {0, 0, 0};
+            for (int i = 1; i < elements.Length - 2; i++) 
+            {
+                if (elements[i] is BatchCell_UserControl batchCell)
+                {
+
+                    float dataA, dataB, dataL;
+
+                    if (float.TryParse(batchCell.cols1.Text, out dataA)) { avgAll[0] += dataA; }
+                    if (float.TryParse(batchCell.cols2.Text, out dataB)) { avgAll[1] += dataB; }
+                    if (float.TryParse(batchCell.cols3.Text, out dataL)) { avgAll[2] += dataL; }
+                }
+            }
+
+            avgAll = avgAll.Select(x => (float)(x/eleNum)).ToArray();
+
+            if (avgUI is not BatchCell_UserControl avgBatchRow)
+            {
+                throw new Exception("Invalid Average row UI");
+            }
+            else
+            {
+                avgBatchRow.cols1.Text = avgAll[0].ToString("F2");
+                avgBatchRow.cols2.Text = avgAll[1].ToString("F2");
+                avgBatchRow.cols3.Text = avgAll[2].ToString("F2");
+
+            }
         }
         #endregion
 
@@ -275,25 +444,6 @@ namespace QC_Toray_App_v3
             });
         }
 
-        private void ChangeBtnTcpStatusUI(bool isConnected)
-        {
-            Brush blueColor = btnSave.Background;
-            Brush redColor = (Brush)new BrushConverter().ConvertFromString("#FFC864C8");
-
-            if (isConnected)
-            {
-                btnTcpStatus.Content = DISCONNECT;
-                btnTcpStatus.Background = redColor;
-                btnTcpStatus.BorderBrush = redColor;
-            }
-            else
-            {
-                btnTcpStatus.Content = CONNECT;
-                btnTcpStatus.Background = blueColor;
-                btnTcpStatus.BorderBrush = blueColor;
-            }
-        }
-
         private async Task SendMessageToServer(string message)
         {
             if (viewModel == null) return;
@@ -315,6 +465,32 @@ namespace QC_Toray_App_v3
             }
         }
 
+        private void OnMessageReceivedFromServer(string message)
+        {
+            // This callback comes from background thread -> marshal to UI thread
+            //Dispatcher.Invoke(() => GetDefectDataAndUpdateUI(message));
+            //Dispatcher.Invoke(() => UpdateBatchDiameterTable(message));
+            if (Dispatcher.CheckAccess())
+            {
+                UpdateBatchDiameterTable(message); // already on UI thread
+            }
+            else
+            {
+                // Post the UI update to the UI thread without blocking the receive thread
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    try
+                    {
+                        UpdateBatchDiameterTable(message);
+                    }
+                    catch (Exception ex)
+                    {
+                        // log — prevents exceptions in UI code from bubbling back into the receive thread
+                        Console.WriteLine($"UpdateBatchDiameterTable failed: {ex.Message}");
+                    }
+                }));
+            }
+        }
         #endregion
 
         #region Button Click Handlers

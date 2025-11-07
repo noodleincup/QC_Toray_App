@@ -15,19 +15,19 @@
     <Compile Update="BatchDiameterDatail_Window.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="LotOverviewUserControl.xaml.cs">
+    <Compile Update="UserControl\LotOverviewUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Master_UserControl.xaml.cs">
+    <Compile Update="UserControl\Master_UserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Report1_UserControl.xaml.cs">
+    <Compile Update="UserControl\Report1_UserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Report2_UserControl.xaml.cs">
+    <Compile Update="UserControl\Report2_UserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UniformGrid_Master_UserControl.xaml.cs">
+    <Compile Update="UserControl\UniformGrid_Master_UserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControl\BatchCell_UserControl.xaml.cs">
@@ -35,25 +35,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="LoginUserControl.xaml">
+    <Page Update="UserControl\LoginUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Master_UserControl.xaml">
+    <Page Update="UserControl\Master_UserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="OperationUserControl.xaml">
+    <Page Update="UserControl\OperationUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Report1_UserControl.xaml">
+    <Page Update="UserControl\Report1_UserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Report2_UserControl.xaml">
+    <Page Update="UserControl\Report2_UserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UniformGrid_Master_UserControl.xaml">
+    <Page Update="UserControl\UniformGrid_Master_UserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

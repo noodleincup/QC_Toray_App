@@ -8,5 +8,11 @@
     <Setting Name="LotOverviewTableName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Lot_Overview_Table</Value>
     </Setting>
+    <Setting Name="ServerIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.0.123</Value>
+    </Setting>
+    <Setting Name="ServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7930</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
