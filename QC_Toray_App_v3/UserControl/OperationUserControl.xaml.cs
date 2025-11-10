@@ -104,7 +104,7 @@ namespace QC_Toray_App_v3
             batchs.Add(new Batch() { Batch_Number = 3, Judgement = 0 });
             batchs.Add(new Batch() { Batch_Number = 4, Judgement = 1 });
 
-            dgBatchHis.ItemsSource = batchs;
+            //dgBatchHis.ItemsSource = batchs;
 
             //Display_Data();
         }
@@ -372,7 +372,7 @@ namespace QC_Toray_App_v3
             }
 
             // Add data to DataGrid
-            dgBatchHis.ItemsSource = lists;
+            //dgBatchHis.ItemsSource = lists;
 
         }
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QC_Toray_App_v3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ad2c80a98e6af47ad14b8fb871a03f35fa13357")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a61541966c4663bf585b7f0a993e86c8fbeb09d")]
 [assembly: System.Reflection.AssemblyProductAttribute("QC_Toray_App_v3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QC_Toray_App_v3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

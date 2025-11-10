@@ -85,7 +85,7 @@
         </Border>
 
         <!--Batch History-->
-        <DataGrid x:Name="dgBatchHis" Grid.Row="1" Margin="20, 0, 20, 20" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource MaterialDesignRaisedButton}">
+        <!--<DataGrid x:Name="dgBatchHis" Grid.Row="1" Margin="20, 0, 20, 20" AutoGenerateColumns="False" ColumnHeaderStyle="{DynamicResource MaterialDesignRaisedButton}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Batch Number" Binding="{Binding Batch_Number}" Width="*">
                     <DataGridTextColumn.ElementStyle>
@@ -104,9 +104,68 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
 
-        <!--Operation-->
+        <Grid Grid.Row="1" Margin="20,0,0,20" Background="#FAFAFA">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Name="imgDefect_1_1" 
+                   Grid.Row="0" Grid.Column="0" 
+                   Source="/image/1.1.png"
+                   HorizontalAlignment="Right"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_1_2" 
+                   Grid.Row="0" Grid.Column="1" 
+                   Source="/image/1.2.png"
+                   HorizontalAlignment="Left"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_1_3" 
+                   Grid.Row="1" Grid.Column="0" 
+                   Source="/image/1.3.png"
+                   HorizontalAlignment="Right"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_1_4" 
+                   Grid.Row="1" Grid.Column="1" 
+                   Source="/image/1.4.png"
+                   HorizontalAlignment="Left"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_2" 
+                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                   Source="/image/defect_2.png"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_3" 
+                   Grid.Row="3" Grid.Column="0"
+                   Source="/image/defect_3.png"
+                   HorizontalAlignment="Right"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_5" 
+                   Grid.Row="3" Grid.Column="1"
+                   Source="/image/defect_5.png"
+                   HorizontalAlignment="Left"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_6" 
+                   Grid.Row="4" Grid.Column="0"
+                   Source="/image/defect_6.png"
+                   HorizontalAlignment="Right"
+                   Stretch="Fill"/>
+            <Image Name="imgDefect_7" 
+                   Grid.Row="4" Grid.Column="1"
+                   Source="/image/defect_7.png"
+                   HorizontalAlignment="Left"
+                   Stretch="Fill"/>
+        </Grid>
+
+            <!--Operation-->
         <Border Grid.Column="1" Grid.Row="1" Margin="20, 0, 20, 20" BorderThickness="0.5" BorderBrush="Gray" Background="#FAFAFA" CornerRadius="20">
             <Grid Grid.Column="1" Grid.Row="1" Margin="5">
                 <Grid.Resources>

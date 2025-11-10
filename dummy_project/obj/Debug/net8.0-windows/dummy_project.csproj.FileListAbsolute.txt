@@ -72,12 +72,6 @@ D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\refint\dumm
 D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\dummy_project.pdb
 D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\dummy_project.genruntimeconfig.cache
 D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\ref\dummy_project.dll
-D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project.csproj.AssemblyReference.cache
-D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\MainWindow.g.cs
-D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\App.g.cs
-D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_Content.g.cs
-D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_MarkupCompile.cache
-D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_MarkupCompile.lref
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\dummy_project.exe
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\dummy_project.deps.json
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\dummy_project.runtimeconfig.json
@@ -132,6 +126,12 @@ D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\Mater
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\MaterialDesignThemes.Wpf.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\bin\Debug\net8.0-windows\de\MahApps.Metro.resources.dll
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project.csproj.AssemblyReference.cache
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\App.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_Content.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_MarkupCompile.cache
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_MarkupCompile.lref
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\App.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\MainWindow.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project.g.resources

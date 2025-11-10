@@ -81,6 +81,7 @@ namespace QC_Toray_App_v3
             // Defer TCP initialization to Loaded to avoid duplicate/early initialization
             this.Loaded += BatchDiameterDetail_Winodws_Loaded;
             this.Unloaded += BatchDiameterDetail_Winodws_Unloaded;
+            //this.Closed += DisconnectTcpServer_Safely;
 
             // Store the data
             _initialGrade = grade;
@@ -432,6 +433,19 @@ namespace QC_Toray_App_v3
             }
         }
 
+        private void DisconnectTcpServer_Safely()
+        {
+            // Use the Dispatcher to ensure the UI update runs on the main thread
+            Dispatcher.Invoke(async () =>
+            {
+                if (viewModel != null && viewModel.IsConnected == true)
+                {
+                    await viewModel.DisconnectFromServerAsync().ConfigureAwait(false);
+                    UpdateConnectionStatusSafely(false);
+                }
+            });
+        }
+
         private void UpdateConnectionStatusSafely(bool isConnected)
         {
             // Use the Dispatcher to ensure the UI update runs on the main thread
@@ -510,6 +524,8 @@ namespace QC_Toray_App_v3
             }
             ResultString = resultBuilder.ToString();
             this.DialogResult = true; // Indicate success
+
+            DisconnectTcpServer();
             this.Close();
         }
 
@@ -535,6 +551,13 @@ namespace QC_Toray_App_v3
         {
             // Send grab image command to server
             await SendMessageToServer(measureDiameterABMessage).ConfigureAwait(false);
+        }
+
+        // In the window's code-behind
+        private async void MyWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            await DisconnectTcpServer().ConfigureAwait(false);
+            e.Cancel = true;
         }
         #endregion
     }

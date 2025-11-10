@@ -163,6 +163,7 @@ namespace QC_Toray_App_v3
             if (dialogResult == true)
             {
                 MessageBox.Show($"dialogResult: {dialogResult}");
+                //Console.WriteLine(batchDiameterWindow.ResultString);
             }
             else
             {

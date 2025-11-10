@@ -37,7 +37,7 @@ namespace QC_Toray_App_v3
         DataTable dt = new DataTable();
 
         // Create DatabaseHandler
-        DatabaseHandler dataHandler = new DatabaseHandler(DatabaseConfig.ConnectionString);
+        DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString);
 
         // Table Name
         private string LOT_OVERVIEW_TABLE = DatabaseConfig.LotOverviewTableName;
@@ -85,7 +85,7 @@ namespace QC_Toray_App_v3
         private void LoadDataFromDatabase()
         {
             // Implement database loading logic here if needed
-            dt = dataHandler.GetTableDatabaseAsDataTable(LOT_OVERVIEW_TABLE);
+            dt = databaseHandler.GetTableDatabaseAsDataTable(LOT_OVERVIEW_TABLE);
             TrimDataTable(dt);
 
             // Bind to DataGrid

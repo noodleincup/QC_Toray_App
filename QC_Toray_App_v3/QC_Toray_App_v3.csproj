@@ -10,7 +10,16 @@
 
   <ItemGroup>
     <None Remove="Fonts\segoeui.ttf" />
+    <None Remove="image\1.1.png" />
+    <None Remove="image\1.2.png" />
+    <None Remove="image\1.3.png" />
+    <None Remove="image\1.4.png" />
     <None Remove="image\close.png" />
+    <None Remove="image\defect_2.png" />
+    <None Remove="image\defect_3.png" />
+    <None Remove="image\defect_5.png" />
+    <None Remove="image\defect_6.png" />
+    <None Remove="image\defect_7.png" />
     <None Remove="image\next.png" />
     <None Remove="image\Toray_logo.svg.png" />
   </ItemGroup>
@@ -37,7 +46,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="image\1.1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\1.2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\1.3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\1.4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="image\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\defect_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\defect_3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\defect_5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\defect_6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\defect_7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="image\next.png">
