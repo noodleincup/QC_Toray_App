@@ -41,7 +41,7 @@ namespace QC_Toray_App_v3
         private const string DISCONNECT = "Disconnected";
         private const int DEFECT_DATA_LENGTH = 23;
 
-        private string grabImageMessage = "grabImage123456789";
+        private string grabImageMessage = "grabM";
         private string resetDefectsMessage = "resetDefects987654321";
 
         private string _connectionStaus = DISCONNECT;
@@ -193,7 +193,11 @@ namespace QC_Toray_App_v3
                 // Insert data
                 bool success = true; // Insert_Data(batch);
                                      //if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Success"); }
-
+                                     
+                if (viewModel.IsConnected)
+                {
+                    _ = Dispatcher.InvokeAsync(async() => await SendMessageToServer(resetDefectsMessage).ConfigureAwait(false));
+                }
                 UpdateSelectUI(sampleIndex);
                 UpdateSampleIndex();
 
@@ -445,7 +449,7 @@ namespace QC_Toray_App_v3
         {
             string[] defectData = message.Split(',');
 
-            if(defectData.Length == DEFECT_DATA_LENGTH) 
+            if(defectData.Length == DEFECT_DATA_LENGTH)
             {
 
                 var allTextBoxes = UniformSample[sampleIndex].Children.OfType<TextBox>().ToList();
