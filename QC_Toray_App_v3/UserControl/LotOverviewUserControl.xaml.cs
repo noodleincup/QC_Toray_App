@@ -21,7 +21,7 @@ namespace QC_Toray_App_v3
     public partial class LotOverviewUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
-        private const int DEFAULT_BATCH_NUM= 20; // Default number of BatchDetailItem controls
+        private const int DEFAULT_BATCH_NUM= 40; // Default number of BatchDetailItem controls
         private string userLotData;
         private string userGradeData;
 
@@ -51,46 +51,46 @@ namespace QC_Toray_App_v3
                 wrpBatchDetail.Children.Add(item);
             }
 
-            // 1. Create the StackPanel (the container)
-            _buttonPanel = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 10, 0, 0), // Optional: add some top margin
-                Width = 300 // Optional: match the width of the UserControls
-            };
+            //// 1. Create the StackPanel (the container)
+            //_buttonPanel = new StackPanel
+            //{
+            //    Orientation = Orientation.Horizontal,
+            //    Margin = new Thickness(0, 10, 0, 0), // Optional: add some top margin
+            //    Width = 300 // Optional: match the width of the UserControls
+            //};
 
-            // 2. Create the 'Add' Button
-            Button addButton = new Button
-            {
-                Content = "Add",
-                Width = 100,
-                Height = 30,
-                Margin = new Thickness(20,5,5,5)
-            };
-            // Attach click event handler
-            addButton.Click += AddDetail_Click;
+            //// 2. Create the 'Add' Button
+            //Button addButton = new Button
+            //{
+            //    Content = "Add",
+            //    Width = 100,
+            //    Height = 30,
+            //    Margin = new Thickness(20, 5, 5, 5)
+            //};
+            //// Attach click event handler
+            //addButton.Click += AddDetail_Click;
 
-            // 3. Create the 'Remove' Button
-            Button removeButton = new Button
-            {
-                Content = "Remove",
-                Width = 100,
-                Height = 30,
-                Margin = new Thickness(20, 5, 5, 5),
-                Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFC864C8"),
-                BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFC864C8")
-            };
-            // Attach click event handler
-            removeButton.Click += RemoveDetail_Click;
+            //// 3. Create the 'Remove' Button
+            //Button removeButton = new Button
+            //{
+            //    Content = "Remove",
+            //    Width = 100,
+            //    Height = 30,
+            //    Margin = new Thickness(20, 5, 5, 5),
+            //    Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFC864C8"),
+            //    BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#FFC864C8")
+            //};
+            //// Attach click event handler
+            //removeButton.Click += RemoveDetail_Click;
 
-            // 4. Add the buttons to the StackPanel
-            _buttonPanel.Children.Add(addButton);
-            _buttonPanel.Children.Add(removeButton);
+            //// 4. Add the buttons to the StackPanel
+            //_buttonPanel.Children.Add(addButton);
+            //_buttonPanel.Children.Add(removeButton);
 
-            // 5. Add the StackPanel to the WrapPanel as the last child
-            // This ensures the button group is always at the end, even 
-            // if the WrapPanel wraps to a new line.
-            wrpBatchDetail.Children.Add(_buttonPanel);
+            //// 5. Add the StackPanel to the WrapPanel as the last child
+            //// This ensures the button group is always at the end, even 
+            //// if the WrapPanel wraps to a new line.
+            //wrpBatchDetail.Children.Add(_buttonPanel);
         }
 
         private void Item_ChangePageRequested(object? sender, string e)

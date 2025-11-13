@@ -82,19 +82,54 @@ namespace QC_Toray_App_v3
             }
         }
 
-        private void LoadDataFromDatabase()
+        private async void LoadDataFromDatabase()
         {
-            // Implement database loading logic here if needed
-            dt = databaseHandler.GetTableDatabaseAsDataTable(LOT_OVERVIEW_TABLE);
-            TrimDataTable(dt);
+            const int TimeoutMilliseconds = 2000; // 2 seconds
 
-            // Bind to DataGrid
-            tableGrid.ItemsSource = dt.DefaultView;
-            ConfigureDataGrid();
+            // 1. Run the potentially slow database operation on a background thread
+            Task<DataTable> databaseTask = Task.Run(() =>
+            {
+                // This runs on a thread pool thread, not the UI thread
+                return databaseHandler.GetTableDatabaseAsDataTable(LOT_OVERVIEW_TABLE);
+            });
+
+            try
+            {
+                // 2. Wait for the database task to complete, but only up to the timeout
+                if (await Task.WhenAny(databaseTask, Task.Delay(TimeoutMilliseconds)) == databaseTask)
+                {
+                    // The databaseTask finished within the timeout
+                    dt = await databaseTask; // Get the result and re-throw any exception from the task
+
+                    // 3. Process and bind the data on the UI thread
+                    TrimDataTable(dt);
+                    tableGrid.ItemsSource = dt.DefaultView;
+                    ConfigureDataGrid();
+                }
+                else
+                {
+                    // The Task.Delay finished first, indicating a timeout
+                    MessageBox.Show("Database loading operation timed out (more than 2 seconds). Skipping data binding.", "Timeout", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // The databaseTask might still be running in the background. 
+                    // Depending on your databaseHandler, you might want a CancellationToken here to stop it.
+                    // For simplicity, we just move on.
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions from the database operation itself
+                MessageBox.Show($"An error occurred while loading data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void TrimDataTable(DataTable dt)
         {
+            if (dt == null) 
+            { 
+                //MessageBox.Show("Data table is null, Something wrong with SQL server", "Invalid Data Table", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; 
+            }
+
             foreach (DataRow row in dt.Rows)
             {
                 foreach (DataColumn col in dt.Columns)
