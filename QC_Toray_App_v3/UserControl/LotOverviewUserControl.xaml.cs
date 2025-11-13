@@ -204,6 +204,11 @@ namespace QC_Toray_App_v3
        
         #endregion
 
+        private void batchItem_DoubleClicked(object sender, string lotData, string batchNumber)
+        {
+
+        }
+
         private void OnChangePageRequested(object sender, string pageName)
         {
             ChangePageRequested?.Invoke(this, pageName);

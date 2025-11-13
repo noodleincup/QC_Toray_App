@@ -52,7 +52,14 @@ namespace QC_Toray_App_v3
             //MessageBox.Show($"Batch Detail {ItemValue}");
             MainWindow.Instance.BatchNum = ItemValue;
             //MessageBox.Show($"From the second");
-            ChangePageRequested?.Invoke(this, "Operating");
+            // ChangePageRequested?.Invoke(this, "Operating");
+
+            OperationUserControl operationControl = new OperationUserControl();
+
+            bool result = operationControl.ShowDialog() ?? false;
+
+            this.Status = result ? "OK" : "NG";
+            this.ItemCheckBox.IsChecked = true;
         }
     }
 }

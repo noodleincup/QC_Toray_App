@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="QC_Toray_App_v3.OperationUserControl"
+﻿<Window x:Class="QC_Toray_App_v3.OperationUserControl"
              PreviewKeyDown="Window_PreviewKeyDown"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,9 +9,9 @@
              mc:Ignorable="d"
              Width="1530" Height="835"
              >
-    <UserControl.Resources>
+    <Window.Resources>
         <local:JudgementConverter x:Key="JudgementConverter"/>
-    </UserControl.Resources>
+    </Window.Resources>
     <Grid Background="#FFDEDEDE">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>
@@ -266,10 +266,15 @@
                  <!--Judgment--> 
                 <TextBlock Grid.Row="26" Grid.Column="0" FontWeight="Bold">Judgment (OK/NG)</TextBlock>
                 <UniformGrid Grid.Row="26" Grid.Column="2" Grid.ColumnSpan="7" Rows="1" Columns="2">
-                    <Button Margin="3" Height="20" >
-                        <TextBlock x:Name="btnOK" Foreground="White" FontSize="10" >OK</TextBlock>
+                    <Button x:Name="btnOK" 
+                            Margin="3" Height="20" 
+                            Click="btnOK_Click" >
+                        <TextBlock Foreground="White" FontSize="10">OK</TextBlock>
                     </Button>
-                    <Button x:Name="btnNG" Margin="3" Height="20" Background="#FFC864C8" BorderBrush="#FFC864C8">
+                    <Button x:Name="btnNG" 
+                            Margin="3" Height="20" 
+                            Background="#FFC864C8" BorderBrush="#FFC864C8"
+                            Click="btnNG_Click">
                         <TextBlock Foreground="White" FontSize="10" >NG</TextBlock>
                     </Button>
                 </UniformGrid>
@@ -769,4 +774,4 @@
 
 
     </Grid>
-</UserControl>
+</Window>

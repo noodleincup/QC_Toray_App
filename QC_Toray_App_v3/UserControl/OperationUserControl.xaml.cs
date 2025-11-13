@@ -28,7 +28,7 @@ namespace QC_Toray_App_v3
     /// <summary>
     /// Interação lógica para UserControlCreate.xam
     /// </summary>
-    public partial class OperationUserControl : System.Windows.Controls.UserControl, INotifyPropertyChanged
+    public partial class OperationUserControl : Window, INotifyPropertyChanged// System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
 
         #region Declare Constants and Variables
@@ -332,20 +332,24 @@ namespace QC_Toray_App_v3
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            // Get data and OK Trick
-            Batch batch = PrepareData(true);
-            // Insert data
-            bool success = Insert_Data(batch);
-            if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Failed"); }
+            //// Get data and OK Trick
+            //Batch batch = PrepareData(true);
+            //// Insert data
+            //bool success = Insert_Data(batch);
+            //if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Failed"); }
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void btnNG_Click(object sender, RoutedEventArgs e)
         {
-            // Get data and NG Trick
-            Batch batch = PrepareData(false);
-            // Insert data
-            bool success = Insert_Data(batch);
-            if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Failed"); }
+            //// Get data and NG Trick
+            //Batch batch = PrepareData(false);
+            //// Insert data
+            //bool success = Insert_Data(batch);
+            //if (success) { MessageBox.Show("Insert Success"); } else { MessageBox.Show("Insert Failed"); }
+            this.DialogResult = false;
+            this.Close();
         }
 
         #endregion

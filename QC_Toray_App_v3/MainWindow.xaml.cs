@@ -125,11 +125,11 @@ namespace QC_Toray_App_v3
                     GridMain.Children.Add(lotOverview);
                     break;
                 case "Operating":
-                    OperationUserControl operationUser = new OperationUserControl(
-                        lotData: LotData,
-                        batchNum: BatchNum);
-                    //MessageBox.Show($"Lot Data: {LotData}\nBatch Number: {BatchNum}", "Operating Page Data", MessageBoxButton.OK, MessageBoxImage.Information);
-                    GridMain.Children.Add(operationUser);
+                    //OperationUserControl operationUser = new OperationUserControl(
+                    //    lotData: LotData,
+                    //    batchNum: BatchNum);
+                    ////MessageBox.Show($"Lot Data: {LotData}\nBatch Number: {BatchNum}", "Operating Page Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //GridMain.Children.Add(operationUser);
                     break;
                 case "Report1":
                     usc = new Report1_UserControl();
@@ -202,9 +202,9 @@ namespace QC_Toray_App_v3
                 ListViewMenu.SelectedItem = listViewItem;
                 if (pageName == "Operating")
                 {
-                    OperationUserControl operationControl = new OperationUserControl(lotData, batchNum);
-                    GridMain.Children.Clear();
-                    GridMain.Children.Add(operationControl);
+                    //OperationUserControl operationControl = new OperationUserControl(lotData, batchNum);
+                    //GridMain.Children.Clear();
+                    //GridMain.Children.Add(operationControl);
                 }
                 else
                 {
