@@ -25,8 +25,8 @@ namespace QC_Toray_App_v3.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123,1433; Database=test_app_db; User Id=admin; Password=123;Trus" +
-            "tServerCertificate=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=test_app_db; User Id=sa; Password=1234;" +
+            "TrustServerCertificate=True;")]
         public string DatabaseConnectionString {
             get {
                 return ((string)(this["DatabaseConnectionString"]));

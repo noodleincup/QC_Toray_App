@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QC_Toray_App_v3", "QC_Toray
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dummy_project", "dummy_project\dummy_project.csproj", "{70BCC3E2-E1C1-4D36-8C3C-41E4DAF1B0F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dummy_Test_DB_console_app", "dummy_Test_DB_console_app\dummy_Test_DB_console_app.csproj", "{A4EE1169-9434-4CC6-B4AC-BE81EC994FC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{70BCC3E2-E1C1-4D36-8C3C-41E4DAF1B0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70BCC3E2-E1C1-4D36-8C3C-41E4DAF1B0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70BCC3E2-E1C1-4D36-8C3C-41E4DAF1B0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4EE1169-9434-4CC6-B4AC-BE81EC994FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4EE1169-9434-4CC6-B4AC-BE81EC994FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4EE1169-9434-4CC6-B4AC-BE81EC994FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4EE1169-9434-4CC6-B4AC-BE81EC994FC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

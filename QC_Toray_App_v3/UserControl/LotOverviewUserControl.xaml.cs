@@ -21,7 +21,7 @@ namespace QC_Toray_App_v3
     public partial class LotOverviewUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
-        private const int DEFAULT_BATCH_NUM= 40; // Default number of BatchDetailItem controls
+        private const int DEFAULT_BATCH_NUM= 30; // Default number of BatchDetailItem controls
         private string userLotData;
         private string userGradeData;
 
@@ -203,11 +203,6 @@ namespace QC_Toray_App_v3
         }
        
         #endregion
-
-        private void batchItem_DoubleClicked(object sender, string lotData, string batchNumber)
-        {
-
-        }
 
         private void OnChangePageRequested(object sender, string pageName)
         {

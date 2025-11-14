@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -40,6 +41,7 @@ namespace QC_Toray_App_v3
         private const string CONNECT = "Connected";
         private const string DISCONNECT = "Disconnected";
         private const int DEFECT_DATA_LENGTH = 23;
+        private const int SAMPLE_IMAGE_BUTTON_NUM = 5;
 
         private string grabImageMessage = "grabM";
         private string resetDefectsMessage = "resetDefects987654321";
@@ -51,6 +53,7 @@ namespace QC_Toray_App_v3
         private UniformGrid[] UniformSample;
         private int sampleIndex = 0;
 
+        private string gradeData = MainWindow.Instance.GradeData;
         public string ConnectionStatus
         {
             get { return _connectionStaus; }
@@ -94,6 +97,10 @@ namespace QC_Toray_App_v3
             // Set initial values for Lot and Batch Number
             txbLot.Text = lotData;
             txbNo.Text = batchNum;
+            txbGrade.Text = MainWindow.Instance.GradeData;
+
+            // Initialize Sample Image Buttons
+            InitialSampleImageButtonLoading();
 
             DateTime dateTime = DateTime.Now;
             txblDate.Text = dateTime.ToString("yyyy-MM-dd");
@@ -162,6 +169,74 @@ namespace QC_Toray_App_v3
             Dispatcher.Invoke(() => GetDefectDataAndUpdateUI(message));
         }
 
+        private void InitialSampleImageButtonLoading()
+        {
+            for (int i = 0; i < SAMPLE_IMAGE_BUTTON_NUM; i++)
+            {
+                string imageName = GetImageHeader() + $"sample{i + 1}.jpg";
+                string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SampleImages", imageName);
+                Button button = new Button()
+                {
+                    Content = $"Sample Image {i + 1}",
+                    Width = 200,
+                    Height = 30,
+                    Margin = new Thickness(0, 5, 0, 5),
+                };
+                button.Click += (s, e) =>
+                {
+                    if (!File.Exists(imagePath))
+                    {
+                        MessageBox.Show($"Image not found: {imagePath}");
+                        return;
+                    }
+
+                    // 2. Create a new WPF Window instance
+                    Window popUpWindow = new Window
+                    {
+                        Title = "Sample Image Viewer",
+                        // Set SizeToContent to ensure the window fits the image dimensions
+                        SizeToContent = SizeToContent.WidthAndHeight,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen
+                    };
+                    // 3. Create the BitmapImage source
+                    BitmapImage bitmap = new BitmapImage();
+                    try
+                    {
+                        bitmap.BeginInit();
+                        // Use UriKind.Absolute or Relative based on your path type. 
+                        // For local files, a simple Uri constructor works fine.
+                        bitmap.UriSource = new Uri(imagePath);
+                        bitmap.EndInit();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle potential errors during image loading (e.g., corrupt file)
+                        MessageBox.Show($"Failed to load image: {ex.Message}", "Loading Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    // 4. Create the Image control
+                    Image imageControl = new Image
+                    {
+                        Source = bitmap,
+                        // Optional: Set maximum size and scaling behavior
+                        MaxWidth = 800,
+                        MaxHeight = 600,
+                        Stretch = System.Windows.Media.Stretch.Uniform,
+                        Margin = new Thickness(10) // Add some padding around the image
+                    };
+
+                    // 5. Assign the Image control as the content of the new Window
+                    popUpWindow.Content = imageControl;
+
+                    // 6. Show the window modally
+                    popUpWindow.ShowDialog();
+
+                };
+
+                stackPanelButtons.Children.Add(button);
+            }
+        }
+
         #endregion
 
         #region Keyboard Events
@@ -179,8 +254,11 @@ namespace QC_Toray_App_v3
         {
             if (e.Key == Key.Space)
             {
+
+                string message = grabImageMessage + "," + GetImageHeader() + "sample" + (sampleIndex + 1).ToString() + ".jpg";
+
                 // Ensure sending uses awaited path and single-connection behavior
-                _ = Dispatcher.InvokeAsync(async () => await SendMessageToServer(grabImageMessage).ConfigureAwait(false));
+                _ = Dispatcher.InvokeAsync(async () => await SendMessageToServer(message).ConfigureAwait(false));
 
                 e.Handled = true; // Stops further event bubbling
             }
@@ -352,6 +430,22 @@ namespace QC_Toray_App_v3
             this.Close();
         }
 
+        private void btnSampleImage1_Click(object sender, RoutedEventArgs e)
+        {
+            //sampleIndex = 0;
+            //UpdateSelectUI((sampleIndex -1 + UniformSample.Length) % UniformSample.Length);
+
+            string imageName = txbLot.Text + "_" + txbGrade.Text + "_" + txbNo.Text + "_" + "sample1.jpg";
+            string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SampleImages", imageName);
+
+            Console.WriteLine(grabImageMessage + "," + imagePath);
+
+            if (File.Exists(imagePath))
+            {
+                MessageBox.Show($"Image Path: {imagePath}");
+            }
+        }
+
         #endregion
 
 
@@ -444,6 +538,12 @@ namespace QC_Toray_App_v3
             insertBatch.PIC = PIC;
             
             return insertBatch;
+        }
+
+        private string GetImageHeader()
+        {
+            string header = txbLot.Text + "_" + txbGrade.Text + "_" + txbNo.Text + "_";
+            return header;
         }
         #endregion
 

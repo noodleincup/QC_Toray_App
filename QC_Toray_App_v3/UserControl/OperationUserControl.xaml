@@ -22,9 +22,14 @@
             <RowDefinition Height="75*"/>
         </Grid.RowDefinitions>
 
+        <!--Image button-->
+        <StackPanel Name="stackPanelButtons" Orientation="Vertical"/>
+
         <!--Grade Infomation-->
-        <Border BorderThickness="1" BorderBrush="#FF675656" Grid.Column="1"  Margin="50,10" CornerRadius="20" Background="#FAFAFA" Style="{DynamicResource MaterialDesignToolBarMainPanelBorderStyle}">
-            <Grid Grid.ColumnSpan="2" x:Name="GradeInfo" >
+        <Border BorderThickness="1" BorderBrush="#FF675656" 
+                Grid.Column="1" Grid.ColumnSpan="2"  
+                Margin="50,10" CornerRadius="20" Background="#FAFAFA" Style="{DynamicResource MaterialDesignToolBarMainPanelBorderStyle}">
+            <Grid  x:Name="GradeInfo" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="5*"/>
@@ -106,6 +111,7 @@
             </DataGrid.Columns>
         </DataGrid>-->
 
+        <!--Image Display-->
         <Grid Grid.Row="1" Margin="20,0,0,20" Background="#FAFAFA">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -282,7 +288,7 @@
 
                 <!--Sample1-->
                 <UniformGrid Name="uniSample1" Grid.Column="2" Grid.RowSpan="24" Columns="1" Rows="24">
-                    <TextBlock HorizontalAlignment="Center" >Sample 1</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">Sample 1</TextBlock>
                     <ToggleButton x:Name="tgPalletSize_S1" Background="LightGreen"></ToggleButton>
                     <TextBox x:Name="txbMissDb_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
                     <TextBox x:Name="txbMissTp_S1" Margin="5,1" Foreground="Black" TextAlignment="Center" InputScope="Number"></TextBox>
