@@ -53,7 +53,7 @@ namespace QC_Toray_App_v3
         private List<string> PrepareHeader()
         {
             // Get Connection String for connecting database
-            string conn = DatabaseConfig.ConnectionString;
+            string conn = DatabaseConfig.ConnectionString1;
 
             // Define Users Database Object
             ItemsHandle itemsDb = new ItemsHandle(conn);
@@ -77,7 +77,7 @@ namespace QC_Toray_App_v3
         private List<string[]> PrepareData()
         {
             // Get Connection String for connecting database
-            string conn = DatabaseConfig.ConnectionString;
+            string conn = DatabaseConfig.ConnectionString1;
 
             // Define Users Database Object
             ItemsHandle itemsDb = new ItemsHandle(conn);

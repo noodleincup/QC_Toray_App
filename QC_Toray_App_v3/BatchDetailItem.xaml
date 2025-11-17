@@ -5,19 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QC_Toray_App_v3"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="300"
+             d:DesignHeight="50" d:DesignWidth="300"
              Width="300">
     <DockPanel>
         <Border DockPanel.Dock="Left" BorderThickness="0.5" BorderBrush="Gray" Width="150" Padding="5,0,5,0">
             <DockPanel>
                 <CheckBox x:Name="ItemCheckBox" DockPanel.Dock="Left"/>
                 <TextBox x:Name="ValueTextBox" DockPanel.Dock="Right" 
-                         Text="1" BorderThickness="0" TextAlignment="Right" 
+                         Text="1" BorderThickness="0" 
+                         TextAlignment="Right"
+                         VerticalAlignment="Center"
                          MouseDoubleClick="txbBatchDetail_DoubleClicked"/>
             </DockPanel>
         </Border>
         <Border DockPanel.Dock="Right" BorderThickness="0.5" BorderBrush="Gray" Width="150" Padding="5,0,0,0">
-            <TextBox x:Name="StatusTextBox" Text="-" BorderThickness="0" TextAlignment="Left"/>
+            <TextBox x:Name="StatusTextBox" Text="-" BorderThickness="0" 
+                     TextAlignment="Left"
+                     VerticalAlignment="Center"/>
         </Border>
     </DockPanel>
 </UserControl>

@@ -27,12 +27,12 @@ namespace QC_Toray_App_v3.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=test_app_db; User Id=sa; Password=1234;" +
             "TrustServerCertificate=True;")]
-        public string DatabaseConnectionString {
+        public string DatabaseConnectionString1 {
             get {
-                return ((string)(this["DatabaseConnectionString"]));
+                return ((string)(this["DatabaseConnectionString1"]));
             }
             set {
-                this["DatabaseConnectionString"] = value;
+                this["DatabaseConnectionString1"] = value;
             }
         }
         
@@ -69,6 +69,19 @@ namespace QC_Toray_App_v3.Properties {
             }
             set {
                 this["ServerPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=camera_inspection; User Id=sa; Password" +
+            "=1234;TrustServerCertificate=True;")]
+        public string DatabaseConnectionString2 {
+            get {
+                return ((string)(this["DatabaseConnectionString2"]));
+            }
+            set {
+                this["DatabaseConnectionString2"] = value;
             }
         }
     }

@@ -37,7 +37,7 @@ namespace QC_Toray_App_v3
         DataTable dt = new DataTable();
 
         // Create DatabaseHandler
-        DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString);
+        DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
 
         // Table Name
         private string LOT_OVERVIEW_TABLE = DatabaseConfig.LotOverviewTableName;

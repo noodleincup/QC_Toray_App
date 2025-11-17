@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="QC_Toray_App_v3.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DatabaseConnectionString" Type="System.String" Scope="User">
+    <Setting Name="DatabaseConnectionString1" Type="System.String" Scope="User">
       <Value Profile="(Default)">Server=192.168.0.123\SQLEXPRESS; Database=test_app_db; User Id=sa; Password=1234;TrustServerCertificate=True;</Value>
     </Setting>
     <Setting Name="LotOverviewTableName" Type="System.String" Scope="User">
@@ -13,6 +13,9 @@
     </Setting>
     <Setting Name="ServerPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7930</Value>
+    </Setting>
+    <Setting Name="DatabaseConnectionString2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Server=192.168.0.123\SQLEXPRESS; Database=camera_inspection; User Id=sa; Password=1234;TrustServerCertificate=True;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

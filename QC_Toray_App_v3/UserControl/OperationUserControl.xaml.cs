@@ -454,7 +454,7 @@ namespace QC_Toray_App_v3
         private void Display_Data()
         {
             // Get Connection String for connecting database
-            string conn = DatabaseConfig.ConnectionString;
+            string conn = DatabaseConfig.ConnectionString1;
 
             // Define Users Database Object
             ItemsHandle itemsDb = new ItemsHandle(conn);
@@ -482,7 +482,7 @@ namespace QC_Toray_App_v3
         private bool Insert_Data(Batch batch)
         {
             // Get Connection String for connecting database
-            string conn = DatabaseConfig.ConnectionString;
+            string conn = DatabaseConfig.ConnectionString1;
 
             // Define Users Database Object
             ItemsHandle itemsDb = new ItemsHandle(conn);

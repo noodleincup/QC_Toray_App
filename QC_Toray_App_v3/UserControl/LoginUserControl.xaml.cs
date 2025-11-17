@@ -84,7 +84,7 @@ namespace QC_Toray_App_v3
         private bool VerifyLogin(string user, string pass)
         {
             // Get Connection String for connecting database
-            string conn = DatabaseConfig.ConnectionString;
+            string conn = DatabaseConfig.ConnectionString1;
 
             //Debugging
             MessageBox.Show(conn);

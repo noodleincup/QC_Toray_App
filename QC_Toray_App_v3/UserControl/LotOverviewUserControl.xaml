@@ -18,6 +18,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Background="#FFFAFAFA" Margin="30" CornerRadius="20">
                 <StackPanel Name="stackSample" Margin="20">
@@ -45,8 +46,23 @@
             <Border Grid.Row="1" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
                 <StackPanel Name="stackSTD" Orientation="Horizontal" Height="50" Margin="5,0">
                     <Label Content="Sample batch amount:" VerticalAlignment="Center" FontSize="16"/>
-                    <TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>
+                    <!--<TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>-->
+                    <ComboBox Name="cbxSTD" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,0,0,0" Width="150" HorizontalContentAlignment="Center" FontSize="16">
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="15"/>
+                        <ComboBoxItem Content="20"/>
+                    </ComboBox>
                 </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
+                <TextBlock Name ="tblDescription" 
+                           Text="หมายเหตุ: เลือก Batch No. ที่ต้องการตรวจสอบ จากนั้นกดปุ่ม บันทึก เพื่อบันทึกข้อมูลการตรวจสอบ" 
+                           TextWrapping="Wrap"
+                           Height="100"
+                           Margin="10" 
+                           FontSize="14"/>
             </Border>
         </Grid>
         <!-- #end region Left Area -->
@@ -70,8 +86,12 @@
                     </Border>
                 </StackPanel>
             </Border>
-            <Border Grid.Row="1" Background="#FFFAFAFA" Margin="0,0,0,50" Padding="0,10,0,10" BorderThickness="0.5,1,0.5,0.5" CornerRadius="20">
-                <Grid Name="gridBatchJudgement" Width="600">
+            <Border Grid.Row="1" Background="#FFFAFAFA" 
+                    Margin="0,0,0,50" Padding="0,10,0,10" 
+                    BorderThickness="0.5,1,0.5,0.5" CornerRadius="20"
+                    Height="520" 
+                    VerticalAlignment="Top">
+                <Grid Name="gridBatchJudgement" Width="600" VerticalAlignment="Top" Margin="0,3,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -92,9 +112,10 @@
         <!-- #region Right Area -->
         <Grid Grid.Column="2" Name="gridRight">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="350"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Border Name="borderBatchDiameter" CornerRadius="20"
                     Grid.ColumnSpan="2" Grid.RowSpan="2" 
                     Background="#FFFAFAFA" BorderBrush="Gray" 
@@ -131,7 +152,6 @@
                                 Content="Pass/Not pass/-" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
-
                 </Grid>
             </Border>
             <!--<Button Name = "btnBatchDiameter" 
@@ -180,20 +200,173 @@
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>-->
-            <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
-                <Button Name="btnRecord" Content="บันทึก"
-                        DockPanel.Dock="Top"
-                        FontSize="20" Width="200" Height="60" 
-                        HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Margin="0,50,0,0"
-                        Click="btnRecord_Clicked"/>
-                <Button Name="btnSendData" Content="ส่งข้อมูล" 
-                        DockPanel.Dock="Bottom"
-                        FontSize="20" Width="200" Height="60" 
-                        HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Margin="0,50,0,0"
-                        Click="btnSendData_Clicked"/>
-            </DockPanel>
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center">
+                
+                <Border Name="borderMasterTable" CornerRadius="20"
+                        Grid.ColumnSpan="2" Grid.RowSpan="2" 
+                        Background="#FFFAFAFA" BorderBrush="Gray" 
+                        Margin="20,0,17,0" Padding="15" 
+                        Width="400" Height="360"   
+                        VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Master Label-->
+                        <Border Grid.Row="0" Grid.Column="0"  BorderThickness="0.5,1,0.5,0.5">
+                            <Label Content="Standard: " HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="0.5,1,0.5,0.5">
+                            <ComboBox Name="cbxMasterStandard" 
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Width="180">
+                                <ComboBoxItem Content="5"/>
+                                <ComboBoxItem Content="10"/>
+                                <ComboBoxItem Content="15"/>
+                                <ComboBoxItem Content="20"/>
+                            </ComboBox>
+                        </Border>
+
+                        <!--Master Header-->
+                        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label  Content="item" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label  Content="Linit" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label  Content="AVG" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!-- A Rows -->
+                        
+                        <!--Min A-->
+                        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label Content="A MIN" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterMinA"
+                                   Text="" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Max A-->
+                        <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label Content="A MAX" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterMaxA"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Average A-->
+                        <Border Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterAverageA"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Min B-->
+                        <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label Content="B MIN" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterMinB"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Max B-->
+                        <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label Content="B MAX" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterMaxB"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Average B-->
+                        <Border Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterAverageB"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Min L-->
+                        <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label Content="L MIN" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterMinL"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Max L-->
+                        <Border Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <Label Content="L MAX" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterMaxL"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!--Average L-->
+                        <Border Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
+                            <TextBlock Name="tblMasterAverageL"
+                                       Text="" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                    </Grid>
+                </Border>
+                
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,20,0,0">
+                    <Button Name="btnRecord" Content="บันทึก"
+                            DockPanel.Dock="Top"
+                            FontSize="20" Width="200" Height="60" 
+                            HorizontalAlignment="Center" VerticalAlignment="Top"
+                            Margin="0,0,0,0"
+                            Click="btnRecord_Clicked"/>
+                    <Button Name="btnSendData" Content="ส่งข้อมูล" 
+                            DockPanel.Dock="Bottom"
+                            FontSize="20" Width="200" Height="60" 
+                            HorizontalAlignment="Center" VerticalAlignment="Top"
+                            Margin="10,0,0,0"
+                            Click="btnSendData_Clicked"/>
+                </StackPanel>
+            </StackPanel>
         </Grid>
         <!-- #end region Right Area -->
     </Grid>
