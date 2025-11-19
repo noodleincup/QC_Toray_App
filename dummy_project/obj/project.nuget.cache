@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TWOajCFTcHM=",
+  "dgSpecHash": "Aw9K32VFGv4=",
   "success": true,
   "projectFilePath": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\dummy_project\\dummy_project.csproj",
   "expectedPackageFiles": [
@@ -51,8 +51,7 @@
     "C:\\Users\\autoy\\.nuget\\packages\\mahapps.metro.iconpacks.zondicons\\6.1.0\\mahapps.metro.iconpacks.zondicons.6.1.0.nupkg.sha512",
     "C:\\Users\\autoy\\.nuget\\packages\\materialdesigncolors\\5.3.0\\materialdesigncolors.5.3.0.nupkg.sha512",
     "C:\\Users\\autoy\\.nuget\\packages\\materialdesignthemes\\5.3.0\\materialdesignthemes.5.3.0.nupkg.sha512",
-    "C:\\Users\\autoy\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
-    "C:\\Users\\autoy\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512"
+    "C:\\Users\\autoy\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512"
   ],
   "logs": []
 }

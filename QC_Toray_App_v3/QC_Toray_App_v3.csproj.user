@@ -12,7 +12,10 @@
     <Compile Update="BatchDetailItem.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="BatchDiameterDatail_Window.xaml.cs">
+    <Compile Update="Windows\AddLot_Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\BatchDiameterDatail_Window.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControl\LotOverviewUserControl.xaml.cs">

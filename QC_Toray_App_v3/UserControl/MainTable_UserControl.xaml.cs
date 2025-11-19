@@ -4,6 +4,7 @@ using iTextSharp.text.pdf;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using QC_Toray_App_v3.library;
+using QC_Toray_App_v3.Windows;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -63,11 +64,14 @@ namespace QC_Toray_App_v3
         {
             try
             {
-                
+
+                List<string> header = databaseHandler.HeaderList(dt);
                 // Update Lot and Grade Data
                 if (tableGrid.SelectedItem is DataRowView rowView)
                 {
-                    string formatLotGradeData = rowView["lot"].ToString() + "," + rowView["Grade"].ToString();
+                    string lotHeaderName = header[4].Trim();
+                    string gradeHeaderName = header[3].Trim();
+                    string formatLotGradeData = rowView[lotHeaderName].ToString() + "," + rowView[gradeHeaderName].ToString();
                     UpdateLotAndGradeData?.Invoke(this, formatLotGradeData);
                 }
 
@@ -101,7 +105,11 @@ namespace QC_Toray_App_v3
                     // The databaseTask finished within the timeout
                     dt = await databaseTask; // Get the result and re-throw any exception from the task
 
-                    // 3. Process and bind the data on the UI thread
+                    // 3. Convert DateTime column to formatted string column
+                    string dateColumnName = databaseHandler.HeaderList(dt)[1];
+                    databaseHandler.ReplaceDateTimeColumn(dt, dateColumnName);
+
+                    // 4. Process and bind the data on the UI thread
                     TrimDataTable(dt);
                     tableGrid.ItemsSource = dt.DefaultView;
                     ConfigureDataGrid();
@@ -142,24 +150,38 @@ namespace QC_Toray_App_v3
             }
         }
 
-        private void ConvertDateFormat(DataTable dt)
+        private DataTable ConvertDateFormat(DataTable dt, string dateColumnName)
         {
             // If you need the column to be formatted as a string to explicitly remove the time,
             // you must change the column's data type, or add a new string column.
 
+            string newDateColumnName = dateColumnName + "_string";
+
+            dt.Columns.Add(newDateColumnName, typeof(string));
+
             // To format it as a string for display, use the previous function logic:
             foreach (DataRow row in dt.Rows)
             {
-                // 1. Check if the value is a DateTime (as retrieved from SQL)
-                if (row["Date"] is DateTime dateValue)
+                if (row[dateColumnName] is DateTime dateValue)
                 {
                     // 2. Format the DateTime object as a string (e.g., "yy-MM-dd")
-                    row["Date"] = dateValue.ToString("yy-MM-dd");
+                    string dateTimeString = dateValue.ToString("yyyy-MM-dd");
+                    row[newDateColumnName] = dateTimeString;
+                    Console.WriteLine($"Converted DateTime to string: {row[newDateColumnName]}");
                 }
                 // Note: The DataGrid will now display this string.
             }
 
-            DataRow[] rows = dt.Select();
+
+            // 3. Remove the original DateTime column if no longer needed
+            dt.Columns.Remove(dateColumnName);
+
+            // 4. Rename the new string column to the original name
+            dt.Columns[newDateColumnName].ColumnName = dateColumnName;
+
+            return dt;
+
+            //DataRow[] rows = dt.Select();
 
             //MessageBox.Show($"Date column type: {dt.Columns["Date"].DataType}");
         }
@@ -249,6 +271,24 @@ namespace QC_Toray_App_v3
 
 
         #region Button functions
+
+        private void btnAddLot_Click(object sender, RoutedEventArgs e)
+        {
+            // Raise the event and pass the desired ListViewItem name
+            AddLot_Window addLot_Window = new AddLot_Window();
+
+            bool? dialogResult = addLot_Window.ShowDialog();
+
+            if (dialogResult == true)
+            {
+                // If the dialog was closed with "OK", reload data
+                LoadDataFromDatabase();
+            }
+            else
+            {
+                //MessageBox.Show("Add Lot operation was cancelled or closed without adding.", "Lot Invalidation", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void CheckLot_Clicked(object sender, RoutedEventArgs e)
         {

@@ -25,8 +25,8 @@ namespace QC_Toray_App_v3.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=test_app_db; User Id=sa; Password=1234;" +
-            "TrustServerCertificate=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=camera_inspection; User Id=sa; Password" +
+            "=1234;TrustServerCertificate=True;")]
         public string DatabaseConnectionString1 {
             get {
                 return ((string)(this["DatabaseConnectionString1"]));
@@ -38,7 +38,7 @@ namespace QC_Toray_App_v3.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Lot_Overview_Table")]
+        [global::System.Configuration.DefaultSettingValueAttribute("uv_lot_onprocess")]
         public string LotOverviewTableName {
             get {
                 return ((string)(this["LotOverviewTableName"]));
@@ -74,8 +74,8 @@ namespace QC_Toray_App_v3.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=camera_inspection; User Id=sa; Password" +
-            "=1234;TrustServerCertificate=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.0.123\\SQLEXPRESS; Database=test_app_db; User Id=sa; Password=1234;" +
+            "TrustServerCertificate=True;")]
         public string DatabaseConnectionString2 {
             get {
                 return ((string)(this["DatabaseConnectionString2"]));

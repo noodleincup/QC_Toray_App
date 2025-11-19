@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\App.xaml
-12720879837
+13166845826
 
-25-1730383489
-227-1207525203
-BatchDetailItem.xaml;BatchDiameterDatail_Window.xaml;MainWindow.xaml;UserControl\BatchCell_UserControl.xaml;UserControl\LoginUserControl.xaml;UserControl\LotOverviewUserControl.xaml;UserControl\MainTable_UserControl.xaml;UserControl\Master_UserControl.xaml;UserControl\OperationUserControl.xaml;UserControl\Report1_UserControl.xaml;UserControl\Report2_UserControl.xaml;UserControl\UniformGrid_Master_UserControl.xaml;
+26-1843235149
+226582766399
+BatchDetailItem.xaml;MainWindow.xaml;UserControl\BatchCell_UserControl.xaml;UserControl\LoginUserControl.xaml;UserControl\LotOverviewUserControl.xaml;UserControl\MainTable_UserControl.xaml;UserControl\Master_UserControl.xaml;UserControl\OperationUserControl.xaml;UserControl\Report1_UserControl.xaml;UserControl\Report2_UserControl.xaml;UserControl\UniformGrid_Master_UserControl.xaml;Windows\AddLot_Window.xaml;Windows\BatchDiameterDatail_Window.xaml;
 
-False
+True
 

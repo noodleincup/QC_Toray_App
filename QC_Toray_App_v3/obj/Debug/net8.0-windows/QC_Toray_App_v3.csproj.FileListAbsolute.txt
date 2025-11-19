@@ -133,7 +133,6 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\Mic
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\Microsoft.IO.RecyclableMemoryStream.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
-D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\System.Drawing.Common.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\System.Formats.Asn1.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
@@ -164,7 +163,6 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\run
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\HandleDatabase.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.csproj.AssemblyReference.cache
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\BatchDetailItem.g.cs
-D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\BatchDiameterDatail_Window.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\MainWindow.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\BatchCell_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\LoginUserControl.g.cs
@@ -175,13 +173,14 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Use
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report1_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report2_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\UniformGrid_Master_UserControl.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\AddLot_Window.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\BatchDiameterDatail_Window.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\App.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3_MarkupCompile.cache
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3_MarkupCompile.lref
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\App.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\BatchDetailItem.baml
-D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\BatchDiameterDatail_Window.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\MainWindow.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\BatchCell_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\LoginUserControl.baml
@@ -192,6 +191,8 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Use
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report1_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report2_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\UniformGrid_Master_UserControl.baml
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\AddLot_Window.baml
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\BatchDiameterDatail_Window.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.g.resources
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.GeneratedMSBuildEditorConfig.editorconfig
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.AssemblyInfoInputs.cache

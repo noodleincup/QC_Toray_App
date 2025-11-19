@@ -15,15 +15,25 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Name="txbSearch"
-                 mah:TextBoxHelper.Watermark="Search" 
-                 TextChanged="txbSearch_TextChanged"
-                 Width="200" 
-                 Height="30" 
-                 Background="White" 
-                 BorderBrush="Black" 
-                 BorderThickness="0.5" Style="{DynamicResource MahApps.Styles.TextBox}" 
-                 Margin="20,10" HorizontalAlignment="Left"/>
+        <DockPanel>
+            <TextBox Grid.Row="0" Name="txbSearch" DockPanel.Dock="Left"
+                     mah:TextBoxHelper.Watermark="Search" 
+                     TextChanged="txbSearch_TextChanged"
+                     Width="200" 
+                     Height="30" 
+                     Background="White" 
+                     BorderBrush="Black" 
+                     BorderThickness="0.5" Style="{DynamicResource MahApps.Styles.TextBox}" 
+                     Margin="20,10" HorizontalAlignment="Left"/>
+            <Button Name="btnAdd" 
+                    DockPanel.Dock="Right"
+                    HorizontalAlignment="Right"
+                    Width="150" Height="30"
+                    Content="Add"
+                    Margin="20,10"
+                    Click="btnAddLot_Click"/>
+        </DockPanel>
+        
         <!--Batch History-->
         <DataGrid Grid.Row="1" Margin ="20,0,20,0" 
                   x:Name="tableGrid" 

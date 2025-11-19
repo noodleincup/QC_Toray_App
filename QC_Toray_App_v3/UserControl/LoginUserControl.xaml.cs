@@ -27,6 +27,10 @@ namespace QC_Toray_App_v3
     public partial class LoginUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
+
+        // Create DatabaseHandler
+        DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
+
         public LoginUserControl()
         {
             InitializeComponent();
