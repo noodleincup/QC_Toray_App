@@ -9,7 +9,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="BatchDetailItem.xaml.cs">
+    <Compile Update="Element_UserControl\BatchDetailItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Element_UserControl\SampleTypeElement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControl\ManagePattern_UserControl.xaml.cs">

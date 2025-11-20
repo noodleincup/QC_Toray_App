@@ -4,9 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QC_Toray_App_v3.UserControl"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             mc:Ignorable="d"
+             Background="#c3c3c3"
+             Width="1530" Height="835">
+    <Border Background="#FAFAFAFA"  Margin="50,30" CornerRadius="50">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" 
+                   Content="Set Pattern" 
+                   FontSize="36" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Left" 
+                   Margin="20,20"
+                   />
+            <DataGrid Name="dgSetPattern"
+                      Grid.Row="1"
+                      VerticalAlignment="Top"
+                      BorderThickness="3"
+                      BorderBrush="#c3c3c3"
+                      Margin="20,0,20,20"/> 
+        </Grid>
+    </Border>
 </UserControl>

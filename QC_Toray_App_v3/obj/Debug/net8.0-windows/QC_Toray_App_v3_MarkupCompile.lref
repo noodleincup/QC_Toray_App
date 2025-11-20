@@ -1,6 +1,7 @@
-﻿D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\App.xaml;;
-FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\BatchDetailItem.xaml;;
+FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\Element_UserControl\BatchDetailItem.xaml;;
+FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\Element_UserControl\SampleTypeElement.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\MainWindow.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\BatchCell_UserControl.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\LoginUserControl.xaml;;
@@ -12,6 +13,7 @@ FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\OperationUserCo
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\Report1_UserControl.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\Report2_UserControl.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\SetPattern_UserControl .xaml;;
+FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\SetSampleType_UserControl.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\UserControl\UniformGrid_Master_UserControl.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\Windows\AddLot_Window.xaml;;
 FD:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\Windows\BatchDiameterDatail_Window.xaml;;

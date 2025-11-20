@@ -90,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="UserControl\SetSampleType_UserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControl\SetPattern_UserControl .xaml.cs">
       <SubType>Code</SubType>
     </Compile>

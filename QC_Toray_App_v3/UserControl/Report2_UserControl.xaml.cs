@@ -1,6 +1,4 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -19,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace QC_Toray_App_v3
 {
@@ -291,7 +291,7 @@ namespace QC_Toray_App_v3
                         {
                             BackgroundColor = BaseColor.LIGHT_GRAY
                         };
-                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
                         pdfTable.AddCell(cell);
                     }
 
@@ -308,7 +308,7 @@ namespace QC_Toray_App_v3
                                 // Define Font to cell in this column
                                 PdfPCell cell = new PdfPCell(new Phrase(cellValue, font));
                                 // Text Alignment in cell
-                                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
                                 pdfTable.AddCell(cell);
                             }
                         }

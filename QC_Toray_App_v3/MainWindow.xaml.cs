@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Standard;
+using QC_Toray_App_v3.UserControl;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -123,6 +124,18 @@ namespace QC_Toray_App_v3
                     LotOverviewUserControl lotOverview = new LotOverviewUserControl(lotData, gradeData);
                     lotOverview.ChangePageRequested += (s, e) => OnChangePageRequested(s, e);
                     GridMain.Children.Add(lotOverview);
+                    break;
+                case "SetManagePattern":
+                    usc = new ManagePattern_UserControl();
+                    GridMain.Children.Add(usc);
+                    break;
+                case "SetPattern":
+                    usc = new SetPattern_UserControl();
+                    GridMain.Children.Add(usc);
+                    break;
+                case "SetSampleType":
+                    usc = new SetSampleType_UserControl();
+                    GridMain.Children.Add(usc);
                     break;
                 case "Operating":
                     //OperationUserControl operationUser = new OperationUserControl(

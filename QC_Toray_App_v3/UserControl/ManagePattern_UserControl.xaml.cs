@@ -20,6 +20,7 @@ namespace QC_Toray_App_v3.UserControl
     /// </summary>
     public partial class ManagePattern_UserControl : System.Windows.Controls.UserControl
     {
+        public event EventHandler<string> ChangePageRequested;
         public ManagePattern_UserControl()
         {
             InitializeComponent();

@@ -13,19 +13,27 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" 
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right" 
-                        Margin="50,20">
-                <Button Name="btnAdd"  
-                        Width="150" Height="70"
-                        Content="Add" FontSize="25"
-                        Margin="20,0"/>
-                <Button Name="btnSave"  
-                        Width="150" Height="70"
-                        Content="Save" FontSize="25"/>
-            </StackPanel>
 
+            <DockPanel Grid.Row="0" >
+                <StackPanel DockPanel.Dock="Right"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right" 
+                            Margin="50,20">
+                    <Button Name="btnAdd"  
+                            Width="150" Height="70"
+                            Content="Add" FontSize="25"
+                            Margin="20,0"/>
+                    <Button Name="btnSave"  
+                            Width="150" Height="70"
+                            Content="Save" FontSize="25"/>
+                </StackPanel>
+
+                <Label DockPanel.Dock="Left"
+                       Content="Manage Pattern" 
+                       FontSize="36" 
+                       FontWeight="Bold" 
+                       Margin="20,20"/>
+            </DockPanel>
             <DataGrid Name="dgManagePattern"
                       Grid.Row="1"
                       Width="600" Height="400"

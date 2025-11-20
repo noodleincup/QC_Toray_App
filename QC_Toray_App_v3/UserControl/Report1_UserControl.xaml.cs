@@ -438,7 +438,7 @@ namespace QC_Toray_App_v3
                         {
                             BackgroundColor = BaseColor.LIGHT_GRAY
                         };
-                        cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                        cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
                         pdfTable.AddCell(cell);
                     }
 
@@ -456,7 +456,7 @@ namespace QC_Toray_App_v3
                                 // If it's NOT the first column (column 0), center-align text
                                 if (colIndex > 0)
                                 {
-                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                    cell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER;
                                 }
 
                                 pdfTable.AddCell(cell);

@@ -162,7 +162,8 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\run
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\HandleDatabase.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.csproj.AssemblyReference.cache
-D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\BatchDetailItem.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Element_UserControl\BatchDetailItem.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Element_UserControl\SampleTypeElement.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\MainWindow.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\BatchCell_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\LoginUserControl.g.cs
@@ -174,6 +175,7 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Use
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report1_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report2_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\SetPattern_UserControl .g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\SetSampleType_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\UniformGrid_Master_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\AddLot_Window.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\BatchDiameterDatail_Window.g.cs
@@ -182,7 +184,8 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Gen
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3_MarkupCompile.cache
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3_MarkupCompile.lref
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\App.baml
-D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\BatchDetailItem.baml
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Element_UserControl\BatchDetailItem.baml
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Element_UserControl\SampleTypeElement.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\MainWindow.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\BatchCell_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\LoginUserControl.baml
@@ -194,6 +197,7 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Use
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report1_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\Report2_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\SetPattern_UserControl .baml
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\SetSampleType_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\UniformGrid_Master_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\AddLot_Window.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\BatchDiameterDatail_Window.baml
