@@ -98,45 +98,62 @@
                 </Grid>
                 <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
                     <ListViewItem x:Name="Login" Height="60" 
-                                  IsEnabled="{Binding  NegativeIsFeatureEnabled,
-                                                       Source={x:Static local:GlobalState.Instance}}">
+                                  IsEnabled="{Binding Path=NegativeIsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
                         <!--Converter={x:Static local:BooleanNegationConverter.Instance}}">-->
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="LoginVariant" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Login" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="MainTable" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                    <ListViewItem x:Name="MainTable" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Table" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Lot Table" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="LotOverview" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                    <ListViewItem x:Name="LotOverview" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="FormatListBulleted" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Lot Overview" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="Operating" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                    <ListViewItem x:Name="SetSampleType" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Wrench" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Set Sample Type" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="SetManagePattern" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Package" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Set Manage Pattern" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="SetPattern" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="TableEdit" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Set Pattern" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="Operating" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Worker" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Operating" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="Report1" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
+                    <ListViewItem x:Name="Report1" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookOpen" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Report 1" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="Report2" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
+                    <ListViewItem x:Name="Report2" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookmarkCheck" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Report 2" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="Master" Height="60" IsEnabled="{Binding IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
+                    <ListViewItem x:Name="Master" Height="60" IsEnabled="{Binding Path=IsFeatureEnabled, Source={x:Static local:GlobalState.Instance}}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PencilBox" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Master Configuration" VerticalAlignment="Center"  Margin="20 10"/>

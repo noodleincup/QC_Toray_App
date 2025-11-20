@@ -12,6 +12,9 @@
     <Compile Update="BatchDetailItem.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControl\ManagePattern_UserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\AddLot_Window.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
