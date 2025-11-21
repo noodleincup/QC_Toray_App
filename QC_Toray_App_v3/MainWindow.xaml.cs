@@ -70,6 +70,7 @@ namespace QC_Toray_App_v3
             // Attach event listener when LoginUserControl is added
             var loginControl = new LoginUserControl();
             loginControl.ChangePageRequested += OnChangePageRequested;
+            loginControl.ChangeUserName += OnChangeUserName;
             GridMain.Children.Add(loginControl);
         }
         #region Menu Buttons functions
@@ -93,6 +94,7 @@ namespace QC_Toray_App_v3
             GlobalState.Instance.IsFeatureEnabled = false;
             LoginUserControl usc = new LoginUserControl();
             usc.ChangePageRequested += OnChangePageRequested;
+            usc.ChangeUserName += OnChangeUserName;
             GridMain.Children.Add(usc);
         }
         #endregion
@@ -111,8 +113,11 @@ namespace QC_Toray_App_v3
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "Login":
-                    usc = new LoginUserControl();
-                    GridMain.Children.Add(usc);
+                    LoginUserControl loginUserControl = new LoginUserControl();
+                    loginUserControl.ChangePageRequested += OnChangePageRequested;
+                    loginUserControl.ChangeUserName += OnChangeUserName;
+                    GridMain.Children.Add(loginUserControl);
+
                     break;
                 case "MainTable":
                     MainTable_UserControl mainTable = new MainTable_UserControl();
@@ -248,6 +253,11 @@ namespace QC_Toray_App_v3
             gradeData = parts[1];
 
             //MessageBox.Show($"Lot Data: {lotData}\nGrade Data: {gradeData}", "Lot and Grade Data Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void OnChangeUserName(object sender, string userName)
+        {
+            txtUsername.Text = userName;
         }
 
 

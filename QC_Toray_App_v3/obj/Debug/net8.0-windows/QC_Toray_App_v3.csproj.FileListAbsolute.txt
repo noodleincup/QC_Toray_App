@@ -161,6 +161,7 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\run
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Text.Encoding.CodePages.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\HandleDatabase.dll
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\bin\Debug\net8.0-windows\HandleDatabase.pdb
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.csproj.AssemblyReference.cache
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Element_UserControl\BatchDetailItem.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Element_UserControl\SampleTypeElement.g.cs
@@ -179,6 +180,7 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Use
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\UniformGrid_Master_UserControl.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\AddLot_Window.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\BatchDiameterDatail_Window.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\MasterSampleLimit_Window.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\App.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3_MarkupCompile.cache
@@ -201,6 +203,7 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Use
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\UserControl\UniformGrid_Master_UserControl.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\AddLot_Window.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\BatchDiameterDatail_Window.baml
+D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\Windows\MasterSampleLimit_Window.baml
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.g.resources
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.GeneratedMSBuildEditorConfig.editorconfig
 D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\obj\Debug\net8.0-windows\QC_Toray_App_v3.AssemblyInfoInputs.cache

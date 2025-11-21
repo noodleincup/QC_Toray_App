@@ -27,6 +27,9 @@ namespace QC_Toray_App_v3
     public partial class LoginUserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
+        public event EventHandler<string> ChangeUserName;
+
+        private const string AUTHENTICATION_SP = "usp_authenticate_user";
 
         // Create DatabaseHandler
         DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
@@ -45,15 +48,14 @@ namespace QC_Toray_App_v3
             {
                 bool result = true; // VerifyLogin(user, pass);
                 string display = result ? "Correct" : "Username or Password is failure";
-                //MessageBox.Show($"State: {GlobalState.Instance.IsFeatureEnabled}");
                 if (result)
                 {
                     GlobalState.Instance.IsFeatureEnabled = true;
+                    GlobalState.Instance.UserName = user;
                     // Raise the event and pass the desired ListViewItem name
                     ChangePageRequested?.Invoke(this, "MainTable"); // Example: Navigate to Operating page
                 }
                 else { MessageBox.Show(display); }
-                //MessageBox.Show($"State: {GlobalState.Instance.IsFeatureEnabled}");
             }
             catch (Exception ex) { 
                 MessageBox.Show(ex.ToString());
@@ -67,22 +69,28 @@ namespace QC_Toray_App_v3
                 {
                     string user = txbUser.Text;
                     string pass = txbPassword.Password;
-                    bool result = true;// VerifyLogin(user, pass);
-                    string display = result ? "Correct" : "Username or Password is failure";
-
-                    if (result)
-                    {
-                        GlobalState.Instance.IsFeatureEnabled = true;
-                        // Raise the event and pass the desired ListViewItem name
-                        ChangePageRequested?.Invoke(this, "MainTable"); // Example: Navigate to Operating page
-                    }
-                    else { MessageBox.Show(display); }
+                    LoginProcess(user, pass);
                 }
             }
             catch (Exception ex){ 
                 MessageBox.Show(ex.ToString());
             }
-            
+        }
+
+        private void LoginProcess(string username, string password)
+        {
+            bool result = VerifyLogin(username, password);
+            string display = result ? "Correct" : "Username or Password is failure";
+
+            if (result)
+            {
+                GlobalState.Instance.IsFeatureEnabled = true;
+                GlobalState.Instance.UserName = username;
+                // Raise the event and pass the desired ListViewItem name
+                ChangeUserName?.Invoke(this, username);
+                ChangePageRequested?.Invoke(this, "MainTable"); // Example: Navigate to Operating page
+            }
+            else { MessageBox.Show(display); }
         }
 
         private bool VerifyLogin(string user, string pass)
@@ -91,26 +99,25 @@ namespace QC_Toray_App_v3
             string conn = DatabaseConfig.ConnectionString1;
 
             //Debugging
-            MessageBox.Show(conn);
-            
-            // Define Users Database Object
-            UsersHandle usersDb = new UsersHandle(conn);
-            
-            // Get DataTable from database
-            DataTable usersTable = usersDb.GetUsers();
+            //MessageBox.Show(conn);
 
-            // Get existed user index
-            List<int> indexs = DataTableHandle.GetExistIndex(user, usersTable, "Username");
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "@username", user },
+                { "@password", pass  }
+            };
+
+            DataSet result = databaseHandler.ExecuteStoredProcedure(AUTHENTICATION_SP, parameters, true, "@IsValidUser");
+
 
             // Check index is null
-            if (indexs.Count == 0) {
+            if (result.Tables.Count == 0) {
                 return false;
             }
-            else
-            {
-                bool result = (pass == usersTable.Rows[indexs[0]]["Password"].ToString());
-                return result;
-            }
+
+
+
+            return true;
 
         }
 

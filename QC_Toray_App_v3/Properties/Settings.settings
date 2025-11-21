@@ -17,5 +17,14 @@
     <Setting Name="DatabaseConnectionString2" Type="System.String" Scope="User">
       <Value Profile="(Default)">Server=192.168.0.123\SQLEXPRESS; Database=test_app_db; User Id=sa; Password=1234;TrustServerCertificate=True;</Value>
     </Setting>
+    <Setting Name="AddLotStoredProcedure" Type="System.String" Scope="User">
+      <Value Profile="(Default)">usp_lot_add</Value>
+    </Setting>
+    <Setting Name="SampleGroupTable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tb_master_SamepleGroupName</Value>
+    </Setting>
+    <Setting Name="MasterSampleLimitTable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tb_master_sample_limit</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

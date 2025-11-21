@@ -3,52 +3,52 @@
   "WorkspaceRootPath": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\setsampletype_usercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\setsampletype_usercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\windows\\mastersamplelimit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\windows\\mastersamplelimit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\element_usercontrol\\sampletypeelement.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\element_usercontrol\\sampletypeelement.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\windows\\mastersamplelimit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\windows\\mastersamplelimit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\setsampletype_usercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\setsampletype_usercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\element_usercontrol\\sampletypeelement.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\element_usercontrol\\sampletypeelement.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\lotoverviewusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\lotoverviewusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\maintable_usercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\maintable_usercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\lotoverviewusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\lotoverviewusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\element_usercontrol\\batchdetailitem.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\element_usercontrol\\batchdetailitem.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\library\\databaseconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\library\\databaseconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\loginusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\loginusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\windows\\addlot_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\windows\\addlot_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\appvar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\appvar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\maintable_usercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\maintable_usercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|D:\\Project\\QC_Toray\\QC_Toray_App_v3\\qc_toray_app_v3\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
       "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\library\\tcpconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\library\\tcpconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\usercontrol\\setsampletype_usercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\usercontrol\\setsampletype_usercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\library\\tcpclientviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\library\\tcpclientviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\element_usercontrol\\sampletypeelement.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\element_usercontrol\\sampletypeelement.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\appvar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\appvar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|solutionrelative:qc_toray_app_v3\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B7D5E1E5-A82D-4B77-A45F-5EE8F2E371DD}|QC_Toray_App_v3\\QC_Toray_App_v3.csproj|d:\\project\\qc_toray\\qc_toray_app_v3\\qc_toray_app_v3\\library\\consolehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,8 +62,33 @@
       "DocumentGroups": [
         {
           "DockedHeight": 1245,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SetSampleType_UserControl.xaml.cs",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
+              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwCkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T08:24:44.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SampleTypeElement.xaml",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
+              "RelativeToolTip": "QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-21T04:01:04.177Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -90,87 +115,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SampleTypeElement.xaml",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
-              "RelativeToolTip": "QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-20T08:19:55.518Z",
+              "DocumentIndex": 6,
+              "Title": "MainTable_UserControl.xaml.cs",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml.cs",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml.cs",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml.cs",
+              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAewF0AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T02:34:48.08Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SetSampleType_UserControl.xaml",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml",
-              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-20T08:15:19.02Z",
+              "Title": "MasterSampleLimit_Window.xaml.cs",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml.cs",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml.cs",
+              "RelativeToolTip": "QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAgwGUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T07:07:17.543Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SetSampleType_UserControl.xaml.cs",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
-              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\SetSampleType_UserControl.xaml.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAowBcAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T08:13:26.965Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoginUserControl.xaml.cs",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\LoginUserControl.xaml.cs",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\LoginUserControl.xaml.cs",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\LoginUserControl.xaml.cs",
-              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\LoginUserControl.xaml.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAIwBwAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T09:04:18.052Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "Settings.settings",
               "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Properties\\Settings.settings",
               "RelativeDocumentMoniker": "QC_Toray_App_v3\\Properties\\Settings.settings",
               "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Properties\\Settings.settings",
               "RelativeToolTip": "QC_Toray_App_v3\\Properties\\Settings.settings",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
-              "WhenOpened": "2025-11-07T07:02:28.555Z"
+              "WhenOpened": "2025-11-07T07:02:28.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\MainWindow.xaml.cs",
+              "RelativeToolTip": "QC_Toray_App_v3\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAmwNwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T01:59:15.773Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "TCPClientViewModel.cs",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\library\\TCPClientViewModel.cs",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\library\\TCPClientViewModel.cs",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\library\\TCPClientViewModel.cs",
-              "RelativeToolTip": "QC_Toray_App_v3\\library\\TCPClientViewModel.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACEAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T02:08:28.218Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TcpConfig.cs",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\library\\TcpConfig.cs",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\library\\TcpConfig.cs",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\library\\TcpConfig.cs",
-              "RelativeToolTip": "QC_Toray_App_v3\\library\\TcpConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-07T07:14:05.655Z"
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\MainWindow.xaml",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\MainWindow.xaml",
+              "RelativeToolTip": "QC_Toray_App_v3\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-21T02:17:45.91Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -182,7 +186,8 @@
               "RelativeToolTip": "QC_Toray_App_v3\\library\\ConsoleHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T06:09:51.035Z"
+              "WhenOpened": "2025-11-05T06:09:51.035Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -227,67 +232,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AddLot_Window.xaml.cs",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Windows\\AddLot_Window.xaml.cs",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Windows\\AddLot_Window.xaml.cs",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Windows\\AddLot_Window.xaml.cs",
-              "RelativeToolTip": "QC_Toray_App_v3\\Windows\\AddLot_Window.xaml.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAqwB0AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T08:14:03.593Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "AppVar.cs",
               "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\AppVar.cs",
               "RelativeDocumentMoniker": "QC_Toray_App_v3\\AppVar.cs",
               "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\AppVar.cs",
               "RelativeToolTip": "QC_Toray_App_v3\\AppVar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAA7wB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T09:03:07.37Z"
+              "WhenOpened": "2025-11-19T09:03:07.37Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "LotOverviewUserControl.xaml",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml",
-              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml",
+              "Title": "MainTable_UserControl.xaml",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml",
+              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\MainTable_UserControl.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-20T06:51:29.062Z",
+              "WhenOpened": "2025-11-21T03:05:06.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SampleTypeElement.xaml.cs",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml.cs",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml.cs",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml.cs",
+              "RelativeToolTip": "QC_Toray_App_v3\\Element_UserControl\\SampleTypeElement.xaml.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAASwC0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T04:00:37.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MasterSampleLimit_Window.xaml",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml",
+              "RelativeToolTip": "QC_Toray_App_v3\\Windows\\MasterSampleLimit_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-21T05:03:01.139Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "BatchDetailItem.xaml",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\BatchDetailItem.xaml",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\Element_UserControl\\BatchDetailItem.xaml",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\Element_UserControl\\BatchDetailItem.xaml",
-              "RelativeToolTip": "QC_Toray_App_v3\\Element_UserControl\\BatchDetailItem.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-20T07:34:03.036Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LotOverviewUserControl.xaml.cs",
-              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml.cs",
-              "RelativeDocumentMoniker": "QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml.cs",
-              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml.cs",
-              "RelativeToolTip": "QC_Toray_App_v3\\UserControl\\LotOverviewUserControl.xaml.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAQwBYAAAA+AAAAAAAAAA==",
+              "Title": "DatabaseConfig.cs",
+              "DocumentMoniker": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\library\\DatabaseConfig.cs",
+              "RelativeDocumentMoniker": "QC_Toray_App_v3\\library\\DatabaseConfig.cs",
+              "ToolTip": "D:\\Project\\QC_Toray\\QC_Toray_App_v3\\QC_Toray_App_v3\\library\\DatabaseConfig.cs",
+              "RelativeToolTip": "QC_Toray_App_v3\\library\\DatabaseConfig.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwEUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T06:51:30.004Z",
+              "WhenOpened": "2025-11-21T03:08:07.935Z",
               "EditorCaption": ""
             }
           ]

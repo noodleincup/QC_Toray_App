@@ -275,7 +275,7 @@ namespace QC_Toray_App_v3
         private void btnAddLot_Click(object sender, RoutedEventArgs e)
         {
             // Raise the event and pass the desired ListViewItem name
-            AddLot_Window addLot_Window = new AddLot_Window();
+            AddLot_Window addLot_Window = new AddLot_Window(databaseHandler);
 
             bool? dialogResult = addLot_Window.ShowDialog();
 
@@ -314,7 +314,9 @@ namespace QC_Toray_App_v3
                 MessageBox.Show(ex.ToString());
             }
         }
+        #endregion
 
+        #region Export Functions
         // Export to CSV
         private void ExportToCSV_Click(object sender, RoutedEventArgs e)
         {

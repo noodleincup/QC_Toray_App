@@ -84,5 +84,41 @@ namespace QC_Toray_App_v3.Properties {
                 this["DatabaseConnectionString2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("usp_lot_add")]
+        public string AddLotStoredProcedure {
+            get {
+                return ((string)(this["AddLotStoredProcedure"]));
+            }
+            set {
+                this["AddLotStoredProcedure"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tb_master_SamepleGroupName")]
+        public string SampleGroupTable {
+            get {
+                return ((string)(this["SampleGroupTable"]));
+            }
+            set {
+                this["SampleGroupTable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tb_master_sample_limit")]
+        public string MasterSampleLimitTable {
+            get {
+                return ((string)(this["MasterSampleLimitTable"]));
+            }
+            set {
+                this["MasterSampleLimitTable"] = value;
+            }
+        }
     }
 }

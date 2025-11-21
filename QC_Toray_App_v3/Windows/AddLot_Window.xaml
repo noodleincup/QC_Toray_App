@@ -8,6 +8,7 @@
         Title="Add Lot" 
         Height="180" Width="220"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Background="#0A0A0A">
     <Grid Margin="20">
         <Grid.RowDefinitions>

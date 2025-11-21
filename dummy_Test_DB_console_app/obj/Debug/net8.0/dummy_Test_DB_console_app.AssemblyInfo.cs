@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dummy_Test_DB_console_app")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e5e9bdaa1b66d828d75a4fd73e5d7d9e3973378")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6d9ec601392c8dd2d35635055e2a4dc4ea7f7c5")]
 [assembly: System.Reflection.AssemblyProductAttribute("dummy_Test_DB_console_app")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dummy_Test_DB_console_app")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

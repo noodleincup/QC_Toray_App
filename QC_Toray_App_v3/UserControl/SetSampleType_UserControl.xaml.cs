@@ -1,6 +1,9 @@
-﻿using QC_Toray_App_v3.Element;
+﻿using HandleDatabase;
+using QC_Toray_App_v3.Element;
+using QC_Toray_App_v3.library;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,23 +24,41 @@ namespace QC_Toray_App_v3.UserControl
     /// </summary>
     public partial class SetSampleType_UserControl : System.Windows.Controls.UserControl
     {
+
+        private DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
+
         public SetSampleType_UserControl()
         {
             InitializeComponent();
             LoadSampleType();
         }
 
-        private void LoadSampleType()
+        private async void LoadSampleType()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                SampleTypeElement sampleType = new SampleTypeElement();
-                sampleType.txtSampleName.Text = "Sample Type " + (i + 1);
-                sampleType.txtUpdateDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                sampleType.txtUpdateBy.Text = "Admin";
+            DataTable dt = databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.SampleGroupTableName);
 
-                wrpSampleTypeList.Children.Add(sampleType);
+            List<string> headerNameList = databaseHandler.HeaderList(dt);
+
+            databaseHandler.DisplayHeader(dt);
+
+            try
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    SampleTypeElement sampleTypeElement = new SampleTypeElement(databaseHandler);
+                    sampleTypeElement.txtSampleName.Text = row[headerNameList[3]].ToString();
+                    sampleTypeElement.txtUpdateBy.Text = row[headerNameList[2]].ToString();
+                    sampleTypeElement.txtUpdateDate.Text = Convert.ToDateTime(row[headerNameList[1]]).ToString("yyyy-MM-dd HH:mm:ss");
+                    sampleTypeElement.SampleId = Convert.ToInt32(row[headerNameList[0]]);
+
+                    wrpSampleTypeList.Children.Add(sampleTypeElement);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading sample types: " + ex.Message);
+            }
+
         }
     }
 }

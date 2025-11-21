@@ -29,6 +29,7 @@
                     <local:UniformGrid_Master_UserControl HeadLabel="" SubLabel="level 3" InputValue="0"/>
                     <local:UniformGrid_Master_UserControl HeadLabel="3) Meyani" SubLabel="" InputValue="0"/>
                     <local:UniformGrid_Master_UserControl HeadLabel="" SubLabel="Not change color" InputValue="15"/>
+                    
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <local:UniformGrid_Master_UserControl HeadLabel="4) Foreign materials" SubLabel="" InputValue="0"/>

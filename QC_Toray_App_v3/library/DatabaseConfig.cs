@@ -40,5 +40,35 @@ namespace QC_Toray_App_v3.library
                 Properties.Settings.Default.Save();
             }
         }
+
+        public static string AddLotStoredProcedure
+        {
+            get => Properties.Settings.Default.AddLotStoredProcedure;
+            set
+            {
+                Properties.Settings.Default.AddLotStoredProcedure = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public static string SampleGroupTableName
+        {
+            get => Properties.Settings.Default.SampleGroupTable;
+            set
+            {
+                Properties.Settings.Default.SampleGroupTable = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public static string MasterSampleLimitTableName
+        {
+            get => Properties.Settings.Default.MasterSampleLimitTable;
+            set
+            {
+                Properties.Settings.Default.MasterSampleLimitTable = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }

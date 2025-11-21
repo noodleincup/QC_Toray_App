@@ -19,7 +19,8 @@
             <TextBlock x:Name="txtSampleName"
                        FontSize="24"
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center"
+                       />
         </Border>
         <Border Grid.Column="1" 
                 BorderThickness="0.5" BorderBrush="Gray">
