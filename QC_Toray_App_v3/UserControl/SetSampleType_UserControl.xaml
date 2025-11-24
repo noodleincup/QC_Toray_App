@@ -22,7 +22,8 @@
                     <Button Name="btnAdd"  
                             Width="150" Height="70"
                             Content="Add" FontSize="25"
-                            Margin="20,0"/>
+                            Margin="20,0"
+                            Click="btnAdd_Click"/>
                     <Button Name="btnSave"  
                             Width="150" Height="70"
                             Content="Save" FontSize="25"/>

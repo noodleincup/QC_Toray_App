@@ -26,5 +26,14 @@
     <Setting Name="MasterSampleLimitTable" Type="System.String" Scope="User">
       <Value Profile="(Default)">tb_master_sample_limit</Value>
     </Setting>
+    <Setting Name="MasterSampleItemTable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tb_master_sample_item</Value>
+    </Setting>
+    <Setting Name="UpdateOrInsertMasterSampleLimitProcedure" Type="System.String" Scope="User">
+      <Value Profile="(Default)">usp_UpdateOrInsertMasterSampleLimit</Value>
+    </Setting>
+    <Setting Name="MasterPatternTable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tb_master_pattern</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

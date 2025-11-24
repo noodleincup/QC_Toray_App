@@ -43,11 +43,9 @@ namespace QC_Toray_App_v3.Element
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Edit Sample Type clicked");
-            MasterSampleLimit_Window masterSampleLimitWindow = new MasterSampleLimit_Window(databaseHandler, SampleId);
-
+            //MessageBox.Show($"Sample: {SampleId}");
+            MasterSampleLimit_Window masterSampleLimitWindow = new MasterSampleLimit_Window(databaseHandler, true, SampleId);
             masterSampleLimitWindow.txbSampleName.Text = txtSampleName.Text;
-
             bool result = masterSampleLimitWindow.ShowDialog() ?? false;
         }
     }

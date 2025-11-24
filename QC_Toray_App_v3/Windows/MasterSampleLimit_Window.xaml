@@ -21,7 +21,7 @@
                          HorizontalAlignment="Center" VerticalAlignment="Center"
                          TextAlignment="Center"/>
             </Border>
-            <Button Content="Save" Width="120" Height="40" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+            <Button Name="btnSave" Content="Save" Width="120" Height="40" HorizontalAlignment="Right" DockPanel.Dock="Right" Click="btnSave_Click"/>
         </DockPanel>
 
         <DataGrid x:Name="MyDataGrid"
@@ -39,6 +39,7 @@
 
             <DataGrid.Columns>
 
+                <!-- Header Column 1 -->
                 <DataGridTextColumn Header="Items"
                                     Binding="{Binding Items}"
                                     IsReadOnly="True"
@@ -50,6 +51,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
+                <!-- Header Column 2 -->
                 <DataGridTemplateColumn Header="Max OK qty" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -64,6 +66,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
+                <!-- Header Column 3 -->
                 <DataGridTemplateColumn Header="Range Min" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -78,6 +81,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
 
+                <!-- Header Column 4 -->
                 <DataGridTemplateColumn Header="Range Max" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -1,6 +1,7 @@
 ﻿using HandleDatabase;
 using QC_Toray_App_v3.Element;
 using QC_Toray_App_v3.library;
+using QC_Toray_App_v3.Windows;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,10 +31,26 @@ namespace QC_Toray_App_v3.UserControl
         public SetSampleType_UserControl()
         {
             InitializeComponent();
-            LoadSampleType();
+            //LoadSampleType();
+
+            this.Loaded += SetSampleType_UserControl_Loaded;
         }
 
-        private async void LoadSampleType()
+        private async void SetSampleType_UserControl_Loaded(object? sender, RoutedEventArgs e)
+        {
+            //this.Loaded -= SetSampleType_UserControl_Loaded; // detach if run only once
+            try
+            {
+                await LoadSampleType();
+            }
+            catch (Exception ex)
+            {
+                // Surface any exceptions so you can see what went wrong
+                MessageBox.Show(ex.ToString(), "Initialization error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task LoadSampleType()
         {
             DataTable dt = databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.SampleGroupTableName);
 
@@ -59,6 +76,12 @@ namespace QC_Toray_App_v3.UserControl
                 MessageBox.Show("Error loading sample types: " + ex.Message);
             }
 
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            MasterSampleLimit_Window masterSampleLimitWindow = new MasterSampleLimit_Window(databaseHandler, false);
+            bool result = masterSampleLimitWindow.ShowDialog() ?? false;
         }
     }
 }

@@ -120,5 +120,41 @@ namespace QC_Toray_App_v3.Properties {
                 this["MasterSampleLimitTable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tb_master_sample_item")]
+        public string MasterSampleItemTable {
+            get {
+                return ((string)(this["MasterSampleItemTable"]));
+            }
+            set {
+                this["MasterSampleItemTable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("usp_UpdateOrInsertMasterSampleLimit")]
+        public string UpdateOrInsertMasterSampleLimitProcedure {
+            get {
+                return ((string)(this["UpdateOrInsertMasterSampleLimitProcedure"]));
+            }
+            set {
+                this["UpdateOrInsertMasterSampleLimitProcedure"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tb_master_pattern")]
+        public string MasterPatternTable {
+            get {
+                return ((string)(this["MasterPatternTable"]));
+            }
+            set {
+                this["MasterPatternTable"] = value;
+            }
+        }
     }
 }
