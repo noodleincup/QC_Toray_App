@@ -16,5 +16,5 @@ D:\Project\QC_Toray\QC_Toray_App_v3\QC_Toray_App_v3\App.xaml
 226582766399
 Element_UserControl\BatchDetailItem.xaml;Element_UserControl\SampleTypeElement.xaml;MainWindow.xaml;UserControl\BatchCell_UserControl.xaml;UserControl\LoginUserControl.xaml;UserControl\LotOverviewUserControl.xaml;UserControl\MainTable_UserControl.xaml;UserControl\ManagePattern_UserControl.xaml;UserControl\Master_UserControl.xaml;UserControl\OperationUserControl.xaml;UserControl\Report1_UserControl.xaml;UserControl\Report2_UserControl.xaml;UserControl\SetPattern_UserControl .xaml;UserControl\SetSampleType_UserControl.xaml;UserControl\UniformGrid_Master_UserControl.xaml;Windows\AddLot_Window.xaml;Windows\BatchDiameterDatail_Window.xaml;Windows\MasterSampleLimit_Window.xaml;
 
-False
+True
 

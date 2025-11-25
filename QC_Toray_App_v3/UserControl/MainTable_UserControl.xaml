@@ -42,7 +42,9 @@
                   CanUserSortColumns="True"
                   IsReadOnly="True"
                   CellStyle="{DynamicResource MaterialDesignDataGridCell}"
-                  SelectedCellsChanged="tableGrid_SelectionCellChanged">
+                  SelectedCellsChanged="tableGrid_SelectionCellChanged"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False">
             
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Width="Auto"/>

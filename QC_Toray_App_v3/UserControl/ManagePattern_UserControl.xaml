@@ -22,10 +22,12 @@
                     <Button Name="btnAdd"  
                             Width="150" Height="70"
                             Content="Add" FontSize="25"
-                            Margin="20,0"/>
+                            Margin="20,0"
+                            Click="btnAdd_Click"/>
                     <Button Name="btnSave"  
                             Width="150" Height="70"
-                            Content="Save" FontSize="25"/>
+                            Content="Save" FontSize="25"
+                            Click="btnSave_Click"/>
                 </StackPanel>
 
                 <Label DockPanel.Dock="Left"
@@ -66,6 +68,18 @@
                     </DataGridTextColumn>
 
                     <!-- Header Column 2 -->
+                    <!--
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding Name}"
+                                        IsReadOnly="True"
+                                        Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    -->
                     <DataGridTemplateColumn Header="Name" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -74,10 +88,14 @@
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                                         TextAlignment="Center"
+                                         Width="150"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
+                    </DataGridTemplateColumn> 
+                    
 
                     <!-- Header Column 3 -->
                     <DataGridTemplateColumn Header="Description" Width="2*">
@@ -88,7 +106,10 @@
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" 
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                         TextAlignment="Center"
+                                         Width="180"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>

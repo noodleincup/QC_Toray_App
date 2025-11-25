@@ -2,6 +2,8 @@
 using QC_Toray_App_v3.library;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -25,23 +27,80 @@ namespace QC_Toray_App_v3.UserControl
     public partial class ManagePattern_UserControl : System.Windows.Controls.UserControl
     {
         public event EventHandler<string> ChangePageRequested;
+        public ObservableCollection<PatternItem> PatternList { get; set; } = new ObservableCollection<PatternItem>();
+
         private DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
         private DataTable dt;
         private string MANNAGE_PATTREN_TABLE = DatabaseConfig.MasterPatternTableName;
+        private string UPDATE_INSERT_PATTERN_PROCEDURE = DatabaseConfig.InserOrUpdateMasterPatternProcedure;
         private const int TimeoutMilliseconds = 2000; // 2 seconds
+
+
         public ManagePattern_UserControl()
         {
             InitializeComponent();
 
-            LoadDataToDataGrid();
+            dgManagePattern.ItemsSource = PatternList;
+
+            LoadDataToDataGrid_2().ConfigureAwait(false);
         }
 
         private async void ManagePattern_UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() =>
+            await Task.Run(() => // detach when run only once
             {
                 { Console.WriteLine("Hello World"); }
             });
+        }
+
+        private async Task LoadDataToDataGrid_2()
+        {
+            Task<DataTable> databaseTask = Task.Run(() =>
+            {
+                // This runs on a thread pool thread, not the UI thread
+                return databaseHandler.GetTableDatabaseAsDataTable(MANNAGE_PATTREN_TABLE);
+            });
+
+            try
+            {
+                // 2. Wait for the database task to complete, but only up to the timeout
+                if (await Task.WhenAny(databaseTask, Task.Delay(TimeoutMilliseconds)) == databaseTask)
+                {
+                    // The databaseTask finished within the timeout
+                    dt = await databaseTask; // Get the result and re-throw any exception from the task
+                    databaseHandler.ShowDataTable(dt);
+
+                    AddPatternDataToList(dt);
+                }
+                else
+                {
+                    // The Task.Delay finished first, indicating a timeout
+                    MessageBox.Show($"Database loading operation timed out (more than {(int)(TimeoutMilliseconds/1000)} seconds). Skipping data binding.", "Timeout", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // The databaseTask might still be running in the background. 
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions from the database operation itself
+                MessageBox.Show($"An error occurred while loading data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddPatternDataToList(DataTable patternDt)
+        {
+            if (dt != null)
+            {
+                PatternList.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    PatternList.Add(new PatternItem
+                    {
+                        No = Convert.ToInt32(row[0]),
+                        Name = row[1].ToString(),
+                        Description = row[2].ToString()
+                    });
+                }
+            }
         }
 
         private async Task LoadDataToDataGrid()
@@ -139,5 +198,112 @@ namespace QC_Toray_App_v3.UserControl
                 dgManagePattern.Columns[0].Width = 80; // Fixed width of 50 for the first column
             }
         }
+
+        #region Button Events
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            PatternItem lastPattern = PatternList.LastOrDefault();
+
+            PatternItem newPatternItem = new PatternItem
+            {
+                No = (lastPattern is null)? 1 : lastPattern.No + 1,
+                Name = "New Pattern",
+                Description = "Description"
+            };
+
+            PatternList.Add(newPatternItem);
+        }
+
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Dictionary<string, object> patternData = new Dictionary<string, object>
+                {
+                    { "@No", 0 },
+                    { "@Name", "" },
+                    { "@Description", "" },
+                    { "@User", GlobalState.Instance.UserName }
+                };
+
+                // Save PatternList to database
+                foreach (var pattern in PatternList)
+                {
+                    patternData["@No"] = pattern.No;
+                    patternData["@Name"] = pattern.Name;
+                    patternData["@Description"] = pattern.Description;
+
+                    DataSet ds = databaseHandler.ExecuteStoredProcedure(UPDATE_INSERT_PATTERN_PROCEDURE, patternData);
+
+                    string? message = ds.Tables[0].Rows[0][0].ToString();
+
+                    Console.WriteLine($"Save Pattern No {pattern.No} by {patternData["@User"]}: {message}");
+                }
+
+                MessageBox.Show("All patterns have been saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+        }
+
+        #endregion
+    }
+
+    public class PatternItem : INotifyPropertyChanged
+    {
+        private int _no;
+        private string _name;
+        private string _description;
+
+        public int No
+        {
+            get { return _no; }
+            set
+            {
+                if (_no != value)
+                {
+                    _no = value;
+                    OnPropertyChanged(nameof(No));
+                }
+            }
+        }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
+                }
+            }
+        }
+
+        // Boilerplate INotifyPropertyChanged
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

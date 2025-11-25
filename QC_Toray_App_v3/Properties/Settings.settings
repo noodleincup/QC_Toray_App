@@ -35,5 +35,11 @@
     <Setting Name="MasterPatternTable" Type="System.String" Scope="User">
       <Value Profile="(Default)">tb_master_pattern</Value>
     </Setting>
+    <Setting Name="InserOrUpdateMasterPatternProcedure" Type="System.String" Scope="User">
+      <Value Profile="(Default)">usp_insert_or_update_master_pattern</Value>
+    </Setting>
+    <Setting Name="MasterGradePatternTable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tb_master_grade_pattern</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

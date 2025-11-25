@@ -9,6 +9,7 @@ namespace QC_Toray_App_v3.library
     // Class for get connection string from program setting
     public static class DatabaseConfig
     {
+        #region Database Connection Strings
         public static string ConnectionString1
         {
             get => Properties.Settings.Default.DatabaseConnectionString1;
@@ -28,7 +29,9 @@ namespace QC_Toray_App_v3.library
                 Properties.Settings.Default.Save();
             }
         }
+        #endregion
 
+        #region Table Names
         public static string LotOverviewTableName
         {
             get => Properties.Settings.Default.LotOverviewTableName;
@@ -78,6 +81,18 @@ namespace QC_Toray_App_v3.library
             }
         }
 
+        public static string MasterGradePatternTableName
+        {
+            get => Properties.Settings.Default.MasterGradePatternTable;
+            set
+            {
+                Properties.Settings.Default.MasterGradePatternTable = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+        #endregion
+
+
         #region Stored Procedures Names
         public static string AddLotStoredProcedure
         {
@@ -95,6 +110,16 @@ namespace QC_Toray_App_v3.library
             set
             {
                 Properties.Settings.Default.UpdateOrInsertMasterSampleLimitProcedure = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public static string InserOrUpdateMasterPatternProcedure
+        {
+            get => Properties.Settings.Default.InserOrUpdateMasterPatternProcedure;
+            set
+            {
+                Properties.Settings.Default.InserOrUpdateMasterPatternProcedure = value;
                 Properties.Settings.Default.Save();
             }
         }

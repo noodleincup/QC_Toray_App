@@ -156,5 +156,29 @@ namespace QC_Toray_App_v3.Properties {
                 this["MasterPatternTable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("usp_insert_or_update_master_pattern")]
+        public string InserOrUpdateMasterPatternProcedure {
+            get {
+                return ((string)(this["InserOrUpdateMasterPatternProcedure"]));
+            }
+            set {
+                this["InserOrUpdateMasterPatternProcedure"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tb_master_grade_pattern")]
+        public string MasterGradePatternTable {
+            get {
+                return ((string)(this["MasterGradePatternTable"]));
+            }
+            set {
+                this["MasterGradePatternTable"] = value;
+            }
+        }
     }
 }
