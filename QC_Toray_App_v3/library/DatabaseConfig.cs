@@ -124,5 +124,11 @@ namespace QC_Toray_App_v3.library
             }
         }
         #endregion
+
+        private static int _timeoutMs = 2000;
+        public static int TimeoutMs
+        {
+            get => _timeoutMs;
+        }
     }
 }

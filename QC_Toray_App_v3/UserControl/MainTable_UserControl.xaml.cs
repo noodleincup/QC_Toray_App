@@ -71,7 +71,10 @@ namespace QC_Toray_App_v3
                 {
                     string lotHeaderName = header[4].Trim();
                     string gradeHeaderName = header[3].Trim();
-                    string formatLotGradeData = rowView[lotHeaderName].ToString() + "," + rowView[gradeHeaderName].ToString();
+                    string orderCardHeaderName = header[5].Trim();
+                    string formatLotGradeData = rowView[lotHeaderName].ToString() + "," 
+                                                + rowView[gradeHeaderName].ToString() + ","
+                                                + rowView[orderCardHeaderName].ToString();
                     Console.WriteLine($"Lot and Grade Data: {formatLotGradeData}");
                     UpdateLotAndGradeData?.Invoke(this, formatLotGradeData);
                 }
@@ -390,7 +393,7 @@ namespace QC_Toray_App_v3
             ExportDataGridToPDF(tableGrid); // Call it as an instance method
         }
 
-        #endregion
+        
         public void ExportDataGridToPDF(DataGrid dataGrid)
         {
             try
@@ -520,7 +523,7 @@ namespace QC_Toray_App_v3
             return string.Empty;
         }
 
-
+        #endregion
 
         #region Filter Feature Area Function
         /// <summary>

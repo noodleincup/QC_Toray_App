@@ -21,7 +21,18 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Background="#FFFAFAFA" Margin="30" CornerRadius="20">
-                <StackPanel Name="stackSample" Margin="20">
+                <StackPanel Name="stackSample" Margin="20,10">
+                    <Label Content="Order No"/>
+                    <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="0.5" Height="40" Margin="20,10">
+                        <TextBlock Name="tblOrderNo" 
+                                   Text="1234567890" 
+                                   Height="30" 
+                                   Margin="20,10" 
+                                   FontSize="16"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"/>
+                    </Border>
+                    
                     <Label Content="Sample Line :"/>
                     <ComboBox Name="cbxFrom" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,10" HorizontalContentAlignment="Center">
                         <ComboBoxItem Content="A" />
@@ -35,25 +46,39 @@
                         <ComboBoxItem Content="PAT"/>
                     </ComboBox>
                     <Label Content="Sample grade name :"/>
-                    <ComboBox Name="cbxName" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,10" HorizontalContentAlignment="Center">
-                        <ComboBoxItem Content="1101G-30"/>
-                        <ComboBoxItem Content="1101G-31"/>
-                        <ComboBoxItem Content="1101G-32"/>
+                    <ComboBox Name="cbxName" 
+                              BorderThickness="1,1,1,1" 
+                              Margin="20,10" 
+                              HorizontalContentAlignment="Center"
+                              IsEditable="True">
                     </ComboBox>
                 </StackPanel>
             </Border>
 
             <Border Grid.Row="1" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
-                <StackPanel Name="stackSTD" Orientation="Horizontal" Height="50" Margin="5,0">
-                    <Label Content="Sample batch amount:" VerticalAlignment="Center" FontSize="16"/>
-                    <!--<TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>-->
-                    <ComboBox Name="cbxSTD" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="20,0,0,0" Width="150" HorizontalContentAlignment="Center" FontSize="16">
-                        <ComboBoxItem Content="5"/>
-                        <ComboBoxItem Content="10"/>
-                        <ComboBoxItem Content="15"/>
-                        <ComboBoxItem Content="20"/>
-                    </ComboBox>
+                <StackPanel Orientation="Vertical" Margin="20,10">
+                    <DockPanel Name="dockSTD" Height="50" LastChildFill="False" Margin="0,10">
+                        <Label DockPanel.Dock="Left" Content="Sample batch amount:" VerticalAlignment="Center" FontSize="16"/>
+                        <!--<TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>-->
+                        <ComboBox Name="cbxSTD" DockPanel.Dock="Right" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="0,0,0,0" Width="150" HorizontalContentAlignment="Center" FontSize="16">
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="15"/>
+                            <ComboBoxItem Content="20"/>
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel Name="dockPattern" Height="50" LastChildFill="False">
+                        <Label DockPanel.Dock="Left" Content="Pattern:" VerticalAlignment="Center" FontSize="16"/>
+                        <!--<TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>-->
+                        <ComboBox Name="cbxPattern" DockPanel.Dock="Right" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="0,0,0,0" Width="150" HorizontalContentAlignment="Center" FontSize="16">
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="15"/>
+                            <ComboBoxItem Content="20"/>
+                        </ComboBox>
+                    </DockPanel>
                 </StackPanel>
+                
             </Border>
 
             <Border Grid.Row="2" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
@@ -70,6 +95,7 @@
         <!-- #region Center Area -->
         <Grid Name="gridCenter" Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -106,6 +132,27 @@
                     </WrapPanel>
                 </Grid>
             </Border>
+
+            <StackPanel Grid.Row="2" 
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,20,0,0">
+                <Button Name="btnInitial" Content="Initial"
+                        FontSize="20" Width="200" Height="60" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Margin="0,0,0,0"
+                        Click="btnRecord_Clicked"/>
+                <Button Name="btnRecord" Content="ส่งข้อมูล" 
+                        FontSize="20" Width="200" Height="60" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Margin="10,0,0,0"
+                        Click="btnRecord_Clicked"/>
+                <Button Name="btnSendData" Content="ส่งข้อมูล" 
+                        FontSize="20" Width="200" Height="60" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Margin="10,0,0,0"
+                        Click="btnSendData_Clicked"/>
+            </StackPanel>
         </Grid>
         <!-- #end region Center Area -->
 
@@ -350,22 +397,7 @@
                     </Grid>
                 </Border>
                 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="0,20,0,0">
-                    <Button Name="btnRecord" Content="บันทึก"
-                            DockPanel.Dock="Top"
-                            FontSize="20" Width="200" Height="60" 
-                            HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Margin="0,0,0,0"
-                            Click="btnRecord_Clicked"/>
-                    <Button Name="btnSendData" Content="ส่งข้อมูล" 
-                            DockPanel.Dock="Bottom"
-                            FontSize="20" Width="200" Height="60" 
-                            HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Margin="10,0,0,0"
-                            Click="btnSendData_Clicked"/>
-                </StackPanel>
+                
             </StackPanel>
         </Grid>
         <!-- #end region Right Area -->

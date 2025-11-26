@@ -1,5 +1,8 @@
-﻿using System;
+﻿using HandleDatabase;
+using QC_Toray_App_v3.library;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +27,11 @@ namespace QC_Toray_App_v3
         private const int DEFAULT_BATCH_NUM= 30; // Default number of BatchDetailItem controls
         private string userLotData;
         private string userGradeData;
+        private string userOrderNo;
+        private DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
 
         StackPanel _buttonPanel;
-        public LotOverviewUserControl(string lotData, string gradeData)
+        public LotOverviewUserControl(string orderNo, string lotData, string gradeData)
         {
             InitializeComponent();
             initializeBatchDetail();
@@ -34,9 +39,13 @@ namespace QC_Toray_App_v3
             // Set initial values for Lot and Grade
             userLotData = lotData;
             userGradeData = gradeData;
+            userOrderNo = orderNo;
+
+            Console.WriteLine($"LotOverviewUserControl initialized with\n Lot: {userLotData}\n Grade: {userGradeData}\n OrderNo: {userOrderNo} ");
 
             txbLot.Text = userLotData;
             cbxName.Text = userGradeData;
+            tblOrderNo.Text = userOrderNo;
         }
 
         public void initializeBatchDetail()
@@ -91,6 +100,24 @@ namespace QC_Toray_App_v3
             //// This ensures the button group is always at the end, even 
             //// if the WrapPanel wraps to a new line.
             //wrpBatchDetail.Children.Add(_buttonPanel);
+        }
+
+        private async Task LoadDatabaseAsync()
+        {
+        }
+
+        private Task LoadMasterSampleGroupDataAsync(CancellationToken cancellationToken)
+        {
+            return Task.Run(() =>
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                DataTable sampleGroupDt = databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.SampleGroupTableName);
+
+                // Process the data as needed
+
+
+            }, cancellationToken);
         }
 
         private void Item_ChangePageRequested(object? sender, string e)

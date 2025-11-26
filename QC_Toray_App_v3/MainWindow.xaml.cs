@@ -41,6 +41,13 @@ namespace QC_Toray_App_v3
             get { return gradeData; }
         }
 
+        private string orderNo = "";
+        public string OrderNo
+        {
+            get { return orderNo; }
+            set { orderNo = value; }
+        }
+
         private string batchNum = "";
         public string BatchNum
         {
@@ -126,7 +133,7 @@ namespace QC_Toray_App_v3
                     GridMain.Children.Add(mainTable);
                     break;
                 case "LotOverview":
-                    LotOverviewUserControl lotOverview = new LotOverviewUserControl(lotData, gradeData);
+                    LotOverviewUserControl lotOverview = new LotOverviewUserControl(orderNo, lotData, gradeData);
                     lotOverview.ChangePageRequested += (s, e) => OnChangePageRequested(s, e);
                     GridMain.Children.Add(lotOverview);
                     break;
@@ -246,13 +253,16 @@ namespace QC_Toray_App_v3
         }
 
 
-        private void OnUpdateLotAndGradeData(object sender, string lot_grade)
+        private void OnUpdateLotAndGradeData(object sender, string lot_grade_orderNo)
         {
-            string[] parts = lot_grade.Split(',');
+            string[] parts = lot_grade_orderNo.Split(',');
             lotData = parts[0];
             gradeData = parts[1];
+            orderNo = parts[2];
 
-            //MessageBox.Show($"Lot Data: {lotData}\nGrade Data: {gradeData}", "Lot and Grade Data Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+            //Console.WriteLine($"Lot Data updated to: {lotData}");
+            //Console.WriteLine($"Grade Data updated to: {gradeData}");
+
         }
 
         private void OnChangeUserName(object sender, string userName)
