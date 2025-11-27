@@ -90,6 +90,16 @@ namespace QC_Toray_App_v3.library
                 Properties.Settings.Default.Save();
             }
         }
+
+        public static string MasterDiameterTableName 
+        {
+            get => Properties.Settings.Default.MasterDiameterTable;
+            set 
+            { 
+                Properties.Settings.Default.MasterDiameterTable = value;
+                Properties.Settings.Default.Save();
+            }
+        }
         #endregion
 
 

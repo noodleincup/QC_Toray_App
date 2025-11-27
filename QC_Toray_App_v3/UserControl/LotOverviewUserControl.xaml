@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QC_Toray_App_v3"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Loaded="LotOverviewUserControl_Loaded"
              d:DesignHeight="835" d:DesignWidth="1530" FontSize="16" Foreground="#FF3B3B3B">
     <Grid Name="gridBackground" Background="#FFDEDEDE">
         <Grid.ColumnDefinitions>
@@ -57,24 +58,36 @@
 
             <Border Grid.Row="1" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
                 <StackPanel Orientation="Vertical" Margin="20,10">
-                    <DockPanel Name="dockSTD" Height="50" LastChildFill="False" Margin="0,10">
+                    <DockPanel Name="dockSTD" 
+                               Height="50" 
+                               LastChildFill="False" 
+                               Margin="0,10">
                         <Label DockPanel.Dock="Left" Content="Sample batch amount:" VerticalAlignment="Center" FontSize="16"/>
                         <!--<TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>-->
-                        <ComboBox Name="cbxSTD" DockPanel.Dock="Right" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="0,0,0,0" Width="150" HorizontalContentAlignment="Center" FontSize="16">
-                            <ComboBoxItem Content="5"/>
-                            <ComboBoxItem Content="10"/>
-                            <ComboBoxItem Content="15"/>
-                            <ComboBoxItem Content="20"/>
+                        <ComboBox Name="cbxSTD" DockPanel.Dock="Right" 
+                                  BorderThickness="1,1,1,1" 
+                                  SelectedIndex="0" 
+                                  Margin="0,0,0,0" Width="150" 
+                                  HorizontalContentAlignment="Center" 
+                                  FontSize="16"
+                                  ItemsSource="{Binding SampleGroups}"
+                                  DisplayMemberPath="SampleName"
+                                  SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
                         </ComboBox>
                     </DockPanel>
                     <DockPanel Name="dockPattern" Height="50" LastChildFill="False">
                         <Label DockPanel.Dock="Left" Content="Pattern:" VerticalAlignment="Center" FontSize="16"/>
                         <!--<TextBox Name="txbSTD" VerticalAlignment="Center" FontSize="16" Width="150" Margin="20,0,0,0"/>-->
-                        <ComboBox Name="cbxPattern" DockPanel.Dock="Right" BorderThickness="1,1,1,1" SelectedIndex="0" Margin="0,0,0,0" Width="150" HorizontalContentAlignment="Center" FontSize="16">
-                            <ComboBoxItem Content="5"/>
-                            <ComboBoxItem Content="10"/>
-                            <ComboBoxItem Content="15"/>
-                            <ComboBoxItem Content="20"/>
+                        <ComboBox Name="cbxPattern" 
+                                  DockPanel.Dock="Right" 
+                                  BorderThickness="1,1,1,1" 
+                                  SelectedIndex="0" 
+                                  Margin="0,0,0,0" 
+                                  Width="150" 
+                                  HorizontalContentAlignment="Center" FontSize="16"
+                                  ItemsSource="{Binding Patterns}"
+                                  DisplayMemberPath="PatternName"
+                                  SelectedItem="{Binding SelectedPattern, Mode=TwoWay}">
                         </ComboBox>
                     </DockPanel>
                 </StackPanel>
@@ -83,11 +96,11 @@
 
             <Border Grid.Row="2" Background="#FFFAFAFA" Margin="30" CornerRadius="5">
                 <TextBlock Name ="tblDescription" 
-                           Text="หมายเหตุ: เลือก Batch No. ที่ต้องการตรวจสอบ จากนั้นกดปุ่ม บันทึก เพื่อบันทึกข้อมูลการตรวจสอบ" 
                            TextWrapping="Wrap"
                            Height="100"
                            Margin="10" 
-                           FontSize="14"/>
+                           FontSize="14"
+                           Text ="{Binding SelectedPattern.Description}"/>
             </Border>
         </Grid>
         <!-- #end region Left Area -->
@@ -123,9 +136,26 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Border Name="bdrHeaderBatch" BorderThickness="0.5" BorderBrush="Gray" Padding="5,0,0,0">
-                        <DockPanel>
+                        <DockPanel LastChildFill="False">
                             <CheckBox Name="cbxSelectAll" DockPanel.Dock="Left" Content="All" Checked="cbxSelectAll_Checked" Unchecked="cbxSelectAll_Unchecked"/>
-                            <Label DockPanel.Dock="Right" HorizontalAlignment="Center" Content="Batch No."/>
+
+                            <Label DockPanel.Dock="Left" 
+                                   HorizontalAlignment="Center" 
+                                   Content="Batch Start:"
+                                   Margin="50,0,0,0"/>
+                            <Border DockPanel.Dock="Left"
+                                    CornerRadius="5"
+                                    Height="25"
+                                    BorderThickness="0.5"
+                                    BorderBrush="Gray"
+                                    Margin="20,0">
+                                <TextBox Name="txbStart" 
+                                         Width="100" Height="25"
+                                         FontSize="14"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                                         TextAlignment="Center"
+                                         KeyDown="txbBatchStart_KeyDown"/>
+                            </Border>
                         </DockPanel>
                     </Border>
                     <WrapPanel Name="wrpBatchDetail" Grid.Row="1" Orientation="Vertical">
@@ -141,7 +171,7 @@
                         FontSize="20" Width="200" Height="60" 
                         HorizontalAlignment="Center" VerticalAlignment="Top"
                         Margin="0,0,0,0"
-                        Click="btnRecord_Clicked"/>
+                        Click="btnInitial_Click"/>
                 <Button Name="btnRecord" Content="ส่งข้อมูล" 
                         FontSize="20" Width="200" Height="60" 
                         HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -283,11 +313,10 @@
                         <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="0.5,1,0.5,0.5">
                             <ComboBox Name="cbxMasterStandard" 
                                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                                      Width="180">
-                                <ComboBoxItem Content="5"/>
-                                <ComboBoxItem Content="10"/>
-                                <ComboBoxItem Content="15"/>
-                                <ComboBoxItem Content="20"/>
+                                      Width="180"
+                                      ItemsSource="{Binding ItemDiameters}"
+                                      DisplayMemberPath="ItemName"
+                                      SelectedItem="{Binding SelectedItemDiameter, Mode=TwoWay}">
                             </ComboBox>
                         </Border>
 
@@ -314,7 +343,7 @@
                         </Border>
                         <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
                             <TextBlock Name="tblMasterMinA"
-                                   Text="" 
+                                   Text="{Binding SelectedItemDiameter.A_Min}" 
                                    HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -325,7 +354,7 @@
                         </Border>
                         <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
                             <TextBlock Name="tblMasterMaxA"
-                                       Text="" 
+                                       Text="{Binding SelectedItemDiameter.A_Max}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -343,7 +372,7 @@
                         </Border>
                         <Border Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
                             <TextBlock Name="tblMasterMinB"
-                                       Text="" 
+                                       Text="{Binding SelectedItemDiameter.B_Min}"
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -354,7 +383,7 @@
                         </Border>
                         <Border Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
                             <TextBlock Name="tblMasterMaxB"
-                                       Text="" 
+                                       Text="{Binding SelectedItemDiameter.B_Max}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -372,7 +401,7 @@
                         </Border>
                         <Border Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
                             <TextBlock Name="tblMasterMinL"
-                                       Text="" 
+                                       Text="{Binding SelectedItemDiameter.L_Min}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 
@@ -383,7 +412,7 @@
                         </Border>
                         <Border Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="0.5,0.5,0.5,0.5">
                             <TextBlock Name="tblMasterMaxL"
-                                       Text="" 
+                                       Text="{Binding SelectedItemDiameter.L_Max}" 
                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
 

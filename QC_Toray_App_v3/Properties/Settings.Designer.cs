@@ -180,5 +180,17 @@ namespace QC_Toray_App_v3.Properties {
                 this["MasterGradePatternTable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tb_master_daimeter")]
+        public string MasterDiameterTable {
+            get {
+                return ((string)(this["MasterDiameterTable"]));
+            }
+            set {
+                this["MasterDiameterTable"] = value;
+            }
+        }
     }
 }

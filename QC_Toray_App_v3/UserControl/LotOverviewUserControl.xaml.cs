@@ -2,8 +2,11 @@
 using QC_Toray_App_v3.library;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace QC_Toray_App_v3
 {
@@ -28,13 +32,13 @@ namespace QC_Toray_App_v3
         private string userLotData;
         private string userGradeData;
         private string userOrderNo;
-        private DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
 
         StackPanel _buttonPanel;
         public LotOverviewUserControl(string orderNo, string lotData, string gradeData)
         {
             InitializeComponent();
             initializeBatchDetail();
+            ToggleIsEnableBatchItem();
 
             // Set initial values for Lot and Grade
             userLotData = lotData;
@@ -46,17 +50,35 @@ namespace QC_Toray_App_v3
             txbLot.Text = userLotData;
             cbxName.Text = userGradeData;
             tblOrderNo.Text = userOrderNo;
+
+            cbxSTD.IsEnabled = true;
+            cbxPattern.IsEnabled = true;
+            cbxMasterStandard.IsEnabled = true;
+
+            txbBatchNumber.IsEnabled = false;
+            txbStart.IsEnabled = false;
+
+            this.DataContext = LotOverviewViewModel.Instance;
         }
 
-        public void initializeBatchDetail()
+        private async void LotOverviewUserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
+            await LotOverviewViewModel.Instance.LoadSampleGroupAsync();
+            await LotOverviewViewModel.Instance.LoadPatternAsync();
+            await LotOverviewViewModel.Instance.LoadItemDiameter();
+            // 🎯 Setting the DataContext in the code-behind
+        }
+
+        public void initializeBatchDetail(int startNum)
+        {
+            wrpBatchDetail.Children.Clear();
             // 0. Create default BatchDetailItem controls
             for (int i = 0; i < DEFAULT_BATCH_NUM; i++)
             {
                 BatchDetailItem item = new BatchDetailItem();
                 item.ChangePageRequested += OnChangePageRequested;
-                item.ItemValue = (i + 1).ToString();
+                item.ItemValue = (i + 1 + startNum).ToString();
                 wrpBatchDetail.Children.Add(item);
             }
 
@@ -102,29 +124,7 @@ namespace QC_Toray_App_v3
             //wrpBatchDetail.Children.Add(_buttonPanel);
         }
 
-        private async Task LoadDatabaseAsync()
-        {
-        }
-
-        private Task LoadMasterSampleGroupDataAsync(CancellationToken cancellationToken)
-        {
-            return Task.Run(() =>
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                DataTable sampleGroupDt = databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.SampleGroupTableName);
-
-                // Process the data as needed
-
-
-            }, cancellationToken);
-        }
-
-        private void Item_ChangePageRequested(object? sender, string e)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         #region Button Click Handlers
         private void AddDetail_Click(object sender, RoutedEventArgs e)
         {
@@ -228,13 +228,357 @@ namespace QC_Toray_App_v3
                 }
             }
         }
+
+        private void btnInitial_Click(object sender, RoutedEventArgs e)
+        {
+            cbxSTD.IsEnabled = false;
+            cbxPattern.IsEnabled = false;
+            cbxMasterStandard.IsEnabled = false;
+
+            cbxSelectAll.IsEnabled = true;
+            txbBatchNumber.IsEnabled = true;
+            txbStart.IsEnabled = true;
+
+            ToggleIsEnableBatchItem();
+            
+        }
        
         #endregion
+
+        private void txbBatchStart_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox? txb = sender as TextBox;
+
+                if (txb == null) { 
+                    MessageBox.Show("object is null");
+                    return;
+                }
+
+                MessageBox.Show($"TextBox is press with enter {txb.Name}, {txb.Text}");
+            }
+        }
+
+        private void ToggleIsEnableBatchItem()
+        {
+            foreach (var child in wrpBatchDetail.Children) 
+            { 
+                if (child is BatchDetailItem item) 
+                {
+                    
+                    item.IsEnabled = item.IsEnabled? false : true;
+                } 
+            }
+        }
 
         private void OnChangePageRequested(object sender, string pageName)
         {
             ChangePageRequested?.Invoke(this, pageName);
 
         }
+    }
+
+    public class LotOverviewViewModel : INotifyPropertyChanged
+    {
+        // Private static field to hold the single instance
+        private static readonly Lazy<LotOverviewViewModel> lazyInstance = new Lazy<LotOverviewViewModel>(() => new LotOverviewViewModel());
+        private DatabaseHandler databaseHandler = new DatabaseHandler(DatabaseConfig.ConnectionString1);
+
+
+        private LotOverviewViewModel()
+        {
+            // Initialize ObservableCollections here or in a load method
+            SampleGroups = new ObservableCollection<SampleGroup>();
+            Patterns = new ObservableCollection<Pattern>();
+            ItemDiameters = new ObservableCollection<ItemDiameter>();
+        }
+
+        // Public static property to provide global access to the instance
+        public static LotOverviewViewModel Instance
+        {
+            get
+            {
+                return lazyInstance.Value;
+            }
+        }
+
+        // Data for the first ComboBox
+        public ObservableCollection<SampleGroup> SampleGroups { get; set; }
+        // SelectedGroup property must fire PropertyChanged
+        private SampleGroup _selectedGroup;
+        public SampleGroup SelectedGroup
+        {
+            get => _selectedGroup;
+            set
+            {
+                if (_selectedGroup != value)
+                {
+                    _selectedGroup = value;
+                    OnPropertyChanged();
+                    // Add logic here to load Patterns based on selected group if needed
+                }
+            }
+        }
+
+        // --- Data for the second ComboBox ---
+        public ObservableCollection<Pattern> Patterns { get; set; }
+
+        // SelectedPattern property must fire PropertyChanged
+        private Pattern _selectedPattern;
+        public Pattern SelectedPattern
+        {
+            get => _selectedPattern;
+            set
+            {
+                if (_selectedPattern != value)
+                {
+                    _selectedPattern = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        // --- Data for the third ComboBox ---
+        public ObservableCollection<ItemDiameter> ItemDiameters { get; set; }
+        private ItemDiameter _selectedItemDiameter;
+        public ItemDiameter SelectedItemDiameter
+        {
+            get => _selectedItemDiameter;
+            set
+            {
+                if (_selectedItemDiameter != value)
+                {
+                    _selectedItemDiameter = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public async Task LoadSampleGroupAsync()
+        {
+            using (var cts = new CancellationTokenSource(DatabaseConfig.TimeoutMs)) 
+            {
+                //cts.CancelAfter(DatabaseConfig.TimeoutMs);
+                var cancellationToken = cts.Token;
+
+                Console.WriteLine("Load Sample Groups Process");
+                //Task<DataTable> task =  GetSampleGroupsFromDatabase(cancellationToken);
+                DataTable sampleGroupDt = await GetSampleGroupsFromDatabase(cancellationToken);
+                Console.WriteLine("End load process");
+
+                try
+                {
+                    //cts.Cancel();
+
+                    //DataTable sampleGroupDt = task.Result;
+
+                    await Task.Run(() => {
+
+                        Console.WriteLine("Update SampleGroups collection Process");
+
+                        Application.Current.Dispatcher.Invoke(() => 
+                        {
+                            SampleGroups.Clear();
+                            for (int i = 0; i < sampleGroupDt.Rows.Count; i++)
+                            {
+                                SampleGroup sampleGroup = new SampleGroup()
+                                {
+                                    ID = Convert.ToInt32(sampleGroupDt.Rows[i]["id"]),
+                                    SampleName = sampleGroupDt.Rows[i]["sampleName"].ToString(),
+                                    UpdatedBy = sampleGroupDt.Rows[i]["updateBy"].ToString(),
+                                    UpdateDate = Convert.ToDateTime(sampleGroupDt.Rows[i]["updateDate"])
+                                };
+
+                                SampleGroups.Add(sampleGroup);
+
+                            }
+                            SelectedGroup = SampleGroups[0];
+                            Console.WriteLine($"Amount rows: {sampleGroupDt.Rows.Count}");
+
+                            Console.WriteLine("End update process");
+                        });
+                        
+                    });
+                }
+                catch (OperationCanceledException)
+                {
+                    // This is caught if the CTS token is canceled (due to timeout or manual cancellation)
+                    MessageBox.Show("Data loading timed out after 2 seconds or was cancelled.");
+                }
+                catch (Exception ex) 
+                {
+                    MessageBox.Show($"Error: {ex}");
+                }
+            }
+        }
+
+        private async Task<DataTable> GetSampleGroupsFromDatabase(CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.SampleGroupTableName);
+        }
+
+        public async Task LoadPatternAsync()
+        {
+            DataTable patternDt;
+            try
+            {
+                using (var cts = new CancellationTokenSource(DatabaseConfig.TimeoutMs))
+                {
+                    Console.WriteLine("Load Pattern process");
+                    patternDt = await GetPatternFromDatabaseAsync(cts.Token);
+                    databaseHandler.DisplayHeader(patternDt);
+                    databaseHandler.ShowDataTable(patternDt);
+                    Console.WriteLine("Load Pattern end.");
+                }
+                Console.WriteLine("Update Patterns");
+                await Task.Run(() => 
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Patterns.Clear();
+                        foreach (DataRow row in patternDt.Rows)
+                        {
+                            Pattern pattern = new Pattern()
+                            {
+                                PatternID = Convert.ToInt32(row["patternID"]),
+                                UpdateDate = Convert.ToDateTime(row["updateDate"]),
+                                UpdatedBy = row["updateBy"].ToString(),
+                                PatternName = row["patternName"].ToString(),
+                                Description = row["description"].ToString()
+                            };
+
+                            Patterns.Add(pattern);
+                        }
+                        if (patternDt.Rows.Count > 0)
+                        {
+                            SelectedPattern = Patterns[0];
+                        }
+                    });
+                });
+                Console.WriteLine("Update Patterns end.");
+            }
+            catch (OperationCanceledException)
+            {
+                MessageBox.Show("Data loading timed out after 2 seconds or was cancelled.",
+                    "Load Time out",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e}",
+                    "Error occur",
+                     MessageBoxButton.OK,
+                     MessageBoxImage.Error);
+            }
+        }
+
+        private async Task<DataTable> GetPatternFromDatabaseAsync(CancellationToken cancellationToken) 
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterPatternTableName);
+        }
+
+        public async Task LoadItemDiameter() 
+        {
+            DataTable masterDiameterDt;
+            try
+            {
+                using (var cts = new CancellationTokenSource(DatabaseConfig.TimeoutMs))
+                {
+                    Console.WriteLine("Load Master Diameter from database");
+                    masterDiameterDt = await GetMasterDiameterFromDatabaseAsync(cts.Token);
+                    databaseHandler.DisplayHeader(masterDiameterDt);
+                    databaseHandler.ShowDataTable(masterDiameterDt);
+                    Console.WriteLine("End Load");
+
+                }
+
+                await Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    ItemDiameters.Clear();
+                    foreach (DataRow row in masterDiameterDt.Rows)
+                    {
+                        ItemDiameter itemDiameter = new ItemDiameter()
+                        {
+                            ID = Convert.ToInt32(row["ID"]),
+                            ItemName = row["itemName"].ToString(),
+                            A_Min = Convert.ToInt32(row["a_min"]),
+                            A_Max = Convert.ToInt32(row["a_max"]),
+                            B_Min = Convert.ToInt32(row["b_min"]),
+                            B_Max = Convert.ToInt32(row["b_max"]),
+                            L_Min = Convert.ToInt32(row["l_min"]),
+                            L_Max = Convert.ToInt32(row["l_max"])
+                        };
+
+                        ItemDiameters.Add(itemDiameter);
+                    }
+                    SelectedItemDiameter = ItemDiameters[0];
+                });
+            }
+            catch (OperationCanceledException)
+            {
+                MessageBox.Show("Data loading timed out after 2 seconds or was cancelled.",
+                    "Load Time out",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e}",
+                    "Error occur",
+                     MessageBoxButton.OK,
+                     MessageBoxImage.Error);
+            }
+        }
+
+        private async Task<DataTable> GetMasterDiameterFromDatabaseAsync(CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterDiameterTableName);
+        }
+
+        // Boilerplate INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class SampleGroup
+    {
+        public int ID { get; set; }
+
+        public DateTime UpdateDate { get; set; }
+
+        public string UpdatedBy { get; set; }
+
+        public string SampleName { get; set; }
+    }
+
+    public class Pattern
+    {
+        public int PatternID { get; set; }
+        public string PatternName { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class ItemDiameter 
+    { 
+        public int ID { get; set; }
+        public string ItemName { get; set; }
+        public double A_Min {  get; set; }
+        public double A_Max { get; set; }
+        public double B_Min { get; set; }
+        public double B_Max { get; set; }
+        public double L_Min { get; set; }
+        public double L_Max { get; set; }
+
     }
 }

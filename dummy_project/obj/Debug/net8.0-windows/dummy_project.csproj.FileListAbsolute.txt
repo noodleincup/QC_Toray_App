@@ -72,3 +72,9 @@ D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\refint\dumm
 D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\dummy_project.pdb
 D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\dummy_project.genruntimeconfig.cache
 D:\Project\Toray\QC_Toray_App\dummy_project\obj\Debug\net8.0-windows\ref\dummy_project.dll
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project.csproj.AssemblyReference.cache
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\App.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_Content.g.cs
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_MarkupCompile.cache
+D:\Project\QC_Toray\QC_Toray_App_v3\dummy_project\obj\Debug\net8.0-windows\dummy_project_MarkupCompile.lref

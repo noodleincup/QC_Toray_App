@@ -1,6 +1,9 @@
-﻿using MahApps.Metro.Controls;
+﻿using dummy_project.Network; // Assuming this namespace based on your file
+using MahApps.Metro.Controls;
 using System.ComponentModel;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,9 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Threading;
-using System.Threading.Tasks;
-using dummy_project.Network; // Assuming this namespace based on your file
+using HandleDatabase;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Runtime.CompilerServices;
+using Microsoft.Data.SqlClient;
 
 namespace dummy_project
 {
@@ -22,6 +27,9 @@ namespace dummy_project
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private ClientViewModel viewModel;
+        private LotOverviewViewModel lotOverviewView;
+        private DatabaseHandler databaseHandler;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +42,15 @@ namespace dummy_project
 
             OpenConsoleWindows();
 
+            lotOverviewView = LotOverviewViewModel.Instance;
 
+            this.DataContext = lotOverviewView;
+
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e) 
+        {
+            await lotOverviewView.LoadSampleGroupAsync();
         }
 
         private string _connectionStaus = "Disconnected";
@@ -227,5 +243,164 @@ namespace dummy_project
             _clientService.OnMessageReceived -= HandleMessageReceived;
             _clientService.OnConnectionChanged -= HandleConnectionChanged;
         }
+    }
+
+    public class LotOverviewViewModel : INotifyPropertyChanged
+    {
+        // Private static field to hold the single instance
+        private static readonly Lazy<LotOverviewViewModel> lazyInstance = new Lazy<LotOverviewViewModel>(() => new LotOverviewViewModel());
+        private DatabaseHandler databaseHandler = new DatabaseHandler("Server=192.168.0.123\\SQLEXPRESS; Database=camera_inspection; User Id=sa; Password=1234;TrustServerCertificate=True;");
+        private const string TABLE = "tb_master_SamepleGroupName";
+        private const string CONNECTION_STRING = "Server=192.168.0.123\\SQLEXPRESS; Database=camera_inspection; User Id=sa; Password=1234;TrustServerCertificate=True;";
+
+        private LotOverviewViewModel()
+        {
+            // Initialize ObservableCollections here or in a load method
+            SampleGroups = new ObservableCollection<SampleGroup> { 
+                new SampleGroup {ID = 1, SampleName = "Apple" },
+                new SampleGroup {ID = 2, SampleName = "Banana" }
+            };
+            Patterns = new ObservableCollection<Pattern>();
+
+
+            
+        }
+
+        public void Test_Display_TABLE() 
+        {
+            databaseHandler = new DatabaseHandler(CONNECTION_STRING);
+            DataTable dt = databaseHandler.GetTableDatabaseAsDataTable(TABLE);
+
+            Console.WriteLine($"Amount rows: {dt.Rows.Count}");
+        }
+
+        // Public static property to provide global access to the instance
+        public static LotOverviewViewModel Instance
+        {
+            get
+            {
+                return lazyInstance.Value;
+            }
+        }
+
+        // Data for the first ComboBox
+        public ObservableCollection<SampleGroup> SampleGroups { get; set; }
+        // SelectedGroup property must fire PropertyChanged
+        private SampleGroup _selectedGroup;
+        public SampleGroup SelectedGroup
+        {
+            get => _selectedGroup;
+            set
+            {
+                if (_selectedGroup != value)
+                {
+                    _selectedGroup = value;
+                    OnPropertyChanged();
+                    // Add logic here to load Patterns based on selected group if needed
+                }
+            }
+        }
+
+        // --- Data for the second ComboBox ---
+        public ObservableCollection<Pattern> Patterns { get; set; }
+
+        // SelectedPattern property must fire PropertyChanged
+        private Pattern _selectedPattern;
+        public Pattern SelectedPattern
+        {
+            get => _selectedPattern;
+            set
+            {
+                if (_selectedPattern != value)
+                {
+                    _selectedPattern = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        public ICommand LoadGroupsCommand { get; }
+
+
+        public async Task LoadSampleGroupAsync(CancellationToken cancellationToken)
+        {
+
+            // 1. **Immediate Action:** Clear the ObservableCollection
+            // This is a safe and fast operation.
+            SampleGroups.Clear();
+
+            // 2. **Check for Cancellation Before Starting**
+            // If the timeout already occurred (e.g., in the calling code) before 
+            // LoadSampleGroup started, we exit immediately.
+            cancellationToken.ThrowIfCancellationRequested();
+
+            DataTable sampleGroupDt = GetSampleGroupsFromDatabase2();
+
+            Console.WriteLine($"Amount rows: {sampleGroupDt.Rows.Count}");
+
+            foreach (DataRow row in sampleGroupDt.Rows)
+            {
+                SampleGroup sampleGroup = new SampleGroup()
+                {
+                    ID = Convert.ToInt32(row["id"]),
+                    SampleName = row["sampleName"]?.ToString() ?? string.Empty,
+                    UpdatedBy = row["updateBy"]?.ToString() ?? string.Empty,
+                    UpdateDate = row["updateDate"] != DBNull.Value ? Convert.ToDateTime(row["updateDate"]) : DateTime.MinValue
+                };
+
+                SampleGroups.Add(sampleGroup);
+            }
+
+        }
+
+        private async Task<DataTable> GetSampleGroupsFromDatabase(CancellationToken cancellationToken)
+        {
+            // Fast-fail if already cancelled
+            cancellationToken.ThrowIfCancellationRequested();
+
+            // databaseHandler.GetTableDatabaseAsDataTable(...) is synchronous.
+            // Run it on the thread-pool so it doesn't block the caller; pass the token to Task.Run
+            // NOTE: passing the token to Task.Run only cancels starting/registration and will not
+            // abort an in-progress synchronous ADO.NET call. Prefer async DB APIs if possible.
+            return await Task.Run(() =>
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                return databaseHandler.GetTableDatabaseAsDataTable("tb_master_SamepleGroupName");
+            }, cancellationToken).ConfigureAwait(false);
+        }
+
+        private DataTable GetSampleGroupsFromDatabase2()
+        {
+            return databaseHandler.GetTableDatabaseAsDataTable("tb_master_SamepleGroupName");
+        }
+
+
+        // Boilerplate INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class SampleGroup
+    {
+        public int ID { get; set; }
+
+        public DateTime UpdateDate { get; set; }
+
+        public string UpdatedBy { get; set; }
+
+        public string SampleName { get; set; }
+    }
+
+    public class Pattern
+    {
+        public int PatternID { get; set; }
+        public string PatternName { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public string Description { get; set; }
     }
 }

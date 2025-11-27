@@ -61,7 +61,7 @@ namespace QC_Toray_App_v3.UserControl {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QC_Toray_App_v3;V1.0.0.0;component/usercontrol/setpattern_usercontrol%20.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QC_Toray_App_v3;component/usercontrol/setpattern_usercontrol%20.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UserControl\SetPattern_UserControl .xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
