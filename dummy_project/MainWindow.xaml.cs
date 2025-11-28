@@ -50,7 +50,10 @@ namespace dummy_project
 
         private async void Window_Loaded(object sender, RoutedEventArgs e) 
         {
-            await lotOverviewView.LoadSampleGroupAsync();
+            using (var cts = new CancellationTokenSource(2000))
+            {
+                await lotOverviewView.LoadSampleGroupAsync(cts.Token);
+            }
         }
 
         private string _connectionStaus = "Disconnected";

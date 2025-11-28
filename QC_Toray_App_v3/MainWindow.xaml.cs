@@ -129,7 +129,7 @@ namespace QC_Toray_App_v3
                 case "MainTable":
                     MainTable_UserControl mainTable = new MainTable_UserControl();
                     mainTable.ChangePageRequested += OnChangePageRequested;
-                    mainTable.UpdateLotAndGradeData += OnUpdateLotAndGradeData; // OnUpdateLotAndGradeData
+                    mainTable.UpdateLotAndGradeDataRequested += OnUpdateLotAndGradeData; // OnUpdateLotAndGradeData
                     GridMain.Children.Add(mainTable);
                     break;
                 case "LotOverview":

@@ -32,7 +32,7 @@ namespace QC_Toray_App_v3
     {
         // Define an event for changing pages
         public event EventHandler<string> ChangePageRequested;
-        public event EventHandler<string> UpdateLotAndGradeData;
+        public event EventHandler<string> UpdateLotAndGradeDataRequested;
 
         // Create DataTable
         DataTable dt = new DataTable();
@@ -76,7 +76,7 @@ namespace QC_Toray_App_v3
                                                 + rowView[gradeHeaderName].ToString() + ","
                                                 + rowView[orderCardHeaderName].ToString();
                     Console.WriteLine($"Lot and Grade Data: {formatLotGradeData}");
-                    UpdateLotAndGradeData?.Invoke(this, formatLotGradeData);
+                    UpdateLotAndGradeDataRequested?.Invoke(this, formatLotGradeData);
                 }
 
                 GlobalState.Instance.IsFeatureEnabled = true;

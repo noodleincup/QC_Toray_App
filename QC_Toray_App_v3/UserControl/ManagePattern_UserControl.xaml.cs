@@ -42,18 +42,20 @@ namespace QC_Toray_App_v3.UserControl
 
             dgManagePattern.ItemsSource = PatternList;
 
-            LoadDataToDataGrid_2().ConfigureAwait(false);
+            
         }
 
         private async void ManagePattern_UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() => // detach when run only once
+            await Application.Current.Dispatcher.BeginInvoke(() => // detach when run only once
             {
-                { Console.WriteLine("Hello World"); }
+                {
+                    LoadDataToDataGrid().ConfigureAwait(false);
+                }
             });
         }
 
-        private async Task LoadDataToDataGrid_2()
+        private async Task LoadDataToDataGrid()
         {
             Task<DataTable> databaseTask = Task.Run(() =>
             {
@@ -103,49 +105,7 @@ namespace QC_Toray_App_v3.UserControl
             }
         }
 
-        private async Task LoadDataToDataGrid()
-        {
-            DataTable dataTable = databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterPatternTableName);
-
-            // 1. Run the potentially slow database operation on a background thread
-            Task<DataTable> databaseTask = Task.Run(() =>
-            {
-                // This runs on a thread pool thread, not the UI thread
-                return databaseHandler.GetTableDatabaseAsDataTable(MANNAGE_PATTREN_TABLE);
-            });
-
-            try
-            {
-                // 2. Wait for the database task to complete, but only up to the timeout
-                if (await Task.WhenAny(databaseTask, Task.Delay(TimeoutMilliseconds)) == databaseTask)
-                {
-                    // The databaseTask finished within the timeout
-                    dt = await databaseTask; // Get the result and re-throw any exception from the task
-
-
-                    DataView view = new DataView(dt);
-                    DataTable displayData = view.ToTable(false, dt.Columns[0].ColumnName, dt.Columns[1].ColumnName, dt.Columns[2].ColumnName);
-
-                    // 4. Process and bind the data on the UI thread
-                    //TrimDataTable(dt);
-                    dgManagePattern.ItemsSource = displayData.DefaultView;
-                    ConfigureDataGrid();
-                }
-                else
-                {
-                    // The Task.Delay finished first, indicating a timeout
-                    MessageBox.Show("Database loading operation timed out (more than 2 seconds). Skipping data binding.", "Timeout", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    // The databaseTask might still be running in the background. 
-                    // Depending on your databaseHandler, you might want a CancellationToken here to stop it.
-                    // For simplicity, we just move on.
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions from the database operation itself
-                MessageBox.Show($"An error occurred while loading data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+        
 
         private void ConfigureDataGrid()
         {

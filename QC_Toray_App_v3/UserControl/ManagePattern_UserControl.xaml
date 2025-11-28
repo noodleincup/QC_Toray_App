@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QC_Toray_App_v3.UserControl"
              mc:Ignorable="d" 
+             Loaded="ManagePattern_UserControl_Loaded"
              Width="1530" Height="835"
              Background="#c3c3c3">
     <Border Background="#FAFAFA"  Margin="50,30" CornerRadius="50">

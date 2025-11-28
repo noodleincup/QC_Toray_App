@@ -75,7 +75,6 @@ namespace QC_Toray_App_v3.UserControl
             {
                 MessageBox.Show("Error loading sample types: " + ex.Message);
             }
-
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

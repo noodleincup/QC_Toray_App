@@ -37,7 +37,7 @@ namespace QC_Toray_App_v3
         public LotOverviewUserControl(string orderNo, string lotData, string gradeData)
         {
             InitializeComponent();
-            initializeBatchDetail();
+            initializeBatchDetail(Convert.ToInt32(txbStart));
             ToggleIsEnableBatchItem();
 
             // Set initial values for Lot and Grade
