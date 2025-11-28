@@ -154,6 +154,7 @@
                                          FontSize="14"
                                          HorizontalAlignment="Center" VerticalAlignment="Center"
                                          TextAlignment="Center"
+                                         Text="1"
                                          KeyDown="txbBatchStart_KeyDown"/>
                             </Border>
                         </DockPanel>

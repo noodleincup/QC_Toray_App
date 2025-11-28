@@ -37,7 +37,9 @@ namespace QC_Toray_App_v3
         public LotOverviewUserControl(string orderNo, string lotData, string gradeData)
         {
             InitializeComponent();
-            initializeBatchDetail(Convert.ToInt32(txbStart));
+
+            
+            initializeBatchDetail(Convert.ToInt32(txbStart.Text));
             ToggleIsEnableBatchItem();
 
             // Set initial values for Lot and Grade
@@ -63,11 +65,21 @@ namespace QC_Toray_App_v3
 
         private async void LotOverviewUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
-            await LotOverviewViewModel.Instance.LoadSampleGroupAsync();
-            await LotOverviewViewModel.Instance.LoadPatternAsync();
-            await LotOverviewViewModel.Instance.LoadItemDiameter();
-            // 🎯 Setting the DataContext in the code-behind
+            try
+            {
+                LotOverviewViewModel.Instance.LoadSampleGroupAsync();
+                LotOverviewViewModel.Instance.LoadPatternAsync();
+                LotOverviewViewModel.Instance.LoadItemDiameter();
+            }
+            catch (OperationCanceledException)
+            {
+                // 🎯 Handle the timeout ONLY at the top level
+                MessageBox.Show("A data load operation timed out and was cancelled.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}");
+            }
         }
 
         public void initializeBatchDetail(int startNum)
@@ -362,16 +374,37 @@ namespace QC_Toray_App_v3
                 //cts.CancelAfter(DatabaseConfig.TimeoutMs);
                 var cancellationToken = cts.Token;
 
-                Console.WriteLine("Load Sample Groups Process");
-                //Task<DataTable> task =  GetSampleGroupsFromDatabase(cancellationToken);
-                DataTable sampleGroupDt = await GetSampleGroupsFromDatabase(cancellationToken);
-                Console.WriteLine("End load process");
+                // Run the potentially long-running database call on a background thread
+                Task<DataTable> getDataTask = Task.Run(() =>
+                    GetSampleGroupsFromDatabase(CancellationToken.None) // Pass None, as the *Task* is being timed out, not the sync call.
+                );
+
+                // Define your max time
+                var timeout = TimeSpan.FromMilliseconds(DatabaseConfig.TimeoutMs);
+
+                // Create a delay task for the timeout
+                Task delayTask = Task.Delay(timeout);
 
                 try
                 {
-                    //cts.Cancel();
 
-                    //DataTable sampleGroupDt = task.Result;
+                    if (await Task.WhenAny(getDataTask, delayTask) == delayTask)
+                    {
+                        // Timeout occurred
+                        cts.Cancel(); // Cancel the database task
+                        throw new OperationCanceledException("The operation was canceled due to timeout.");
+                    }
+
+
+                    Console.WriteLine("Load Sample Groups Process");
+                    //Task<DataTable> task =  GetSampleGroupsFromDatabase(cancellationToken);
+                    DataTable sampleGroupDt = await getDataTask;
+                    Console.WriteLine("End load process");
+
+                    if(sampleGroupDt is null)
+                    {
+                        throw new Exception("Sample Group DataTable is null");
+                    }
 
                     await Task.Run(() => {
 
@@ -404,7 +437,10 @@ namespace QC_Toray_App_v3
                 catch (OperationCanceledException)
                 {
                     // This is caught if the CTS token is canceled (due to timeout or manual cancellation)
-                    MessageBox.Show("Data loading timed out after 2 seconds or was cancelled.");
+                    MessageBox.Show("Data loading timed out after 2 seconds or was cancelled.",
+                    "Load Time out",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 }
                 catch (Exception ex) 
                 {
@@ -428,12 +464,30 @@ namespace QC_Toray_App_v3
                 using (var cts = new CancellationTokenSource(DatabaseConfig.TimeoutMs))
                 {
                     Console.WriteLine("Load Pattern process");
-                    patternDt = await GetPatternFromDatabaseAsync(cts.Token);
+
+                    Task<DataTable> getDataTask = GetPatternFromDatabaseAsync(cts.Token);
+
+                    Task timeoutTask = Task.Delay(DatabaseConfig.TimeoutMs);
+
+                    if(await Task.WhenAny(getDataTask, timeoutTask) == timeoutTask) 
+                    {
+                        cts.Cancel();
+                        throw new OperationCanceledException("The operation was canceled due to timeout.");
+                    }
+
+
+                    patternDt = await getDataTask;
+
+                    if (patternDt is null)
+                    {
+                        throw new Exception("Pattern DataTable is null");
+                    }
+
                     databaseHandler.DisplayHeader(patternDt);
                     databaseHandler.ShowDataTable(patternDt);
                     Console.WriteLine("Load Pattern end.");
                 }
-                Console.WriteLine("Update Patterns");
+                
                 await Task.Run(() => 
                 {
                     Application.Current.Dispatcher.Invoke(() =>
@@ -476,10 +530,18 @@ namespace QC_Toray_App_v3
             }
         }
 
-        private async Task<DataTable> GetPatternFromDatabaseAsync(CancellationToken cancellationToken) 
+        private Task<DataTable> GetPatternFromDatabaseAsync(CancellationToken cancellationToken) 
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterPatternTableName);
+            return Task.Run(() =>
+            {
+                // IMPORTANT: The blocking call now runs on a background thread.
+                // We still check the token just in case the task queue is backed up, 
+                // but it won't help while GetTableDatabaseAsDataTable is running.
+                cancellationToken.ThrowIfCancellationRequested();
+
+                return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterPatternTableName);
+
+            }, cancellationToken); // Pass the token to Task.Run as well
         }
 
         public async Task LoadItemDiameter() 
@@ -490,7 +552,25 @@ namespace QC_Toray_App_v3
                 using (var cts = new CancellationTokenSource(DatabaseConfig.TimeoutMs))
                 {
                     Console.WriteLine("Load Master Diameter from database");
-                    masterDiameterDt = await GetMasterDiameterFromDatabaseAsync(cts.Token);
+
+                    Task<DataTable> getDataTask = GetMasterDiameterFromDatabaseAsync(cts.Token);
+
+                    Task timeoutTask = Task.Delay(DatabaseConfig.TimeoutMs);
+
+                    if (await Task.WhenAny(getDataTask, timeoutTask) == timeoutTask)
+                    {
+                        cts.Cancel();
+                        throw new OperationCanceledException("The operation was canceled due to timeout.");
+                    }
+
+
+                    masterDiameterDt = await getDataTask;
+
+                    if (masterDiameterDt is null)
+                    {
+                        throw new Exception("Master Diameter DataTable is null");
+                    }
+
                     databaseHandler.DisplayHeader(masterDiameterDt);
                     databaseHandler.ShowDataTable(masterDiameterDt);
                     Console.WriteLine("End Load");
@@ -535,10 +615,13 @@ namespace QC_Toray_App_v3
             }
         }
 
-        private async Task<DataTable> GetMasterDiameterFromDatabaseAsync(CancellationToken cancellationToken)
+        private Task<DataTable> GetMasterDiameterFromDatabaseAsync(CancellationToken cancellationToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterDiameterTableName);
+            return Task.Run(() =>
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                return databaseHandler.GetTableDatabaseAsDataTable(DatabaseConfig.MasterDiameterTableName);
+            }, cancellationToken);
         }
 
         // Boilerplate INotifyPropertyChanged
